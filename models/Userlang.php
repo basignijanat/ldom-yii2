@@ -44,7 +44,7 @@ class Userlang extends \yii\db\ActiveRecord
             'value' => Yii::t('app\admin', 'Value'),
         ];
     }
-	public static function Setlang()
+	public static function SetLanguage()
 	{
 		if (isset($_COOKIE['userlang']))
 		{
@@ -59,5 +59,15 @@ class Userlang extends \yii\db\ActiveRecord
 			setcookie('userlang', $_GET['lang']);
 			Yii::$app->language = $_GET['lang'];
 		}
-	}	
+	}
+	public static function GetMenuLanguages()
+	{
+		$languages = Userlang::find()->all();
+		$menu_langs = array();
+		foreach ($languages as $language)
+		{
+			$menu_langs[] = ['label' => $language['short_name'], 'url' => ['?lang='.$language['value']]];
+		}
+		return $menu_langs;
+	}
 }

@@ -8,6 +8,7 @@ use app\models\UserlangSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\components\NoEmptyDb;
 
 /**
  * UserlangController implements the CRUD actions for Userlang model.
@@ -17,6 +18,17 @@ class UserlangController extends Controller
     /**
      * {@inheritdoc}
      */
+	public function __construct($id, $module, $config = [])
+	{
+		parent::__construct($id, $module, $config = []);
+		Userlang::SetLanguage();
+		NoEmptyDb::firstEntry(new Userlang, [
+			'name' => 'English US',
+			'short_name' => 'En',
+			'value' => 'en-US',
+		]);
+	}
+	
     public function behaviors()
     {
         return [

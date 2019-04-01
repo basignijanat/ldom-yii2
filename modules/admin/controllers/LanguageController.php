@@ -21,8 +21,9 @@ class LanguageController extends Controller
 	public function __construct($id, $module, $config = [])
 	{
 		parent::__construct($id, $module, $config = []);
-		Userlang::Setlang();
+		Userlang::SetLanguage();
 	}
+
     public function behaviors()
     {
         return [

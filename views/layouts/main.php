@@ -9,25 +9,12 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\Userlang;
 
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
-<?php 
-	/*if (isset($_COOKIE['userlang']))
-	{
-		Yii::$app->language = $_COOKIE['userlang'];
-	}
-	else
-	{	
-		setcookie('userlang', Yii::$app->language);
-	}
-	if (isset($_GET['lang']))
-	{
-		setcookie('userlang', $_GET['lang']);
-		Yii::$app->language = $_GET['lang'];
-	}*/
-?>
+
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -50,25 +37,18 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-	$test_arrs = [
-		['label' => 'De', 'url' => ['?lang=en-US']],
-		['label' => 'It', 'url' => ['?lang=ru-RU']],
-		['label' => 'Es', 'url' => ['?lang=ua-UA']],
-	];
+	$languages = UserLang::GetMenuLanguages();
 	$widget_arrs = [
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => Yii::t('app/admin', 'Home'), 'url' => ['/site/index']],
             ['label' => Yii::t('app/admin', 'About'), 'url' => ['/site/about']],
             ['label' => Yii::t('app/admin', 'Contact'), 'url' => ['/site/contact']],
-			['label' => 'En', 'url' => ['?lang=en-US']],
-			['label' => 'Ru', 'url' => ['?lang=ru-RU']],
-			['label' => 'Ua', 'url' => ['?lang=ua-UA']],            
         ],
     ];
-	foreach($test_arrs as $test_arr)
+	foreach($languages as $language)
 	{
-		$widget_arrs['items'][] = $test_arr;
+		$widget_arrs['items'][] = $language;
 	}
 	$widget_arrs['items'][] = (
 		Yii::$app->user->isGuest ? (
