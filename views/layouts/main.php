@@ -13,6 +13,21 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
+<?php 
+	/*if (isset($_COOKIE['userlang']))
+	{
+		Yii::$app->language = $_COOKIE['userlang'];
+	}
+	else
+	{	
+		setcookie('userlang', Yii::$app->language);
+	}
+	if (isset($_GET['lang']))
+	{
+		setcookie('userlang', $_GET['lang']);
+		Yii::$app->language = $_GET['lang'];
+	}*/
+?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -35,26 +50,40 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Nav::widget([
+	$test_arrs = [
+		['label' => 'De', 'url' => ['?lang=en-US']],
+		['label' => 'It', 'url' => ['?lang=ru-RU']],
+		['label' => 'Es', 'url' => ['?lang=ua-UA']],
+	];
+	$widget_arrs = [
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            ['label' => Yii::t('app/admin', 'Home'), 'url' => ['/site/index']],
+            ['label' => Yii::t('app/admin', 'About'), 'url' => ['/site/about']],
+            ['label' => Yii::t('app/admin', 'Contact'), 'url' => ['/site/contact']],
+			['label' => 'En', 'url' => ['?lang=en-US']],
+			['label' => 'Ru', 'url' => ['?lang=ru-RU']],
+			['label' => 'Ua', 'url' => ['?lang=ua-UA']],            
         ],
-    ]);
+    ];
+	foreach($test_arrs as $test_arr)
+	{
+		$widget_arrs['items'][] = $test_arr;
+	}
+	$widget_arrs['items'][] = (
+		Yii::$app->user->isGuest ? (
+            ['label' => Yii::t('app/admin', 'Login'), 'url' => ['/site/login']]
+        ) : (
+            '<li>'
+            . Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton(
+				'Logout (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>'
+        ));
+    echo Nav::widget($widget_arrs);
     NavBar::end();
     ?>
 

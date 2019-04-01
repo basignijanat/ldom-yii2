@@ -125,4 +125,13 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+	public function actionSetlang($lang, $url)
+	{
+		header('Location: http://ldom-yii2/admin/language/index');
+		header('Location: http://ldom-yii2'.$url);
+		//setcookie('userlang', $lang);			
+		/*return $this->render('setlang', [
+            'url' => $url,
+        ]);*/
+	}
 }

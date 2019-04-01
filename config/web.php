@@ -6,16 +6,37 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+	'language' => 'ru-RU',
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+	'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\admin',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'tjRp-3L26an7f4--vqnqm5IOXQxQ609d',
+			'baseUrl'=> '',
         ],
+		'i18n' => [
+			'translations' => [
+				'app*' => [
+					'class' => 'yii\i18n\PhpMessageSource',
+					'basePath' => '@app/messages',
+					
+					'sourceLanguage' => 'en-US',
+					'fileMap' => [
+						'app/admin' => 'admin.php',
+						'app/error' => 'error.php',
+					],
+				],
+			],
+		],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -43,14 +64,14 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+       
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
