@@ -41,9 +41,9 @@ AppAsset::register($this);
 	$widget_arrs = [
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => Yii::t('app/admin', 'Home'), 'url' => ['/site/index']],
-            ['label' => Yii::t('app/admin', 'About'), 'url' => ['/site/about']],
-            ['label' => Yii::t('app/admin', 'Contact'), 'url' => ['/site/contact']],
+            ['label' => Yii::t('app\admin', 'Home'), 'url' => ['/site/index']],
+            ['label' => Yii::t('app\admin', 'About'), 'url' => ['/site/about']],
+            ['label' => Yii::t('app\admin', 'Contact'), 'url' => ['/site/contact']],
         ],
     ];
 	foreach($languages as $language)
@@ -52,7 +52,7 @@ AppAsset::register($this);
 	}
 	$widget_arrs['items'][] = (
 		Yii::$app->user->isGuest ? (
-            ['label' => Yii::t('app/admin', 'Login'), 'url' => ['/site/login']]
+            ['label' => Yii::t('app\admin', 'Login'), 'url' => ['/site/login']]
         ) : (
             '<li>'
             . Html::beginForm(['/site/logout'], 'post')

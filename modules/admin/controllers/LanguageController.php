@@ -18,6 +18,7 @@ class LanguageController extends Controller
     /**
      * {@inheritdoc}
      */
+	
 	public function __construct($id, $module, $config = [])
 	{
 		parent::__construct($id, $module, $config = []);
@@ -76,9 +77,12 @@ class LanguageController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+		
+		$languages = Userlang::getLanguages();
+		
         return $this->render('create', [
             'model' => $model,
+			'languages' => $languages,
         ]);
     }
 
@@ -97,8 +101,11 @@ class LanguageController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+		$languages = Userlang::getLanguages();
+		
         return $this->render('update', [
             'model' => $model,
+			'languages' => $languages,
         ]);
     }
 
@@ -129,6 +136,6 @@ class LanguageController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app\messages', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('app\admin', 'The requested page does not exist.'));
     }
 }

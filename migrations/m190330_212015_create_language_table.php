@@ -14,6 +14,7 @@ class m190330_212015_create_language_table extends Migration
     {
         $this->createTable('{{%language}}', [
             'id' => $this->primaryKey(),
+			'userlang_id' => $this->integer(),
 			'meta_title' => $this->string(),
 			'meta_description' => $this->text(),
 			'name' => $this->string(),

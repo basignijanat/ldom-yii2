@@ -5,8 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\EduForm */
 
-$this->title = Yii::t('app\messages', 'Create Edu Form');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Edu Forms'), 'url' => ['index']];
+$this->title = Yii::t('app\admin', 'Create Teaching Method');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Teaching Methods'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="edu-form-create">
@@ -15,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+		'languages' => $languages,
     ]) ?>
 
 </div>

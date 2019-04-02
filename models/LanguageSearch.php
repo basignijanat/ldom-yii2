@@ -19,6 +19,7 @@ class LanguageSearch extends Language
         return [
             [['id'], 'integer'],
             [['meta_title', 'meta_description', 'name', 'content'], 'safe'],
+			[['userlang_id'], 'integer'],
         ];
     }
 

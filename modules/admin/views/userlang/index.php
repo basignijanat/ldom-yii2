@@ -7,7 +7,8 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UserlangSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app\admin', 'Userlangs');
+$this->title = Yii::t('app\admin', 'User Languages');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="userlang-index">
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app\admin', 'Create Userlang'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app\admin', 'Create User Language'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

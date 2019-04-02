@@ -11,6 +11,8 @@ use yii\widgets\ActiveForm;
 <div class="language-form">
 
     <?php $form = ActiveForm::begin(); ?>
+	
+	<?= $form->field($model, 'userlang_id')->dropdownList($languages) ?>
 
     <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
 
@@ -21,7 +23,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app\messages', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app\admin', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

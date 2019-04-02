@@ -43,14 +43,14 @@ class EduForm extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app\messages', 'ID'),
-            'meta_title' => Yii::t('app\messages', 'Meta Title'),
-            'meta_description' => Yii::t('app\messages', 'Meta Description'),
-            'name' => Yii::t('app\messages', 'Name'),
-            'content' => Yii::t('app\messages', 'Content'),
-            'language_id' => Yii::t('app\messages', 'Language ID'),
-            'teacher_ids' => Yii::t('app\messages', 'Teacher Ids'),
-            'prices' => Yii::t('app\messages', 'Prices'),
+            'id' => Yii::t('app\admin', 'ID'),
+            'meta_title' => Yii::t('app\admin', 'Meta Title'),
+            'meta_description' => Yii::t('app\admin', 'Meta Description'),
+            'name' => Yii::t('app\admin', 'Name'),
+            'content' => Yii::t('app\admin', 'Content'),
+            'language_id' => Yii::t('app\admin', 'Language ID'),
+            'teacher_ids' => Yii::t('app\admin', 'Teacher Ids'),
+            'prices' => Yii::t('app\admin', 'Prices'),
         ];
     }
 }

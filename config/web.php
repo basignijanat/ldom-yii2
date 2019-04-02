@@ -4,7 +4,8 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'ldomyii2',
+	'name' => 'LanguageDom',
     'basePath' => dirname(__DIR__),
 	'language' => 'ru-RU',
     'bootstrap' => ['log'],
@@ -27,12 +28,11 @@ $config = [
 			'translations' => [
 				'app*' => [
 					'class' => 'yii\i18n\PhpMessageSource',
-					'basePath' => '@app/messages',
-					
+					'basePath' => '@app/messages',					
 					'sourceLanguage' => 'en-US',
 					'fileMap' => [
-						'app/admin' => 'admin.php',
-						'app/error' => 'error.php',
+						'app\admin' => 'admin.php',
+						'app\error' => 'error.php',
 					],
 				],
 			],

@@ -5,6 +5,8 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\EduForm;
 use app\models\EduFormSearch;
+use app\models\Userlang;
+use app\models\Language;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,6 +19,12 @@ class EduformController extends Controller
     /**
      * {@inheritdoc}
      */
+	public function __construct($id, $module, $config = [])
+	{
+		parent::__construct($id, $module, $config = []);
+		Userlang::SetLanguage();
+	}
+
     public function behaviors()
     {
         return [
@@ -70,8 +78,11 @@ class EduformController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+		$languages = Language::getLanguages();
+		
         return $this->render('create', [
             'model' => $model,
+			'languages' => $languages,
         ]);
     }
 
@@ -90,8 +101,11 @@ class EduformController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+		$languages = Language::getLanguages();
+		
         return $this->render('update', [
             'model' => $model,
+			'languages' => $languages,
         ]);
     }
 
@@ -122,6 +136,6 @@ class EduformController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app\messages', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('app\admin', 'The requested page does not exist.'));
     }
 }

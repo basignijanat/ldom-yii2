@@ -1,5 +1,7 @@
 <?php
+
 namespace app\components;
+
 	class NoEmptyDb
 	{
 		public static function firstEntry($model, $data = array())

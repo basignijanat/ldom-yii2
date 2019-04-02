@@ -24,7 +24,7 @@ class UserlangController extends Controller
 		Userlang::SetLanguage();
 		NoEmptyDb::firstEntry(new Userlang, [
 			'name' => 'English US',
-			'short_name' => 'En',
+			'short_name' => 'Eng',
 			'value' => 'en-US',
 		]);
 	}

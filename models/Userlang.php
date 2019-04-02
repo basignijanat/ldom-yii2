@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\components\NoEmptyDb;
+use app\components\ArrayForForm;
 
 /**
  * This is the model class for table "userlang".
@@ -44,6 +46,7 @@ class Userlang extends \yii\db\ActiveRecord
             'value' => Yii::t('app\admin', 'Value'),
         ];
     }
+	
 	public static function SetLanguage()
 	{
 		if (isset($_COOKIE['userlang']))
@@ -60,8 +63,14 @@ class Userlang extends \yii\db\ActiveRecord
 			Yii::$app->language = $_GET['lang'];
 		}
 	}
+	
 	public static function GetMenuLanguages()
 	{
+		NoEmptyDb::firstEntry(new Userlang, [
+			'name' => 'English US',
+			'short_name' => 'Eng',
+			'value' => 'en-US',
+		]);
 		$languages = Userlang::find()->all();
 		$menu_langs = array();
 		foreach ($languages as $language)
@@ -70,4 +79,15 @@ class Userlang extends \yii\db\ActiveRecord
 		}
 		return $menu_langs;
 	}
+	
+	public static function getLanguageById($id)
+	{
+		return Userlang::find()->where(['id' => $id]);
+	}
+	
+	public static function getLanguages()
+	{
+		return ArrayForForm::getDropDownArray(Userlang::find()->all(), 'name');		
+	}
+	
 }

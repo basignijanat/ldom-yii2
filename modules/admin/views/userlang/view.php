@@ -7,7 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Userlang */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Userlangs'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'User Languages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

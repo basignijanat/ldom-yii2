@@ -1,12 +1,21 @@
+<?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\LanguageSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = Yii::t('app\admin', 'Administrator');
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
 <div class="admin-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+    <h1><?= Html::encode($this->title) ?></h1>
+    <ul>
+		<li><a href="admin/language"><h2><?php echo Yii::t('app\admin', 'Languages') ?></h2></a>
+		<li><a href="admin/eduform"><h2><?php echo Yii::t('app\admin', 'Teaching Methods') ?></h2></a>
+		<li><a href="admin/userlang"><h2><?php echo Yii::t('app\admin', 'User Languages') ?></h2></a>		
+	</ul>
 </div>
