@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\components\ListFormHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EduForm */
@@ -31,5 +32,6 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
+	<?php ListFormHelper::showDropDownMultiple($teachers, $model->teacher_ids, 'teachers', 'syncInputText()') ?>
 
 </div>

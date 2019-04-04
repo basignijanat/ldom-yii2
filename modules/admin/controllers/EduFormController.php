@@ -7,6 +7,7 @@ use app\models\EduForm;
 use app\models\EduFormSearch;
 use app\models\Userlang;
 use app\models\Language;
+use app\models\Teacher;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -79,10 +80,12 @@ class EduformController extends Controller
         }
 
 		$languages = Language::getLanguages();
+		$teachers = Teacher::getTeachers();
 		
         return $this->render('create', [
             'model' => $model,
 			'languages' => $languages,
+			'teachers' => $teachers,
         ]);
     }
 
@@ -102,10 +105,12 @@ class EduformController extends Controller
         }
 
 		$languages = Language::getLanguages();
+		$teachers = Teacher::getTeachers();
 		
         return $this->render('update', [
             'model' => $model,
 			'languages' => $languages,
+			'teachers' => $teachers,
         ]);
     }
 

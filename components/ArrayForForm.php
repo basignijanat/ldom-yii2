@@ -12,7 +12,7 @@ namespace app\components;
 				$selectElements[$element['id']] = $element[$name];
 			}		
 			return $selectElements;
-		}
+		}		
 		
 	}
 ?>

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\components\ArrayForForm;
 
 /**
  * This is the model class for table "teacher".
@@ -36,7 +37,7 @@ class Teacher extends \yii\db\ActiveRecord
     {
         return [
             [['age', 'experience'], 'integer'],
-            [['form_ids', 'fname', 'lname', 'education', 'email', 'password', 'image', 'eduprogram_ids'], 'string', 'max' => 255],
+            [['fname', 'lname', 'education', 'email', 'password', 'image', 'eduprogram_ids'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,8 +47,7 @@ class Teacher extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app\messages', 'ID'),
-            'form_ids' => Yii::t('app\messages', 'Form Ids'),
+            'id' => Yii::t('app\messages', 'ID'),            
             'fname' => Yii::t('app\messages', 'Fname'),
             'lname' => Yii::t('app\messages', 'Lname'),
             'age' => Yii::t('app\messages', 'Age'),
@@ -59,4 +59,10 @@ class Teacher extends \yii\db\ActiveRecord
             'eduprogram_ids' => Yii::t('app\messages', 'Eduprogram Ids'),
         ];
     }
+	
+	public static function getTeachers()
+	{
+		return ArrayForForm::getDropDownArray(Teacher::find()->all(), 'fname');		
+	}
+	
 }

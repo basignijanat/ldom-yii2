@@ -13,8 +13,7 @@ class m190330_212744_create_teacher_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%teacher}}', [
-            'id' => $this->primaryKey(),
-			'form_ids' => $this->string(),
+            'id' => $this->primaryKey(),			
 			'fname' => $this->string(),
 			'lname' => $this->string(),
 			'age' => $this->integer(),
