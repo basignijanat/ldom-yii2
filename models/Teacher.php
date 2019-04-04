@@ -8,10 +8,8 @@ use app\components\ArrayForForm;
 /**
  * This is the model class for table "teacher".
  *
- * @property int $id
- * @property string $form_ids
- * @property string $fname
- * @property string $lname
+ * @property int $id 
+ * @property string $name
  * @property int $age
  * @property int $experience
  * @property string $education
@@ -37,7 +35,7 @@ class Teacher extends \yii\db\ActiveRecord
     {
         return [
             [['age', 'experience'], 'integer'],
-            [['fname', 'lname', 'education', 'email', 'password', 'image', 'eduprogram_ids'], 'string', 'max' => 255],
+            [['name', 'education', 'email', 'password', 'image', 'eduprogram_ids'], 'string', 'max' => 255],
         ];
     }
 
@@ -48,8 +46,7 @@ class Teacher extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app\messages', 'ID'),            
-            'fname' => Yii::t('app\messages', 'Fname'),
-            'lname' => Yii::t('app\messages', 'Lname'),
+            'name' => Yii::t('app\messages', 'Name'),            
             'age' => Yii::t('app\messages', 'Age'),
             'experience' => Yii::t('app\messages', 'Experience'),
             'education' => Yii::t('app\messages', 'Education'),
@@ -62,7 +59,7 @@ class Teacher extends \yii\db\ActiveRecord
 	
 	public static function getTeachers()
 	{
-		return ArrayForForm::getDropDownArray(Teacher::find()->all(), 'fname');		
+		return ArrayForForm::getDropDownArray(Teacher::find()->all(), 'name');		
 	}
 	
 }

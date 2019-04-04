@@ -14,8 +14,7 @@ class m190330_212744_create_teacher_table extends Migration
     {
         $this->createTable('{{%teacher}}', [
             'id' => $this->primaryKey(),			
-			'fname' => $this->string(),
-			'lname' => $this->string(),
+			'name' => $this->string(),			
 			'age' => $this->integer(),
 			'experience' => $this->integer(),
 			'education' => $this->string(),
