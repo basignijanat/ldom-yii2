@@ -24,7 +24,7 @@ use app\components\ListFormHelper;
     <?= $form->field($model, 'language_id')->dropdownList($languages) ?>
 
     <?= $form->field($model, 'teacher_ids')->textInput(['maxlength' => true]) ?>
-
+	
     <?= $form->field($model, 'prices')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
@@ -32,6 +32,7 @@ use app\components\ListFormHelper;
     </div>
 
     <?php ActiveForm::end(); ?>
-	<?php ListFormHelper::showDropDownMultiple($teachers, $model->teacher_ids, 'teachers', 'syncInputText()') ?>
+	
+	<?php ListFormHelper::showUpdateList($teachers, explode(' ', $model->teacher_ids)) ?>
 
 </div>
