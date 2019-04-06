@@ -11,6 +11,7 @@ use app\models\Teacher;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\components\ArrayForForm;
 
 /**
  * EduFormController implements the CRUD actions for EduForm model.
@@ -79,13 +80,13 @@ class EduformController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-		$languages = Language::getLanguages();
-		$teachers = Teacher::getTeachers();
+		$essentialData = self::getEssentialData($model);
 		
         return $this->render('create', [
             'model' => $model,
-			'languages' => $languages,
-			'teachers' => $teachers,
+			'languages' => $essentialData['languages'],
+			'teachers' => $essentialData['teachers'],
+			'selectedTeachers' => $essentialData['selectedTeachers'],
         ]);
     }
 
@@ -104,13 +105,13 @@ class EduformController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-		$languages = Language::getLanguages();
-		$teachers = Teacher::getTeachers();
-		
+		$essentialData = self::getEssentialData($model);		
+				
         return $this->render('update', [
             'model' => $model,
-			'languages' => $languages,
-			'teachers' => $teachers,
+			'languages' => $essentialData['languages'],
+			'teachers' => $essentialData['teachers'],
+			'selectedTeachers' => $essentialData['selectedTeachers'],
         ]);
     }
 
@@ -128,6 +129,18 @@ class EduformController extends Controller
         return $this->redirect(['index']);
     }
 
+	public function actionEditteacherids()
+	{
+		$model = $this->findModel($id);
+		
+		$essentialData = self::getEssentialData($model);		
+				
+        return $this->render('form_teacher_ids', [            
+			'teachers' => $essentialData['teachers'],
+			'selectedTeachers' => $essentialData['selectedTeachers'],
+        ]);
+	}
+	
     /**
      * Finds the EduForm model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -143,4 +156,13 @@ class EduformController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app\admin', 'The requested page does not exist.'));
     }
+	
+	protected static function getEssentialData($model)
+	{
+		return array(
+			'languages' => Language::getLanguages(),
+			'teachers' => Teacher::getTeachers(),
+			'selectedTeachers' => ArrayForForm::excludeDropDownById(Teacher::getTeachers(), explode(' ', $model->teacher_ids)),
+		);
+	}
 }

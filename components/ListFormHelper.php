@@ -6,7 +6,7 @@ namespace app\components;
 	{
 		public static function showDropDownMultiple($itemList, $selectId)
 		{			
-			echo '<select id="'.$selectId.'" multiple>';			
+			echo '<select name= "asd" id="'.$selectId.'" multiple>';			
 			if ($itemList)
 			{
 				foreach ($itemList as $key => $value)
@@ -14,18 +14,22 @@ namespace app\components;
 					echo '<option value="'.$key.'">'.$value.'</option>';
 				}
 			}
-			echo '</select></form>';			
+			echo '</select>';			
 		}
 
-		public static function showUpdateList($itemAll, $itemSelected)
+		public static function showUpdateList($itemsAll, $itemsSelected, $outputField, $addButtonName, $removeButtonName)
 		{
-			//$selectedItems = explode(' ', $itemString);
-			self::showDropDownMultiple($itemAll, '');
-			self::showDropDownMultiple($itemSelected, '');
-			/*if (strlen($submitName) > 0)
+			foreach ($itemsAll as $itemOne)
 			{
-				echo '<input type="submit" name="'.$formName.'">';
-			}*/
+				if (in_array($itemOne, $itemsSelected))
+				{
+					unset($itemsAll[array_search($itemOne, $itemsAll)]);					
+				}
+			}
+			self::showDropDownMultiple($itemsAll, 'all_items');
+			echo "<button type=button onclick=addToList('".$outputField."')>".$addButtonName.'</button>';
+			echo "<button type=button onclick=removeFromList('".$outputField."')>".$removeButtonName.'</button>';
+			self::showDropDownMultiple($itemsSelected, 'selected_items');
 		}
 		
 	}

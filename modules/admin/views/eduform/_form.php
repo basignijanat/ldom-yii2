@@ -25,6 +25,10 @@ use app\components\ListFormHelper;
 
     <?= $form->field($model, 'teacher_ids')->textInput(['maxlength' => true]) ?>
 	
+	<?php 
+		ListFormHelper::showUpdateList($teachers, $selectedTeachers, 'eduform-teacher_ids', Yii::t('app\admin', 'Add'), Yii::t('app\admin', 'Remove'));
+	?>
+	
     <?= $form->field($model, 'prices')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
@@ -33,6 +37,6 @@ use app\components\ListFormHelper;
 
     <?php ActiveForm::end(); ?>
 	
-	<?php ListFormHelper::showUpdateList($teachers, explode(' ', $model->teacher_ids)) ?>
+	
 
 </div>

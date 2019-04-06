@@ -69,6 +69,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+				'admin/eduform/editteacherids/' => 'eduform/editteacherids',
             ],
         ],
         

@@ -14,18 +14,19 @@ namespace app\components;
 			return $selectElements;
 		}
 		
-		public static function excludeDropDownById($source, $idList)
-		{
-			if (isset($source))
+		public static function excludeDropDownById($source, $idList = array())
+		{	
+			$newList = array();
+			if ($source && $idList)
 			{
 				foreach ($source as $key => $value)
 				{
-					if (!in_array($key, idList))
+					if (in_array($key, $idList))
 					{
-						unset($source[$key]);
+						$newList[$key] = $source[$key];
 					}
 				}
-				return $source;
+				return $newList;
 			}
 			else
 			{
