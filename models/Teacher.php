@@ -45,15 +45,15 @@ class Teacher extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app\messages', 'ID'),            
-            'name' => Yii::t('app\messages', 'Name'),            
-            'age' => Yii::t('app\messages', 'Age'),
-            'experience' => Yii::t('app\messages', 'Experience'),
-            'education' => Yii::t('app\messages', 'Education'),
-            'email' => Yii::t('app\messages', 'Email'),
-            'password' => Yii::t('app\messages', 'Password'),
-            'image' => Yii::t('app\messages', 'Image'),
-            'eduprogram_ids' => Yii::t('app\messages', 'Eduprogram Ids'),
+            'id' => Yii::t('app\admin', 'ID'),            
+            'name' => Yii::t('app\admin', 'Name'),            
+            'age' => Yii::t('app\admin', 'Age'),
+            'experience' => Yii::t('app\admin', 'Experience'),
+            'education' => Yii::t('app\admin', 'Education'),
+            'email' => Yii::t('app\admin', 'Email'),
+            'password' => Yii::t('app\admin', 'Password'),
+            'image' => Yii::t('app\admin', 'Image'),
+            'eduprogram_ids' => Yii::t('app\admin', 'Curriculums'),
         ];
     }
 	

@@ -5,12 +5,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Teacher */
 
-$this->title = Yii::t('app\messages', 'Update Teacher: {name}', [
+$this->title = Yii::t('app\admin', 'Update Teacher`s Profile: {name}', [
     'name' => $model->name,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Teachers'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Teachers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app\messages', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('app\admin', 'Update');
 ?>
 <div class="teacher-update">
 

@@ -2,6 +2,8 @@
 
 namespace app\modules\admin;
 
+use app\models\Userlang;
+
 /**
  * admin module definition class
  */
@@ -19,6 +21,6 @@ class admin extends \yii\base\Module
     {
         parent::init();
 
-        // custom initialization code goes here
+        Userlang::SetLanguage();
     }
 }

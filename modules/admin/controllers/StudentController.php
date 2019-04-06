@@ -122,6 +122,6 @@ class StudentController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app\messages', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('app\admin', 'The requested page does not exist.'));
     }
 }

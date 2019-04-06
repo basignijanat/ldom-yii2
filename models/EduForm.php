@@ -49,7 +49,7 @@ class EduForm extends \yii\db\ActiveRecord
             'name' => Yii::t('app\admin', 'Name'),
             'content' => Yii::t('app\admin', 'Content'),
             'language_id' => Yii::t('app\admin', 'Language ID'),
-            'teacher_ids' => Yii::t('app\admin', 'Teacher Ids'),
+            'teacher_ids' => Yii::t('app\admin', 'Teachers'),
             'prices' => Yii::t('app\admin', 'Prices'),
         ];
     }
