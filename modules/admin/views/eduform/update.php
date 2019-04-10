@@ -15,13 +15,15 @@ $this->params['breadcrumbs'][] = Yii::t('app\admin', 'Update');
 ?>
 <div class="edu-form-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>	
 		
     <?= $this->render('_form', [
         'model' => $model,
 		'languages' => $languages,
 		'teachers' => $teachers,
 		'selectedTeachers' => $selectedTeachers,
+		'prices' => $prices,
+		'selectedPrices' => $selectedPrices,
     ]) ?>
 
 </div>

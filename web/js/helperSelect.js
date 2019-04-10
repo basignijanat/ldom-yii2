@@ -8,19 +8,19 @@ function syncInputText(options)
 	return optionIds.join(' ');
 }
 
-function changeLists(action, outputField)
+function changeLists(action, outputField, uniqId)
 {
 	var idFromList;
 	var idToList;
 	switch (action)
 	{
 		case 'add':
-			idFromList = 'all_items';
-			idToList = 'selected_items';
+			idFromList = 'all_items_' + uniqId;
+			idToList = 'selected_items_' + uniqId;
 			break;
 		case 'remove':
-			idFromList = 'selected_items';
-			idToList = 'all_items';
+			idFromList = 'selected_items_' + uniqId;
+			idToList = 'all_items_' + uniqId;
 			break;
 	}
 	var selectedIndex = document.getElementById(idFromList).options.selectedIndex;
@@ -28,7 +28,7 @@ function changeLists(action, outputField)
 	{
 		var selectedItem = document.getElementById(idFromList).options[selectedIndex];
 		document.getElementById(idToList).options.add(selectedItem);
-		var syncString = syncInputText(document.getElementById('selected_items').options);
+		var syncString = syncInputText(document.getElementById('selected_items_' + uniqId).options);
 		document.getElementById(outputField).value = syncString;
 	}
 	else
@@ -37,12 +37,12 @@ function changeLists(action, outputField)
 	}	
 }
 
-function addToList(outputField)
+function addToList(outputField, uniqId)
 {
-	changeLists('add', outputField);
+	changeLists('add', outputField, uniqId);
 }
 
-function removeFromList(outputField)
+function removeFromList(outputField, uniqId)
 {
-	changeLists('remove', outputField);
+	changeLists('remove', outputField, uniqId);
 }

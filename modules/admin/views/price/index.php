@@ -7,7 +7,8 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PriceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app\messages', 'Prices');
+$this->title = Yii::t('app\admin', 'Prices');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="price-index">
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app\messages', 'Create Price'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app\admin', 'Create Price'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,8 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'eduform_id',
+            'id',            
             'name',
             'value',
 

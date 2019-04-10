@@ -3,11 +3,13 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use app\models\EduForm;
 use app\models\EduFormSearch;
 use app\models\Userlang;
 use app\models\Language;
 use app\models\Teacher;
+use app\models\Price;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -62,8 +64,17 @@ class EduformController extends Controller
      */
     public function actionView($id)
     {
+		$model = $this->findModel($id);
+		
+		$teachersInString = Teacher::getTeachersInString(explode(' ', $model->teacher_ids), ', ');
+		$pricesInString = Price::getPricesInString(explode(' ', $model->prices), ', ');
+		$languageById = Language::getLanguageById($model->language_id);
+		
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+			'teachersInString' => $teachersInString,
+			'pricesInString' => $pricesInString,
+			'languageById' => $languageById,
         ]);
     }
 
@@ -112,6 +123,8 @@ class EduformController extends Controller
 			'languages' => $essentialData['languages'],
 			'teachers' => $essentialData['teachers'],
 			'selectedTeachers' => $essentialData['selectedTeachers'],
+			'prices' => $essentialData['prices'],
+			'selectedPrices' => $essentialData['selectedPrices'],
         ]);
     }
 
@@ -163,6 +176,8 @@ class EduformController extends Controller
 			'languages' => Language::getLanguages(),
 			'teachers' => Teacher::getTeachers(),
 			'selectedTeachers' => ArrayForForm::excludeDropDownById(Teacher::getTeachers(), explode(' ', $model->teacher_ids)),
+			'prices' => Price::getPrices(),
+			'selectedPrices' => ArrayForForm::excludeDropDownById(Price::getPrices(), explode(' ', $model->prices)),
 		);
 	}
 }

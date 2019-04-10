@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EduForm */
@@ -35,10 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'meta_description:ntext',
             'name',
             'content:ntext',
-            'language_id',
-            'teacher_ids',
-            'prices',
+            ['attribute' => 'language_id', 'value' => $languageById->name],
+			['attribute' => 'teacher_ids', 'value' => $teachersInString],
+			['attribute' => 'prices', 'value' => $pricesInString],
+            //'prices',
         ],
-    ]) ?>
+    ]) ?>	
 
 </div>

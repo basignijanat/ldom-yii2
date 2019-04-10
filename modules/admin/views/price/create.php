@@ -5,8 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Price */
 
-$this->title = Yii::t('app\messages', 'Create Price');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Prices'), 'url' => ['index']];
+$this->title = Yii::t('app\admin', 'Create Price');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Prices'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="price-create">

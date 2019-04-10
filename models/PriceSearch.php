@@ -18,7 +18,7 @@ class PriceSearch extends Price
     {
         return [
             [['id', 'value'], 'integer'],
-            [['eduform_id', 'name'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -62,8 +62,7 @@ class PriceSearch extends Price
             'value' => $this->value,
         ]);
 
-        $query->andFilterWhere(['like', 'eduform_id', $this->eduform_id])
-            ->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

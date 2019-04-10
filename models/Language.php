@@ -56,4 +56,8 @@ class Language extends \yii\db\ActiveRecord
 		return ArrayForForm::getDropDownArray(Language::find()->all(), 'name');		
 	}
 	
+	public static function getLanguageById($id)
+	{
+		return Language::find()->where(['id' => $id])->one();		
+	}
 }

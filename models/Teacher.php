@@ -59,7 +59,11 @@ class Teacher extends \yii\db\ActiveRecord
 	
 	public static function getTeachers()
 	{
-		return ArrayForForm::getDropDownArray(Teacher::find()->all(), 'name');		
+		return ArrayForForm::getDropDownArray(Teacher::find()->all(), 'name');				
 	}
 	
+	public static function getTeachersInString($ids = array(), $separator)
+	{
+		return implode($separator, ArrayForForm::getDropDownArray(Teacher::find()->where(['id' => $ids])->all(), 'name'));
+	}
 }

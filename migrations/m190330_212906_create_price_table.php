@@ -13,8 +13,7 @@ class m190330_212906_create_price_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%price}}', [
-            'id' => $this->primaryKey(),
-			'eduform_id' => $this->string(),
+            'id' => $this->primaryKey(),			
 			'name' => $this->string(),
 			'value' => $this->integer(),
         ]);

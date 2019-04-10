@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\components\ArrayForForm;
 
 /**
  * This is the model class for table "price".
@@ -29,7 +30,7 @@ class Price extends \yii\db\ActiveRecord
     {
         return [
             [['value'], 'integer'],
-            [['eduform_id', 'name'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255],
         ];
     }
 
@@ -39,10 +40,19 @@ class Price extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app\messages', 'ID'),
-            'eduform_id' => Yii::t('app\messages', 'Eduform ID'),
-            'name' => Yii::t('app\messages', 'Name'),
-            'value' => Yii::t('app\messages', 'Value'),
+            'id' => Yii::t('app\admin', 'ID'),            
+            'name' => Yii::t('app\admin', 'Name'),
+            'value' => Yii::t('app\admin', 'Value'),
         ];
     }
+	
+	public static function getPrices()
+	{
+		return ArrayForForm::getDropDownArray(Price::find()->all(), 'name');				
+	}
+	
+	public static function getPricesInString($ids = array(), $separator)
+	{
+		return implode($separator, ArrayForForm::getDropDownArray(Price::find()->where(['id' => $ids])->all(), 'name'));
+	}
 }
