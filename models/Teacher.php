@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
 use app\components\ArrayForForm;
 
 /**

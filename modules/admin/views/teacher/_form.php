@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'education')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email')->input('email') ?>
 
     <?
 		if (strlen($model->password) > 0)

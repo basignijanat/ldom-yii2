@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'experience',
             'education',
             'email:email',
-            ['attribute' => 'password', 'value' => '****'],
+            'password',
             'image',
             'eduprogram_ids',
         ],
