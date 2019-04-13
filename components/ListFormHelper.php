@@ -16,11 +16,14 @@ use yii\helpers\Html;
 		{
 			$result = '';
 			
-			foreach ($itemsAll as $itemOne)
+			if (count($itemsAll) > 0)
 			{
-				if (in_array($itemOne, $itemsSelected))
+				foreach ($itemsAll as $itemOne)
 				{
-					unset($itemsAll[array_search($itemOne, $itemsAll)]);					
+					if (in_array($itemOne, $itemsSelected))
+					{
+						unset($itemsAll[array_search($itemOne, $itemsAll)]);					
+					}
 				}
 			}
 			

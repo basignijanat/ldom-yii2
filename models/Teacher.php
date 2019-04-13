@@ -20,6 +20,28 @@ use app\components\ArrayForForm;
  */
 class Teacher extends \yii\db\ActiveRecord
 {
+	
+	public function beforeSave($insert)
+	{
+		if (!parent::beforeSave($insert)) {
+			return false;
+		}
+		
+		if ($insert)
+		{
+			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+		}
+		else
+		{
+			if ($new_password = Yii::$app->request->post('password_new') && strlen(Yii::$app->request->post('password_new')) > 0)
+			{
+				$this->password = Yii::$app->getSecurity()->generatePasswordHash($new_password);
+			}
+		}		
+				
+		return true;
+	}
+	
     /**
      * {@inheritdoc}
      */

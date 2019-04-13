@@ -67,8 +67,8 @@ class TeacherController extends Controller
         $model = new Teacher();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+			return $this->redirect(['view', 'id' => $model->id]);
+		}
 
         return $this->render('create', [
             'model' => $model,
@@ -89,7 +89,7 @@ class TeacherController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+				
         return $this->render('update', [
             'model' => $model,
         ]);

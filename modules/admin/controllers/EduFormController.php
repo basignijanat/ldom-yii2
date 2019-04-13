@@ -98,6 +98,8 @@ class EduformController extends Controller
 			'languages' => $essentialData['languages'],
 			'teachers' => $essentialData['teachers'],
 			'selectedTeachers' => $essentialData['selectedTeachers'],
+			'prices' => $essentialData['prices'],
+			'selectedPrices' => $essentialData['selectedPrices'],
         ]);
     }
 

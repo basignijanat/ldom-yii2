@@ -22,7 +22,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    <?
+		if (strlen($model->password) > 0)
+		{
+			echo $form->field($model, 'password')->hiddenInput();
+			echo Html::passwordInput('password_new', '', ['class' => 'form-control']);
+		}
+		else
+		{
+			echo $form->field($model, 'password')->passwordInput(['maxlength' => true]);
+		}
+	?>
 
     <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
