@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Teacher;
 use app\models\TeacherSearch;
+use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,7 +66,15 @@ class TeacherController extends Controller
     public function actionCreate()
     {
         $model = new Teacher();
-
+		
+		if (Yii::$app->request->isPost) 
+		{            
+            if ($fullFileName = $model->upload()) {
+				//$model->image = $fullFileName;
+				$model->image = 'a';
+            }
+        }
+		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		}
@@ -85,8 +94,10 @@ class TeacherController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          
+		//$model->upload();
+		
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 				
