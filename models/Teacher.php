@@ -29,16 +29,9 @@ class Teacher extends \yii\db\ActiveRecord
 	{
 		if (!parent::beforeSave($insert)) {
 			return false;
-		}
+		}	
 		
-		if ($insert)
-		{
-			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
-		}
-		elseif (!$insert && strlen($this->password_new) > 0)
-		{			
-			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password_new);
-		}
+		$this->savePassword($insert);
 		
 		$this->uploadUserpic();
 		
@@ -81,6 +74,7 @@ class Teacher extends \yii\db\ActiveRecord
             'password' => Yii::t('app\admin', 'Password'),
 			'password_new' => Yii::t('app\admin', 'New Password'),
             'image' => Yii::t('app\admin', 'Image'),
+			'image_file' => Yii::t('app\admin', 'Download Image'),
             'eduprogram_ids' => Yii::t('app\admin', 'Curriculums'),
         ];
     }
@@ -100,8 +94,20 @@ class Teacher extends \yii\db\ActiveRecord
         if ($this->image_file = UploadedFile::getInstance($this, 'image_file'))
 		{
 			$fullFileName = 'upload/userpic/'.uniqid('teacher_').'.'.$this->image_file->extension;
-			$this->image_file->saveAs(Yii::$app->basePath.'/'.$fullFileName);
+			$this->image_file->saveAs($fullFileName);
 			$this->image = $fullFileName;
 		}
     }
+	
+	protected function savePassword($insert)
+	{
+		if ($insert)
+		{
+			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+		}
+		elseif (!$insert && strlen($this->password_new) > 0)
+		{			
+			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password_new);
+		}
+	}
 }

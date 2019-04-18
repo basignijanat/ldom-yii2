@@ -35,14 +35,15 @@ use yii\widgets\ActiveForm;
 	?>
 
 	<?= $form->field($model, 'image')->hiddenInput()->label(false); ?>
-	
-	<? 
-		if (strlen($model->image) > 0)
-		{}
-		<img src="<? echo 'http://ldom-yii2/'.$model->image; ?>" alt="Userpic">
-	<? endif;?>
 
     <?= $form->field($model, 'image_file')->fileInput(['accept=' => 'image/jpeg,image/png,']) ?>
+	
+	<? 
+		if ($model->image)
+		{
+			echo Html::img('/web/'.$model->image, ['width' => '150px', 'alt' => 'Userpic']);
+		}
+	?>	
 
     <?= $form->field($model, 'eduprogram_ids')->textInput(['maxlength' => true]) ?>
 

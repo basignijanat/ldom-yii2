@@ -33,6 +33,7 @@
 		'Password' => 'Пароль',
 		'New Password' => 'Новый Пароль',
 		'Image'	=> 'Фото',
+		'Download Image' => 'Загрузить Фото',
 		'Curriculums' => 'Образовательные программы',
 		'All Teachers' => 'Все Учителя',
 		'Selected Teachers' => 'Отобранные Учителя',
