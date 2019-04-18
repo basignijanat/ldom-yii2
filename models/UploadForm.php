@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
@@ -23,7 +24,7 @@ class UploadForm extends Model
     {
         if ($this->validate())
 		{
-			$fullFileName = '/upload/userpic/'.$this->imageFile->baseName.'.'.$this->imageFile->extension;
+			$fullFileName = Yii::$app->basePath.'/upload/'.$this->imageFile->baseName.'.'.$this->imageFile->extension;
             $this->imageFile->saveAs($fullFileName);
             return $fullFileName;
         } else {

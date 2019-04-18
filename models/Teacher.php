@@ -40,12 +40,8 @@ class Teacher extends \yii\db\ActiveRecord
 			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password_new);
 		}
 		
-		if ($this->image_file = UploadedFile::getInstance($this, 'image_file'))
-		{
-			$fullFileName = '/upload/userpic/'.$this->image_file->baseName.'.'.$this->image_file->extension;
-			$this->image_file->saveAs($fullFileName);
-			$this->image = $fullFileName;
-		}
+		$this->uploadUserpic();
+		
 		return true;
 	}
 	
@@ -99,17 +95,13 @@ class Teacher extends \yii\db\ActiveRecord
 		return implode($separator, ArrayForForm::getDropDownArray(Teacher::find()->where(['id' => $ids])->all(), 'name'));
 	}
 	
-	public function upload()
+	protected function uploadUserpic()
     {
         if ($this->image_file = UploadedFile::getInstance($this, 'image_file'))
 		{
-			$fullFileName = '/upload/userpic/'.$this->image_file->baseName.'.'.$this->image_file->extension;
-            //$this->imageFile->saveAs($fullFileName);
-			$this->image = $fullFileName;            
-        }
-		else
-		{
-            $this->image = $this->image_file->baseName;
-        }
+			$fullFileName = 'upload/userpic/'.uniqid('teacher_').'.'.$this->image_file->extension;
+			$this->image_file->saveAs(Yii::$app->basePath.'/'.$fullFileName);
+			$this->image = $fullFileName;
+		}
     }
 }

@@ -31,6 +31,7 @@
 		'Experience' => 'Опыт работы',
 		'Education' => 'Образование',
 		'Password' => 'Пароль',
+		'New Password' => 'Новый Пароль',
 		'Image'	=> 'Фото',
 		'Curriculums' => 'Образовательные программы',
 		'All Teachers' => 'Все Учителя',
