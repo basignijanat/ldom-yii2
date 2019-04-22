@@ -2,52 +2,73 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+use Yii;
+
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
-
+	
+	public $password_new;
+	
+	public static function tableName()
+    {
+        return 'userdata';
+    }
+	
+	public function rules()
+    {
+        return [
+			[['isadmin'], 'integer'],
+			[['teacher_id'], 'integer'],
+            [['password', 'password_new', 'authkey', 'accesstoken', 'userpic'], 'string'],
+			[['username'], 'email'],
+        ];
+    }
+	
+	public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app\admin', 'ID'),
+			'isadmin' => Yii::t('app\admin', 'Is Administrator'),
+            'teacher_id' => Yii::t('app\admin', 'Teacher Id'),
+            'username' => Yii::t('app\admin', 'Email'),
+            'password' => Yii::t('app\admin', 'Password'),
+            'userpic' => Yii::t('app\admin', 'Userpic'),			
+        ];
+    }
+	
+	public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert))
+		{
+			if ($this->getIsNewRecord())
+			{
+				$this->authkey = \Yii::$app->security->generateRandomString();
+				$this->accesstoken = \Yii::$app->security->generateRandomString();
+			}
+			$this->savePassword($insert);
+            
+            return true;
+        }
+        return false;
+    }
+	
     /**
      * {@inheritdoc}
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        //return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+		$user_data = User::find()->where(['id' => $id])->one();
+		return $user_data ? $user_data : null;
     }
 
     /**
      * {@inheritdoc}
      */
     public static function findIdentityByAccessToken($token, $type = null)
-    {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+    {        
+		$user_data = User::find()->where(['accesstoken' => $accesstoken])->one();
+		return $user_data ? $user_data : null;
     }
 
     /**
@@ -58,13 +79,8 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        $user_data = User::find()->where(['username' => $username])->one();
+		return $user_data ? $user_data : null;
     }
 
     /**
@@ -80,15 +96,15 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->authkey;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function validateAuthKey($authKey)
+    public function validateAuthKey($authkey)
     {
-        return $this->authKey === $authKey;
+        return $this->authkey === $authkey;
     }
 
     /**
@@ -99,6 +115,19 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
+	
+	protected function savePassword($insert)
+	{
+		if ($insert)
+		{
+			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+		}
+		elseif (!$insert && strlen($this->password_new) > 0)
+		{			
+			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password_new);
+		}
+	}
+	
 }
