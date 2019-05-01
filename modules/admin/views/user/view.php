@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\User */
 
 $this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -25,13 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+	
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-			'isadmin',
-            'teacher_id',
+			['attribute' => 'isadmin', 'value' => $model->isadmin == 0 ? Yii::t('app\admin', 'No') : Yii::t('app\admin', 'Yes')],            
             'username:email',
             'password',
             'authkey',

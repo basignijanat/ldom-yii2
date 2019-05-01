@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\User;
 use app\models\UserSearch;
+use app\models\Teacher;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,8 +21,7 @@ class UserController extends Controller
 	{
 		parent::__construct($id, $module, $config = []);		
 		NoEmptyDb::firstEntry(new User, [
-			'isadmin' => 1,
-			'teacher_id' => 0,
+			'isadmin' => 1,			
 			'username' => 'admin@somemail.com',
 			'password' => Yii::$app->getSecurity()->generatePasswordHash('admin'),
 			'authkey' => \Yii::$app->security->generateRandomString(),
@@ -67,8 +67,11 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        $teachers = Teacher::getTeachers();
+		
+		return $this->render('view', [
             'model' => $this->findModel($id),
+			'teachers' => $teachers,
         ]);
     }
 

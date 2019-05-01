@@ -3,11 +3,14 @@
 namespace app\models;
 
 use Yii;
+use app\components\ArrayForForm;
+use yii\web\UploadedFile;
 
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 	
 	public $password_new;
+	public $image_file;
 	
 	public static function tableName()
     {
@@ -17,10 +20,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	public function rules()
     {
         return [
-			[['isadmin'], 'integer'],
-			[['teacher_id'], 'integer'],
+			[['isadmin'], 'integer'],			
             [['password', 'password_new', 'authkey', 'accesstoken', 'userpic'], 'string'],
 			[['username'], 'email'],
+			[['image_file'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
 	
@@ -28,13 +31,20 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => Yii::t('app\admin', 'ID'),
-			'isadmin' => Yii::t('app\admin', 'Is Administrator'),
-            'teacher_id' => Yii::t('app\admin', 'Teacher Id'),
+			'isadmin' => Yii::t('app\admin', 'Is Administrator'),            
             'username' => Yii::t('app\admin', 'Email'),
             'password' => Yii::t('app\admin', 'Password'),
-            'userpic' => Yii::t('app\admin', 'Userpic'),			
+			'password_new' => Yii::t('app\admin', 'New Password'),
+			'authkey' => Yii::t('app\admin', 'Auth Key'),
+            'userpic' => Yii::t('app\admin', 'Userpic'),
+			'image_file' => Yii::t('app\admin', 'Download Image'),
         ];
     }
+	
+	public static function getUsers()
+	{
+		return ArrayForForm::getDropDownArray(User::find()->all(), 'username');				
+	}
 	
 	public function beforeSave($insert)
     {
@@ -46,6 +56,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 				$this->accesstoken = \Yii::$app->security->generateRandomString();
 			}
 			$this->savePassword($insert);
+			$this->uploadUserpic();
             
             return true;
         }
@@ -119,7 +130,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 	
 	protected function savePassword($insert)
-	{
+	{		
 		if ($insert)
 		{
 			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
@@ -130,4 +141,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 		}
 	}
 	
+	protected function uploadUserpic()
+    {
+        if ($this->image_file = UploadedFile::getInstance($this, 'image_file'))
+		{
+			$fullFileName = 'upload/userpic/'.uniqid('user_').'.'.$this->image_file->extension;
+			$this->image_file->saveAs($fullFileName);
+			$this->userpic = '/web/'.$fullFileName;
+		}
+    }
 }

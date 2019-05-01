@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Teacher;
 use app\models\TeacherSearch;
+use app\models\User;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
 use yii\web\Controller;
@@ -54,8 +55,11 @@ class TeacherController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        $users = User::getUsers();
+		
+		return $this->render('view', [
             'model' => $this->findModel($id),
+			'users' => $users,
         ]);
     }
 
@@ -79,9 +83,12 @@ class TeacherController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		}
-
+		
+		$users = User::getUsers();
+		
         return $this->render('create', [
             'model' => $model,
+			'users' => $users,
         ]);
     }
 
@@ -101,9 +108,12 @@ class TeacherController extends Controller
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-				
+			
+		$users = User::getUsers();		
+		
         return $this->render('update', [
             'model' => $model,
+			'users' => $users,
         ]);
     }
 

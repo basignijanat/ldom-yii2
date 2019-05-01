@@ -19,6 +19,15 @@
 		'Teaching Methods' => 'Методы Обучения',
 		'Prices' => 'Цены',
 		
+		'Users' => 'Пользователи',
+		'Is Administrator' => 'Администратор?',
+		'Teacher Id' => 'ID Учителя',
+		'Auth Key' => 'Ключ',
+		'No' => 'Нет',
+		'Yes' => 'Да',
+		
+		'User Email' => 'Email Пользователя',
+		
 		'Meta Title' => 'Мета Заголовок',
 		'Meta Description' => 'Мета Описание',
 		'Name' => 'Имя',
