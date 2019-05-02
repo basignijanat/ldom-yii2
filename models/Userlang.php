@@ -11,8 +11,8 @@ use app\components\ArrayForForm;
  *
  * @property int $id
  * @property string $name
- * @property string $short_name
- * @property string $value
+ * @property string $shortname
+ * @property string $val
  */
 class Userlang extends \yii\db\ActiveRecord
 {
@@ -30,7 +30,7 @@ class Userlang extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'short_name', 'value'], 'string', 'max' => 255],
+            [['name', 'shortname', 'val'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,8 +42,8 @@ class Userlang extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app\admin', 'ID'),
             'name' => Yii::t('app\admin', 'Name'),
-            'short_name' => Yii::t('app\admin', 'Short Name'),
-            'value' => Yii::t('app\admin', 'Value'),
+            'shortname' => Yii::t('app\admin', 'Short Name'),
+            'val' => Yii::t('app\admin', 'Value'),
         ];
     }
 	
@@ -68,14 +68,14 @@ class Userlang extends \yii\db\ActiveRecord
 	{
 		NoEmptyDb::firstEntry(new Userlang, [
 			'name' => 'English US',
-			'short_name' => 'Eng',
-			'value' => 'en-US',
+			'shortname' => 'Eng',
+			'val' => 'en-US',
 		]);
 		$languages = Userlang::find()->all();
 		$menu_langs = array();
 		foreach ($languages as $language)
 		{
-			$menu_langs[] = ['label' => $language['short_name'], 'url' => ['?lang='.$language['value']]];
+			$menu_langs[] = ['label' => $language['shortname'], 'url' => ['?lang='.$language['val']]];
 		}
 		return $menu_langs;
 	}

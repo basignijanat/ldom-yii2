@@ -18,7 +18,7 @@ class UserlangSearch extends Userlang
     {
         return [
             [['id'], 'integer'],
-            [['name', 'short_name', 'value'], 'safe'],
+            [['name', 'shortname', 'val'], 'safe'],
         ];
     }
 
@@ -62,8 +62,8 @@ class UserlangSearch extends Userlang
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'short_name', $this->short_name])
-            ->andFilterWhere(['like', 'value', $this->value]);
+            ->andFilterWhere(['like', 'shortname', $this->shortname])
+            ->andFilterWhere(['like', 'val', $this->val]);
 
         return $dataProvider;
     }

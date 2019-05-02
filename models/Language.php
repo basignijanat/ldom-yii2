@@ -21,7 +21,7 @@ class Language extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'language';
+        return 'lang';
     }
 
     /**
