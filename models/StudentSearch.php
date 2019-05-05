@@ -17,8 +17,8 @@ class StudentSearch extends Student
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['eduform_ids', 'email', 'password', 'image'], 'safe'],
+            [['id', 'user_id'], 'integer'],
+            [['eduform_ids'], 'safe'],
         ];
     }
 
@@ -61,10 +61,8 @@ class StudentSearch extends Student
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'eduform_ids', $this->eduform_ids])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'image', $this->image]);
+        $query->andFilterWhere(['like', 'eduform_ids', $this->eduform_ids]);
+		$query->andFilterWhere(['like', 'user_id', $this->user_id]);
 
         return $dataProvider;
     }

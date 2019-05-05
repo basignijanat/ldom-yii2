@@ -5,8 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Student */
 
-$this->title = Yii::t('app\messages', 'Create Student');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Students'), 'url' => ['index']];
+$this->title = Yii::t('app\admin', 'Create Student`s Profile');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Students'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="student-create">
@@ -15,6 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+		'users' => $users,
+		'curriculums' => $curriculums,
+		'selectedCurriculums' => $selectedCurriculums,		
     ]) ?>
 
 </div>

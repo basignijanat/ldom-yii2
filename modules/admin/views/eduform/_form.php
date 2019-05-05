@@ -23,7 +23,7 @@ use app\components\ListFormHelper;
 
     <?= $form->field($model, 'language_id')->dropdownList($languages) ?>
 
-    <?= $form->field($model, 'teacher_ids')->hiddenInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'teacher_ids')->hiddenInput(['maxlength' => true])->label(false) ?>
 	
 	<?php 
 		echo ListFormHelper::showUpdateList($teachers, $selectedTeachers, 'eduform-teacher_ids', 'teacher_ids', [
@@ -35,7 +35,7 @@ use app\components\ListFormHelper;
 		]);
 	?>
 	
-    <?= $form->field($model, 'prices')->hiddenInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'prices')->hiddenInput(['maxlength' => true])->label(false) ?>
 	
 	<?php 
 		echo ListFormHelper::showUpdateList($prices, $selectedPrices, 'eduform-prices', 'prices', [

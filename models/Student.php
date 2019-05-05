@@ -8,10 +8,8 @@ use Yii;
  * This is the model class for table "student".
  *
  * @property int $id
+ * @property int $user_id
  * @property string $eduform_ids
- * @property string $email
- * @property string $password
- * @property string $image
  */
 class Student extends \yii\db\ActiveRecord
 {
@@ -29,7 +27,8 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['eduform_ids', 'email', 'password', 'image'], 'string', 'max' => 255],
+			[['user_id'], 'integer'],
+            [['eduform_ids'], 'string', 'max' => 255],
         ];
     }
 
@@ -39,11 +38,9 @@ class Student extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app\messages', 'ID'),
-            'eduform_ids' => Yii::t('app\messages', 'Eduform Ids'),
-            'email' => Yii::t('app\messages', 'Email'),
-            'password' => Yii::t('app\messages', 'Password'),
-            'image' => Yii::t('app\messages', 'Image'),
+            'id' => Yii::t('app\admin', 'ID'),
+			'user_id' => Yii::t('app\admin', 'User Email'),
+            'eduform_ids' => Yii::t('app\admin', 'Curriculums'),
         ];
     }
 }

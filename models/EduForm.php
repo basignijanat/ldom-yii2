@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\components\ArrayForForm;
 
 /**
  * This is the model class for table "eduform".
@@ -53,4 +54,10 @@ class EduForm extends \yii\db\ActiveRecord
             'prices' => Yii::t('app\admin', 'Prices'),
         ];
     }
+	
+	public static function getEduForms()
+	{
+		return ArrayForForm::getDropDownArray(EduForm::find()->all(), 'name');				
+	}
+	
 }

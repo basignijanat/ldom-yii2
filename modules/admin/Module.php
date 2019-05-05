@@ -7,7 +7,7 @@ use app\models\Userlang;
 /**
  * admin module definition class
  */
-class admin extends \yii\base\Module
+class Module extends \yii\base\Module
 {
     /**
      * {@inheritdoc}

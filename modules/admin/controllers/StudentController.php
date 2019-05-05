@@ -5,9 +5,12 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Student;
 use app\models\StudentSearch;
+use app\models\User;
+use app\models\EduForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\components\ArrayForForm;
 
 /**
  * StudentController implements the CRUD actions for Student model.
@@ -52,8 +55,11 @@ class StudentController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        $essentialData = self::getEssentialData($model);
+		
+		return $this->render('view', [
             'model' => $this->findModel($id),
+			'users' => $essentialData['users'],
         ]);
     }
 
@@ -65,6 +71,8 @@ class StudentController extends Controller
     public function actionCreate()
     {
         $model = new Student();
+		
+		$essentialData = self::getEssentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,6 +80,9 @@ class StudentController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+			'users' => $essentialData['users'],
+			'curriculums' => $essentialData['curriculums'],
+			'selectedCurriculums' => $essentialData['selectedCurriculums'],	
         ]);
     }
 
@@ -85,6 +96,8 @@ class StudentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		
+		$essentialData = self::getEssentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,6 +105,9 @@ class StudentController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+			'users' => $essentialData['users'],
+			'curriculums' => $essentialData['curriculums'],
+			'selectedCurriculums' => $essentialData['selectedCurriculums'],	
         ]);
     }
 
@@ -124,4 +140,13 @@ class StudentController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app\admin', 'The requested page does not exist.'));
     }
+	
+	protected static function getEssentialData($model)
+	{
+		return array(
+			'users' => User::getUsers(),
+			'curriculums' => EduForm::getEduForms(),
+			'selectedCurriculums' => ArrayForForm::excludeDropDownById(EduForm::getEduForms(), explode(' ', $model->eduform_ids)),			
+		);
+	}
 }

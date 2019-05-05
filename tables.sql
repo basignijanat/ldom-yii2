@@ -21,6 +21,13 @@ CREATE TABLE teacher(
    PRIMARY KEY (id)
 );
 
+CREATE TABLE student(
+	id int NOT NULL AUTO_INCREMENT,
+	user_id int NOT NULL,
+	eduform_ids varchar(255) NOT NULL,	
+   PRIMARY KEY (id)
+);
+
 CREATE TABLE userlang(
 	id int NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
@@ -43,5 +50,16 @@ CREATE TABLE lang(
 	meta_description varchar(255) NOT NULL,
 	name varchar(255) NOT NULL,
 	content varchar(255) NOT NULL,
+   PRIMARY KEY (id)
+);
+
+CREATE TABLE eduform(
+	id int NOT NULL AUTO_INCREMENT,
+	meta_title varchar(255) NOT NULL,
+	meta_description varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
+	content varchar(255) NOT NULL,
+	language_id
+	teacher_id
    PRIMARY KEY (id)
 );

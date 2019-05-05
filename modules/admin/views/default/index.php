@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<li><a href="/admin/userlang"><h2><?php echo Yii::t('app\admin', 'User Languages') ?></h2></a>
 		<li><a href="/admin/user"><h2><?php echo Yii::t('app\admin', 'Users') ?></h2></a>
 		<li><a href="/admin/teacher"><h2><?php echo Yii::t('app\admin', 'Teachers') ?></h2></a>
+		<li><a href="/admin/student"><h2><?php echo Yii::t('app\admin', 'Students') ?></h2></a>
 		<li><a href="/admin/price"><h2><?php echo Yii::t('app\admin', 'Prices') ?></h2></a>
 	</ul>
 </div>
