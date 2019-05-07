@@ -15,6 +15,8 @@ use app\components\ListFormHelper;
 
 	<?= $form->field($model, 'user_id')->dropDownList($users) ?>
 	
+	<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+	
 	<?= $form->field($model, 'eduform_ids')->hiddenInput(['maxlength' => true])->label(false) ?>
 	
     <?php 

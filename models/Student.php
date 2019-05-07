@@ -28,7 +28,7 @@ class Student extends \yii\db\ActiveRecord
     {
         return [
 			[['user_id'], 'integer'],
-            [['eduform_ids'], 'string', 'max' => 255],
+            [['name', 'eduform_ids'], 'string', 'max' => 255],
         ];
     }
 
@@ -40,6 +40,7 @@ class Student extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app\admin', 'ID'),
 			'user_id' => Yii::t('app\admin', 'User Email'),
+			'name' => Yii::t('app\admin', 'Name'),
             'eduform_ids' => Yii::t('app\admin', 'Curriculums'),
         ];
     }

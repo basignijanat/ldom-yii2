@@ -18,7 +18,7 @@ class StudentSearch extends Student
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['eduform_ids'], 'safe'],
+            [['name', 'eduform_ids'], 'safe'],
         ];
     }
 
@@ -59,6 +59,7 @@ class StudentSearch extends Student
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+			'name' => $this->name,
         ]);
 
         $query->andFilterWhere(['like', 'eduform_ids', $this->eduform_ids]);

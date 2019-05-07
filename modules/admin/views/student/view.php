@@ -31,8 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-			'user_id',
-            'eduform_ids',
+			['attribute' => 'user_id', 'value' => $users[$model->user_id]],
+			'name',
+            ['attribute' => 'eduform_ids', 'value' => implode(' ', $selectedCurriculums)],
         ],
     ]) ?>
 

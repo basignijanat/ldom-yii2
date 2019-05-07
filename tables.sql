@@ -24,6 +24,7 @@ CREATE TABLE teacher(
 CREATE TABLE student(
 	id int NOT NULL AUTO_INCREMENT,
 	user_id int NOT NULL,
+	name varchar(255) NOT NULL,
 	eduform_ids varchar(255) NOT NULL,	
    PRIMARY KEY (id)
 );

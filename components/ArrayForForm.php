@@ -4,9 +4,9 @@ namespace app\components;
 
 	class ArrayForForm
 	{
-		public static function getDropDownArray($elements, $name)
+		public static function getDropDownArray($elements, $name, $defaultNul = '...')
 		{			
-			$selectElements = array();
+			$selectElements[0] = $defaultNul;
 			foreach ($elements as $element)
 			{
 				$selectElements[$element['id']] = $element[$name];

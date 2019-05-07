@@ -43,7 +43,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	
 	public static function getUsers()
 	{
-		return ArrayForForm::getDropDownArray(User::find()->all(), 'username');				
+		return ArrayForForm::getDropDownArray(User::find()->all(), 'username', Yii::t('app\admin', 'No User Selected'));				
 	}
 	
 	public function beforeSave($insert)
