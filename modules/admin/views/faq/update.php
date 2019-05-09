@@ -8,6 +8,7 @@ use yii\helpers\Html;
 $this->title = Yii::t('app\messages', 'Update Faq: {name}', [
     'name' => $model->id,
 ]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Faqs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app\messages', 'Update');
@@ -18,6 +19,7 @@ $this->params['breadcrumbs'][] = Yii::t('app\messages', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
+		'curriculums' => $curriculums,
     ]) ?>
 
 </div>

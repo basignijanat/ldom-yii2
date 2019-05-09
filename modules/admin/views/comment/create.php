@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Comment */
 
 $this->title = Yii::t('app\messages', 'Create Comment');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Comments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+		'students' => $students,
+		'curriculums' => $curriculums,	
     ]) ?>
 
 </div>

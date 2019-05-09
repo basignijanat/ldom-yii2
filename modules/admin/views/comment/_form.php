@@ -12,11 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'student_id')->textInput() ?>
+    <?= $form->field($model, 'student_id')->dropDownList($students) ?>
 
-    <?= $form->field($model, 'form_id')->textInput() ?>
+    <?= $form->field($model, 'form_id')->dropDownList($curriculums) ?>
 
-    <?= $form->field($model, 'content')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app\messages', 'Save'), ['class' => 'btn btn-success']) ?>

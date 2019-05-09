@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\components\ArrayForForm;
 
 /**
  * This is the model class for table "student".
@@ -44,4 +45,9 @@ class Student extends \yii\db\ActiveRecord
             'eduform_ids' => Yii::t('app\admin', 'Curriculums'),
         ];
     }
+	
+	public static function getStudents()
+	{
+		return ArrayForForm::getDropDownArray(Student::find()->all(), 'name');		
+	}
 }

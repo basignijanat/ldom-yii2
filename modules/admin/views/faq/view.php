@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Faq */
 
 $this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Faqs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -30,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'eduform_id',
+            ['attribute' => 'eduform_id', 'value' => $curriculums[$model->eduform_id]],
             'question',
             'answer:ntext',
         ],

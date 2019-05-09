@@ -64,3 +64,10 @@ CREATE TABLE eduform(
 	teacher_id
    PRIMARY KEY (id)
 );
+
+CREATE TABLE comment(
+	id int NOT NULL AUTO_INCREMENT,
+	form_id int NOT NULL,
+	student_id int NOT NULL,
+	content text NOT NULL,
+   PRIMARY KEY (id)

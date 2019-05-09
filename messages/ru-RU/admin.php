@@ -16,7 +16,8 @@
 		
 		'Administrator' => 'Администратор',
 		
-		'Languages' => 'Языки',				
+		'Languages' => 'Языки',
+		'User Language' => 'Язык Пользователя',
 		'User Languages' => 'Языки Пользователя',		
 		'Teaching Methods' => 'Методы Обучения',
 		'Prices' => 'Цены',

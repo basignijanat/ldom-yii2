@@ -66,16 +66,9 @@ class EduformController extends Controller
     {
 		$model = $this->findModel($id);
 		
-		$teachersInString = Teacher::getTeachersInString(explode(' ', $model->teacher_ids), ', ');
-		$pricesInString = Price::getPricesInString(explode(' ', $model->prices), ', ');
-		$languageById = Language::getLanguageById($model->language_id);
+		$essentialData = self::getEssentialData($this->findModel($id));		
 		
-        return $this->render('view', [
-            'model' => $model,
-			'teachersInString' => $teachersInString,
-			'pricesInString' => $pricesInString,
-			'languageById' => $languageById,
-        ]);
+		return $this->render('view', $essentialData);
     }
 
     /**
@@ -93,14 +86,7 @@ class EduformController extends Controller
 
 		$essentialData = self::getEssentialData($model);
 		
-        return $this->render('create', [
-            'model' => $model,
-			'languages' => $essentialData['languages'],
-			'teachers' => $essentialData['teachers'],
-			'selectedTeachers' => $essentialData['selectedTeachers'],
-			'prices' => $essentialData['prices'],
-			'selectedPrices' => $essentialData['selectedPrices'],
-        ]);
+        return $this->render('create', $essentialData);
     }
 
     /**
@@ -120,14 +106,7 @@ class EduformController extends Controller
 
 		$essentialData = self::getEssentialData($model);		
 				
-        return $this->render('update', [
-            'model' => $model,
-			'languages' => $essentialData['languages'],
-			'teachers' => $essentialData['teachers'],
-			'selectedTeachers' => $essentialData['selectedTeachers'],
-			'prices' => $essentialData['prices'],
-			'selectedPrices' => $essentialData['selectedPrices'],
-        ]);
+        return $this->render('update', $essentialData);
     }
 
     /**
@@ -175,6 +154,7 @@ class EduformController extends Controller
 	protected static function getEssentialData($model)
 	{
 		return array(
+			'model' => $model,
 			'languages' => Language::getLanguages(),
 			'teachers' => Teacher::getTeachers(),
 			'selectedTeachers' => ArrayForForm::excludeDropDownById(Teacher::getTeachers(), explode(' ', $model->teacher_ids)),

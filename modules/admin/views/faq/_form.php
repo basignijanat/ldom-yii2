@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'eduform_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'eduform_id')->dropDownList($curriculums) ?>
 
     <?= $form->field($model, 'question')->textInput(['maxlength' => true]) ?>
 

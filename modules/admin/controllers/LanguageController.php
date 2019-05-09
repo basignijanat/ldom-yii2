@@ -60,8 +60,11 @@ class LanguageController extends Controller
      */
     public function actionView($id)
     {
+		$languages = Userlang::getLanguages();
+		
         return $this->render('view', [
             'model' => $this->findModel($id),
+			'languages' => $languages,
         ]);
     }
 

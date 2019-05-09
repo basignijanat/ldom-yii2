@@ -51,8 +51,4 @@ class Price extends \yii\db\ActiveRecord
 		return ArrayForForm::getDropDownArray(Price::find()->all(), 'name');				
 	}
 	
-	public static function getPricesInString($ids = array(), $separator)
-	{
-		return implode($separator, ArrayForForm::getDropDownArray(Price::find()->where(['id' => $ids])->all(), 'name'));
-	}
 }

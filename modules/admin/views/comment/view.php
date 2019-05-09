@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Comment */
 
 $this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Comments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -30,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'student_id',
-            'form_id',
+            ['attribute' => 'student_id', 'value' => $students[$model->student_id]],
+            ['attribute' => 'form_id', 'value' => $curriculums[$model->form_id]],
             'content',
         ],
     ]) ?>

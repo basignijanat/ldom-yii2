@@ -70,15 +70,7 @@ class TeacherController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Teacher();
-		
-		if (Yii::$app->request->isPost) 
-		{            
-            if ($fullFileName = $model->upload()) {
-				//$model->image = $fullFileName;
-				$model->image = 'a';
-            }
-        }
+        $model = new Teacher();		
 		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);

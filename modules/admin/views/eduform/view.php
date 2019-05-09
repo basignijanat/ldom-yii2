@@ -36,9 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'meta_description:ntext',
             'name',
             'content:ntext',
-            ['attribute' => 'language_id', 'value' => $languageById->name],
-			['attribute' => 'teacher_ids', 'value' => $teachersInString],
-			['attribute' => 'prices', 'value' => $pricesInString],
+            ['attribute' => 'language_id', 'value' => $languages[$model->language_id]],
+			['attribute' => 'teacher_ids', 'value' => implode(', ', $selectedTeachers)],
+			['attribute' => 'prices', 'value' => implode(', ', $selectedPrices)],
             //'prices',
         ],
     ]) ?>	

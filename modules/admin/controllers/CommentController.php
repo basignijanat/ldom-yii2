@@ -5,6 +5,8 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Comment;
 use app\models\CommentSearch;
+use app\models\Student;
+use app\models\EduForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,9 +54,9 @@ class CommentController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $essentialData = self::getEssentialData($this->findModel($id));		
+		
+		return $this->render('view', $essentialData);
     }
 
     /**
@@ -65,14 +67,14 @@ class CommentController extends Controller
     public function actionCreate()
     {
         $model = new Comment();
+		
+		$essentialData = self::getEssentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render('create', $essentialData);
     }
 
     /**
@@ -85,14 +87,14 @@ class CommentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		
+		$essentialData = self::getEssentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render('update', $essentialData);
     }
 
     /**
@@ -124,4 +126,13 @@ class CommentController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app\messages', 'The requested page does not exist.'));
     }
+	
+	protected static function getEssentialData($model)
+	{
+		return array(
+			'model' => $model,
+			'students' => Student::getStudents(),
+			'curriculums' => EduForm::getEduForms(),			
+		);
+	}
 }

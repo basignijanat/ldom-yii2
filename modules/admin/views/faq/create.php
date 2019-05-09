@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Faq */
 
 $this->title = Yii::t('app\messages', 'Create Faq');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Faqs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+		'curriculums' => $curriculums,
     ]) ?>
 
 </div>

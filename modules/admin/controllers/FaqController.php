@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Faq;
 use app\models\FaqSearch;
+use app\models\EduForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,9 +53,9 @@ class FaqController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $essentialData = self::getEssentialData($this->findModel($id));		
+		
+		return $this->render('view', $essentialData);
     }
 
     /**
@@ -65,14 +66,14 @@ class FaqController extends Controller
     public function actionCreate()
     {
         $model = new Faq();
+		
+		$essentialData = self::getEssentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render('create', $essentialData);
     }
 
     /**
@@ -85,14 +86,14 @@ class FaqController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		
+		$essentialData = self::getEssentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render('update', $essentialData);
     }
 
     /**
@@ -124,4 +125,12 @@ class FaqController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app\messages', 'The requested page does not exist.'));
     }
+	
+	protected static function getEssentialData($model)
+	{
+		return array(
+			'model' => $model,			
+			'curriculums' => EduForm::getEduForms(),			
+		);
+	}
 }

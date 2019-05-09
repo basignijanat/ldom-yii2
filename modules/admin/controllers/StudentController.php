@@ -75,12 +75,7 @@ class StudentController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-			'users' => $essentialData['users'],
-			'curriculums' => $essentialData['curriculums'],
-			'selectedCurriculums' => $essentialData['selectedCurriculums'],	
-        ]);
+        return $this->render('create', $essentialData);
     }
 
     /**
@@ -100,12 +95,7 @@ class StudentController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-			'users' => $essentialData['users'],
-			'curriculums' => $essentialData['curriculums'],
-			'selectedCurriculums' => $essentialData['selectedCurriculums'],	
-        ]);
+        return $this->render('update', $essentialData);
     }
 
     /**
