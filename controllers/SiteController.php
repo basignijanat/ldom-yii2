@@ -125,6 +125,7 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+	
 	public function actionSetlang($lang, $url)
 	{
 		header('Location: http://ldom-yii2/admin/language/index');
