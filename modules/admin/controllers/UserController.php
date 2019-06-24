@@ -21,7 +21,7 @@ class UserController extends Controller
 	{
 		parent::__construct($id, $module, $config = []);		
 		NoEmptyDb::firstEntry(new User, [
-			'isadmin' => 1,			
+			'is_admin' => 1,			
 			'username' => 'admin@somemail.com',
 			'password' => Yii::$app->getSecurity()->generatePasswordHash('admin'),
 			'authkey' => \Yii::$app->security->generateRandomString(),

@@ -20,7 +20,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	public function rules()
     {
         return [
-			[['isadmin'], 'integer'],			
+			[['is_admin'], 'integer'],			
             [['password', 'password_new', 'authkey', 'accesstoken', 'userpic'], 'string'],
 			[['username'], 'email'],
 			[['image_file'], 'file', 'extensions' => 'png, jpg'],

@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'isadmin')->dropDownList([0 => Yii::t('app\admin', 'No'), 1 => Yii::t('app\admin', 'Yes')]) ?>
+    <?= $form->field($model, 'is_admin')->dropDownList([0 => Yii::t('app\admin', 'No'), 1 => Yii::t('app\admin', 'Yes')]) ?>
 	
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
