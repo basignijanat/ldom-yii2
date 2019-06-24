@@ -60,8 +60,8 @@ CREATE TABLE eduform(
 	meta_description varchar(255) NOT NULL,
 	name varchar(255) NOT NULL,
 	content varchar(255) NOT NULL,
-	language_id
-	teacher_id
+	language_id int NOT NULL,
+	teacher_id int NOT NULL,
    PRIMARY KEY (id)
 );
 
@@ -71,3 +71,4 @@ CREATE TABLE comment(
 	student_id int NOT NULL,
 	content text NOT NULL,
    PRIMARY KEY (id)
+    );
