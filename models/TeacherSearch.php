@@ -18,7 +18,7 @@ class TeacherSearch extends Teacher
     {
         return [
             [['id', 'age', 'experience', 'user_id'], 'integer'],
-            [['name', 'education', 'eduprogram_ids'], 'safe'],
+            [['education', 'eduprogram_ids'], 'safe'],
         ];
     }
 
@@ -63,8 +63,7 @@ class TeacherSearch extends Teacher
             'experience' => $this->experience,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])            
-			->andFilterWhere(['like', 'user_id', $this->user_id])
+        $query->andFilterWhere(['like', 'user_id', $this->user_id])
             ->andFilterWhere(['like', 'education', $this->education])
             ->andFilterWhere(['like', 'eduprogram_ids', $this->eduprogram_ids]);
 

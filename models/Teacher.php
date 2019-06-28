@@ -10,7 +10,6 @@ use app\components\ArrayForForm;
  *
  * @property int $id 
  * @property int $user_id
- * @property string $name
  * @property int $age
  * @property int $experience
  * @property string $education
@@ -43,7 +42,7 @@ class Teacher extends \yii\db\ActiveRecord
     {
         return [
             [['age', 'experience', 'user_id'], 'integer'],
-            [['name', 'education', 'eduprogram_ids'], 'string', 'max' => 255],		
+            [['education', 'eduprogram_ids'], 'string', 'max' => 255],		
         ];
     }
 
@@ -54,8 +53,7 @@ class Teacher extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app\admin', 'ID'),
-			'user_id' => Yii::t('app\admin', 'User Email'),            
-            'name' => Yii::t('app\admin', 'Name'),            
+			'user_id' => Yii::t('app\admin', 'User Email'),                        
             'age' => Yii::t('app\admin', 'Age'),
             'experience' => Yii::t('app\admin', 'Experience'),
             'education' => Yii::t('app\admin', 'Education'),            

@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'user_id')->dropDownList($users) ?>
 	
-	<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'age')->textInput() ?>
 
     <?= $form->field($model, 'experience')->textInput() ?>

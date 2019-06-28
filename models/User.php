@@ -21,8 +21,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
 			[['is_admin'], 'integer'],			
-            [['password', 'password_new', 'authkey', 'accesstoken', 'userpic'], 'string'],
-			[['username'], 'email'],
+            [['authkey', 'accesstoken', 'userpic', 'fname', 'lname', 'mname'], 'string'],
+            [['password', 'password_new'], 'required'],
+            [['username'], 'email'],
+            [['username'], 'required'],
 			[['image_file'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
