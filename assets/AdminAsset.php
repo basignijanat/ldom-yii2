@@ -44,6 +44,7 @@ class AdminAsset extends AssetBundle
         'js/custom.min.js',
         'js/dashboard1.js',
         'plugins/bower_components/toast-master/js/jquery.toast.js',
+        'js/helperSelect.js',
 
     ];
     public $depends = [

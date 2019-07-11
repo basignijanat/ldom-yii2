@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Faqs'), 'ur
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app\messages', 'Update');
 ?>
-<div class="faq-update">
+<div class="white-box">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

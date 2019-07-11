@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Teaching Metho
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app\admin', 'Update');
 ?>
-<div class="edu-form-update">
+<div class="white-box">
 
     <h1><?= Html::encode($this->title) ?></h1>	
 		

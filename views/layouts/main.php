@@ -75,7 +75,7 @@ AppAsset::register($this);
                 <? if (Yii::$app->user->isGuest): ?>
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a href="/site/login" class="button is-primary">
+                            <a href="/site/signup" class="button is-primary">
                                 <strong><?= Yii::t('app\admin', 'Sign up') ?></strong>
                             </a>
                             <a href="/site/login" class="button is-light">
@@ -94,18 +94,21 @@ AppAsset::register($this);
                                 <span class="column">
                                     <?= Yii::$app->user->identity->username ?>
                                 </span>
-                            </a>
-
+                            </a>                           
+                              
                             <div class="navbar-dropdown">
-                                <?= Html::beginForm(['/site/logout'], 'post') ?>
-                                    <?= Html::submitButton(
-                                        'Logout',
-                                        [
-                                            'class' => 'button is-light',
-                                            'style' => 'width: 100%',
-                                        ]
-                                    ) ?>
-                                <?= Html::endForm() ?>
+                                <a href="/cabinet" class="navbar-item">1</a>
+                                <a class="navbar-item">
+                                    <?= Html::beginForm(['/site/logout'], 'post') ?>
+                                        <?= Html::submitButton(
+                                            'Logout',
+                                            [
+                                                'class' => 'button is-text',
+                                                'style' => 'width: 100%',
+                                            ]
+                                        ) ?>
+                                    <?= Html::endForm() ?>
+                                </a>
                             </div>                    
                     </div>
                 <? endif ?>

@@ -12,6 +12,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 
 use app\models\Userlang;
+use app\models\User;
 
 class SiteController extends Controller
 {
@@ -92,6 +93,33 @@ class SiteController extends Controller
 
         $model->password = '';
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionSignup()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new User();       
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()){
+            $model = new LoginForm();
+
+            $model->name = Yii::$app->request->post('User')['username'];
+            $model->password = Yii::$app->request->post('User')['password'];
+            $model->rememberMe = true;
+
+            if ($model->login()){
+
+                return $this->goBack();
+            }
+        }
+
+        $model->password = '';
+        return $this->render('signup', [
             'model' => $model,
         ]);
     }

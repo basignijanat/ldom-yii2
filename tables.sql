@@ -1,13 +1,13 @@
 CREATE TABLE userdata(
 	id int NOT NULL AUTO_INCREMENT,
-	is_admin tinyint NOT NULL,
+	isadmin tinyint DEFAULT 0,
 	username varchar(255) NOT NULL,
 	password varchar(255) NOT NULL,
 	authkey varchar(255) NOT NULL,
 	accesstoken varchar(255) NOT NULL,
-	userpic varchar(255) NOT NULL,
-	fname varchar(255) NOT NULL,
-	lname varchar(255) NOT NULL,
+	userpic varchar(255) NULL,
+	fname varchar(255) default NULL,
+	lname varchar(255) default NULL,
 	mname varchar(255) default NULL,
    PRIMARY KEY (id)
 );

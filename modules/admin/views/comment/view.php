@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Comments'),
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="comment-view">
+<div class="white-box">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

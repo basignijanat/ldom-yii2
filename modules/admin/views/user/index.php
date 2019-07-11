@@ -11,7 +11,7 @@ $this->title = Yii::t('app\admin', 'Users');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
+<div class="white-box">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

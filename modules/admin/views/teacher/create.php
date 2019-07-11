@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Teachers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="teacher-create">
+<div class="white-box">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Students'), 'u
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="student-view">
+<div class="white-box">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

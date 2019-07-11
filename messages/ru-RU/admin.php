@@ -21,6 +21,7 @@
 		'User Languages' => 'Языки Пользователя',		
 		'Teaching Methods' => 'Методы Обучения',
 		'Prices' => 'Цены',
+		'Comments' => 'Отзывы',
 		'FAQ' => 'ЧаВо',
 		
 		'Users' => 'Пользователи',

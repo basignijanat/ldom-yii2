@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'User Languages
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="userlang-view">
+<div class="white-box">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

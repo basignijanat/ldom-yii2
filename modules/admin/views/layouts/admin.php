@@ -85,14 +85,14 @@ AdminAsset::register($this);
                         <a href="<?=Url::to(['/admin'])?>" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Админпанель</a>
                     </li>
                     <li>
+                        <a href="<?=Url::to(['/admin/userlang'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'User Languages') ?></a>
+                    </li>
+                    <li>
                         <a href="<?=Url::to(['/admin/language'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Languages')?> <span class="pull-right badge badge-info badge-pill ml-auto mr-3 font-medium px-2 py-1"><?=$order_count?></span></a>
                     </li>
                     <li>
                         <a href="<?=Url::to(['/admin/eduform'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Teaching Methods') ?></a>
-                    </li>
-                    <li>
-                        <a href="<?=Url::to(['/admin/userlang'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'User Languages') ?></a>
-                    </li>
+                    </li>                    
                     <li>
                         <a href="<?=Url::to(['/admin/user'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Users') ?></a>
                     </li>
@@ -112,9 +112,7 @@ AdminAsset::register($this);
                         <a href="<?=Url::to(['/admin/faq'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'FAQ') ?></a>
                     </li>
                 </ul>
-                <div class="center p-20">
-                     <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank" class="btn btn-danger btn-block waves-effect waves-light">Upgrade to Pro</a>
-                 </div>
+               
             </div>
             
         </div>
@@ -130,10 +128,8 @@ AdminAsset::register($this);
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Dashboard</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
-                        <ol class="breadcrumb">
-                            <li><a href="#">Dashboard</a></li>
-                        </ol>
+                        
+                        
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

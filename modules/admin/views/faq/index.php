@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = Yii::t('app\messages', 'Faqs');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="faq-index">
+<div class="white-box">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
