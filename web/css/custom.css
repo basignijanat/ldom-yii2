@@ -1,0 +1,33 @@
+.navbar-toggle {
+  opacity: 0;
+  position: absolute;
+}
+
+.course-link {
+  display: block;
+  position: relative;
+}
+
+.course-link-big {
+  background-color: #fff;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+          box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  color: #4a4a4a;
+}
+
+.course-link-title {
+  position: absolute;
+  bottom: 0px;
+  text-decoration: none;
+  background-color: lightblue;
+  color: darkblue;
+  font-size: xx-large;
+  opacity: 0.9;
+  padding-top: 25%;
+  padding-left: 10%;
+  padding-right: 25%;
+  padding-bottom: 10%;
+  border-radius: 0em 100% 0em 0em;
+}
+/*# sourceMappingURL=custom.css.map */

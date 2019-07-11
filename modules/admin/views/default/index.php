@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\LanguageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app\admin', 'Administrator');
+$this->title = Yii::t('app\admin', 'Admin Panel');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

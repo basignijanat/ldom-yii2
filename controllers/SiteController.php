@@ -7,14 +7,24 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+
 use app\models\LoginForm;
 use app\models\ContactForm;
+
+use app\models\Userlang;
 
 class SiteController extends Controller
 {
     /**
      * {@inheritdoc}
      */
+    public function __construct($id, $module, $config = [])
+	{		
+        Userlang::SetLanguage();
+        
+        return parent::__construct($id, $module, $config = []);
+    }
+    
     public function behaviors()
     {
         return [

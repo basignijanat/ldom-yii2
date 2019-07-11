@@ -73,9 +73,9 @@ class Userlang extends \yii\db\ActiveRecord
 		]);
 		$languages = Userlang::find()->all();
 		$menu_langs = array();
-		foreach ($languages as $language)
-		{
-			$menu_langs[] = ['label' => $language['shortname'], 'url' => ['?lang='.$language['val']]];
+		
+		foreach ($languages as $language){
+			$menu_langs[$language['val']] = $language['shortname'];				
 		}
 		return $menu_langs;
 	}

@@ -5,7 +5,8 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'ldomyii2',
-	'name' => 'LanguageDom',
+    'name' => 'LanguageDom',
+    'homeUrl' => '/',
     'basePath' => dirname(__DIR__),
 	'language' => 'ru-RU',
     'bootstrap' => ['log'],
@@ -72,9 +73,20 @@ $config = [
 				
             ],
         ],
+
+        /*'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js'=>[]
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => [],
+                ],
+            ],
+        ],*/
         
     ],
-    'params' => $params,
+    'params' => $params,    
 ];
 
 if (YII_ENV_DEV) {

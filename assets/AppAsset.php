@@ -21,6 +21,8 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/bulma.css',
+        'css/custom.css',
     ];
     public $js = [
 		'js/helperSelect.js',

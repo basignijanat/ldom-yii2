@@ -4,48 +4,39 @@
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <ul>
-			<li style="display: block;"><a href="/admin"><h2><?php echo Yii::t('app\admin', 'Administrator') ?></h2></a>			
-		</ul>
+  <section class="section columns">
+    <div class="column is-3">             
+      <a class="course-link">
+        <figure class="image is-4by5">
+          <img src="http://previews.123rf.com/images/prawny/prawny0802/prawny080200039/2527779-british-pound-symbol-with-union-jack-flag-design-Stock-Photo-sterling.jpg">          
+        </figure>        
+        <div class="course-link-title">English</div>
+      </a>
     </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
+    <div class="column is-3">  
+      <a class="course-link">
+        <figure class="image is-4by5">
+          <img src="https://static4.depositphotos.com/1007499/304/i/950/depositphotos_3046471-stock-photo-deutsch-book.jpg">          
+        </figure>
+        <div class="course-link-title">German</div>
+      </a>
     </div>
+    <div class="column is-3">
+      <a class="course-link">
+        <figure class="image is-4by5">
+          <img src="http://www.brainscape.com/blog/wp-content/uploads/2015/06/French.jpg">          
+        </figure>
+        <div class="course-link-title">French</div>
+      </a>
+    </div>    
+    <div class="column is-3">
+      <a class="course-link">
+        <figure class="image is-4by5">
+          <img src="https://www.downloadwallpapers.info/dl/1600x1200//2016/07/18/97580_background-flag-italy-symbol-texture_1920x1200_h.jpg">          
+        </figure>
+        <div class="course-link-title">Italian</div>
+      </a>
+    </div> 
+  </section>
+
 </div>

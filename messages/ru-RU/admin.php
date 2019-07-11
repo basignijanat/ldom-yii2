@@ -14,13 +14,14 @@
 		'Update Teaching Method: {name}' => 'Обновить Метод Обучения: {name}',
 		'Update Price: {name}' => 'Обновить Цену: {name}',
 		
-		'Administrator' => 'Администратор',
+		'Admin Panel' => 'Админпанель',
 		
 		'Languages' => 'Языки',
 		'User Language' => 'Язык Пользователя',
 		'User Languages' => 'Языки Пользователя',		
 		'Teaching Methods' => 'Методы Обучения',
 		'Prices' => 'Цены',
+		'FAQ' => 'ЧаВо',
 		
 		'Users' => 'Пользователи',
 		'Is Administrator' => 'Администратор?',
@@ -69,6 +70,8 @@
 		'Home' => 'Главная',
 		'About' => 'О Нас',
 		'Contact' => 'Контакты',
-		'Login' => 'Войти',
+		'Log in' => 'Войти',
+		'Log out' => 'Выйти',
+		'Sign up' => 'Регистрация',
 	);
 ?>
