@@ -9,7 +9,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+
 use app\models\Userlang;
+use app\models\AlertData;
 
 AppAsset::register($this);
 ?>
@@ -28,7 +30,10 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<? $languages = UserLang::GetMenuLanguages() ?>
+<? 
+    $languages = UserLang::GetMenuLanguages() ;
+    $alert = AlertData::getAlertByCode($_GET['alert']);
+?>
 
 <div class="wrap">
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
@@ -117,7 +122,13 @@ AppAsset::register($this);
     </nav>
 
   <main class="main">        
-        <?= Alert::widget() ?>
+        
+        <?
+            if ($alert){
+                echo Html::tag('div', $alert->content, ['class' => $alert->class.' has-text-centered']);
+            }
+        ?>
+
         <?= $content ?>
   </div>
 </div>

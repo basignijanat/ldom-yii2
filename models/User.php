@@ -9,8 +9,10 @@ use yii\web\UploadedFile;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 	
-	public $password_new;
-	public $image_file;
+    public $password_new;
+    public $password_repeat;
+    public $image_file;
+    public $signup_error;
 	
 	public static function tableName()
     {
@@ -21,10 +23,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
 			[['isadmin'], 'integer'],			
-            [['authkey', 'accesstoken', 'userpic', 'password_new', 'fname', 'lname', 'mname'], 'string'],
+            [['authkey', 'accesstoken', 'userpic', 'password_new', 'password_repeat', 'fname', 'lname', 'mname'], 'string'],
             [['password'], 'required'],
             [['username'], 'email'],
-            [['username'], 'required'],
+            [['username'], 'required'],            
 			[['image_file'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
@@ -51,7 +53,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	public function beforeSave($insert)
     {
         if (parent::beforeSave($insert))
-		{
+		{            
 			if ($this->getIsNewRecord())
 			{
 				$this->authkey = \Yii::$app->security->generateRandomString();
@@ -62,7 +64,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             
             return true;
         }
-        return false;
+        
+        return false;       
     }
 	
     /**
@@ -130,23 +133,33 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
+
+    public function signup(){
+        if (self::find()->where(['username' => $this->username])->one()){            
+            $this->signup_error = 1;
+        }
+        elseif ($this->password != $this->password_repeat){
+            $this->signup_error = 2;
+        }
+        else{            
+
+            return $this->save();            
+        }
+
+        return false;
+    }
 	
-	protected function savePassword($insert)
-	{		
-		if ($insert)
-		{
+	protected function savePassword($insert){		
+		if ($insert){
 			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
 		}
-		elseif (!$insert && strlen($this->password_new) > 0)
-		{			
+		elseif (!$insert && strlen($this->password_new) > 0){			
 			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password_new);
 		}
 	}
 	
-	protected function uploadUserpic()
-    {
-        if ($this->image_file = UploadedFile::getInstance($this, 'image_file'))
-		{
+	protected function uploadUserpic(){
+        if ($this->image_file = UploadedFile::getInstance($this, 'image_file')){
 			$fullFileName = 'upload/userpic/'.uniqid('user_').'.'.$this->image_file->extension;
 			$this->image_file->saveAs($fullFileName);
 			$this->userpic = '/web/'.$fullFileName;

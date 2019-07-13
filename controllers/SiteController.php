@@ -105,22 +105,32 @@ class SiteController extends Controller
 
         $model = new User();       
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()){
-            $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post())){
+            $result = $model->signup();
+            
+            if ($result){
+                $model = new LoginForm();
 
-            $model->name = Yii::$app->request->post('User')['username'];
-            $model->password = Yii::$app->request->post('User')['password'];
-            $model->rememberMe = true;
+                $model->name = Yii::$app->request->post('User')['username'];
+                $model->password = Yii::$app->request->post('User')['password'];
+                $model->rememberMe = true;
 
-            if ($model->login()){
+                if ($model->login()){
 
+                    return $this->goBack();
+                }
+                
                 return $this->goBack();
+            }
+            else{
+                $this->redirect('/site/signup?alert='.$model->signup_error);
             }
         }
 
-        $model->password = '';
+        //$model->password = '';
         return $this->render('signup', [
             'model' => $model,
+            'alert' => '123',
         ]);
     }
 

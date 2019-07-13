@@ -111,6 +111,10 @@ AdminAsset::register($this);
                     <li>
                         <a href="<?=Url::to(['/admin/faq'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'FAQ') ?></a>
                     </li>
+                    <hr>
+                    <li>
+                        <a href="<?=Url::to(['/admin/alert'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Alerts') ?></a>
+                    </li>
                 </ul>
                
             </div>

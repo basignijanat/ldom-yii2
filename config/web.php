@@ -32,7 +32,9 @@ $config = [
 					'basePath' => '@app/messages',					
 					'sourceLanguage' => 'en-US',
 					'fileMap' => [
-						'app\admin' => 'admin.php',
+                        'app\admin' => 'admin.php',
+                        'app\alert' => 'alert.php',
+
 						'app\error' => 'error.php',
 					],
 				],
