@@ -20,9 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
             Please fill out the following fields to sign up:
         </h2>
         <div class="column is-half">            
-            <?= Html::beginForm(null, 'post', ['class' => 'field control']) ?>
+            <?= Html::beginForm(null, 'post', [
+                'class' => 'field control',
+                'enctype' => 'multipart/form-data',
+            ]) ?>
                 <div class="field control">                                    
-                    <?= Html::activeInput('text', $model, 'username', [
+                    <?= Html::activeInput('email', $model, 'username', [
                         'class' => 'input is-primary', 
                         'placeholder' => 'Email',
                         'required' => true,
@@ -69,7 +72,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <div class="field control">
-                    <?= Html::submitButton('Sign up', ['class' => 'button is-primary']) ?>
+                    <?= Html::submitButton('Sign up', [
+                        'class' => 'button is-primary', 
+                        'name' => 'signup',
+                    ]) ?>
                 </div>
             <?= Html::endForm() ?>
         </div>        

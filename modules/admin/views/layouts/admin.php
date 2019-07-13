@@ -9,9 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AdminAsset;
-use app\models\Cart;
 use yii\helpers\Url;
-use app\models\Checkout;
 
 AdminAsset::register($this);
 
@@ -29,14 +27,6 @@ AdminAsset::register($this);
 </head>
 <?php $this->beginBody() ?>
 <body class="fix-header">
-    <!-- ============================================================== -->
-    <!-- Preloader -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-        </svg>
-    </div>
     <!-- ============================================================== -->
     <!-- Wrapper -->
     <!-- ============================================================== -->
@@ -57,13 +47,21 @@ AdminAsset::register($this);
                      </span> </a>
                 </div>
                 <!-- /Logo -->
-                <ul class="nav navbar-top-links navbar-right pull-right">
+                <ul class="nav navbar-top-links navbar-right">                    
                     <li>
-                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                            <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
-                    </li>
-                    <li>
-                        <a class="profile-pic" href="#"> <img src="<?=Yii::$app->params['adminimage']?>/adminassets/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Steave</b></a>
+                        <a class="profile-pic" href="#">                             
+                            <img src="<?= Yii::$app->user->identity->userpic ?>" alt="user-img" width="36" class="img-circle">
+                            <b class="hidden-xs">
+                                <?
+                                    if (strlen(Yii::$app->user->identity->fname) == 0){
+                                        echo Yii::$app->user->identity->username;
+                                    }
+                                    else{
+                                        echo Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname;
+                                    }
+                                ?>
+                            </b>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -110,11 +108,7 @@ AdminAsset::register($this);
                     </li>
                     <li>
                         <a href="<?=Url::to(['/admin/faq'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'FAQ') ?></a>
-                    </li>
-                    <hr>
-                    <li>
-                        <a href="<?=Url::to(['/admin/alert'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Alerts') ?></a>
-                    </li>
+                    </li>                    
                 </ul>
                
             </div>

@@ -41,6 +41,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 			'password_new' => Yii::t('app\admin', 'New Password'),
 			'authkey' => Yii::t('app\admin', 'Auth Key'),
             'userpic' => Yii::t('app\admin', 'Userpic'),
+            'fname' => Yii::t('app\admin', 'First Name'),
+            'mname' => Yii::t('app\admin', 'Middle Name'),
+            'lname' => Yii::t('app\admin', 'Last Name'),
 			'image_file' => Yii::t('app\admin', 'Download Image'),
         ];
     }

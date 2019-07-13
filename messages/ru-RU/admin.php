@@ -51,6 +51,9 @@
 		'Image'	=> 'Фото',
 		'Download Image' => 'Загрузить Фото',
 		'Curriculums' => 'Образовательные Программы',
+		'First Name' => 'Имя',
+		'Middle Name' => 'Отчество',
+		'Last Name' => 'Фамилия ',
 		
 		'All Teachers' => 'Все Учителя',
 		'Selected Teachers' => 'Выбранные Учителя',

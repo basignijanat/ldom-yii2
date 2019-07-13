@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="column is-half">            
             <?= Html::beginForm(null, 'post', ['class' => 'field control']) ?>
                 <div class="field control">                                    
-                    <?= Html::activeInput('text', $model, 'name', [
+                    <?= Html::activeInput('email', $model, 'name', [
                         'class' => 'input is-primary', 
                         'placeholder' => 'Email',
                         'required' => true,
@@ -44,7 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 
 
                 <div class="field control">
-                    <?= Html::submitButton('Sign up', ['class' => 'button is-primary']) ?>
+                    <?= Html::submitButton('Sign up', [
+                        'class' => 'button is-primary',
+                        'name' => 'login',
+                    ]) ?>
                 </div>
             <?= Html::endForm() ?>
         </div>        

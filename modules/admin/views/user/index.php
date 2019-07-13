@@ -30,8 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',           
             'username:email',
 			'userpic',
-            //'accesstoken',
-            //'userpic',
+            'fname',
+            'mname',
+            'lname',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

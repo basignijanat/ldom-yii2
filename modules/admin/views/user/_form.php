@@ -28,6 +28,12 @@ use yii\widgets\ActiveForm;
 		}
 	?>
 	
+	<?= $form->field($model, 'fname')->textInput(['maxlength' => true]) ?>
+
+	<?= $form->field($model, 'mname')->textInput(['maxlength' => true]) ?>
+
+	<?= $form->field($model, 'lname')->textInput(['maxlength' => true]) ?>
+	
 	<?= $form->field($model, 'image_file')->fileInput(['accept=' => 'image/jpeg,image/png,']) ?>
 	
 	<? 

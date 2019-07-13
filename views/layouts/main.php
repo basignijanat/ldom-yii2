@@ -32,7 +32,7 @@ AppAsset::register($this);
 
 <? 
     $languages = UserLang::GetMenuLanguages() ;
-    $alert = AlertData::getAlertByCode($_GET['alert']);
+    $alert = AlertData::getAlert($_GET['alert']);
 ?>
 
 <div class="wrap">
@@ -77,6 +77,7 @@ AppAsset::register($this);
                         <? endforeach ?>                                    
                     </div>
                 </div>
+
                 <? if (Yii::$app->user->isGuest): ?>
                     <div class="navbar-item">
                         <div class="buttons">
@@ -92,24 +93,31 @@ AppAsset::register($this);
                     <div class="navbar-item">                    
 
                         <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                                <figure class="image is-32x32">
-                                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e65e21bd-dc77-499e-962a-fa13cab37fc2/dc498mg-7d01bb7a-3d1e-4d91-ba23-7c7c22e35204.jpg/v1/fill/w_894,h_894,q_70,strp/new_userpic__by_kuvshinov_ilya_dc498mg-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcL2U2NWUyMWJkLWRjNzctNDk5ZS05NjJhLWZhMTNjYWIzN2ZjMlwvZGM0OThtZy03ZDAxYmI3YS0zZDFlLTRkOTEtYmEyMy03YzdjMjJlMzUyMDQuanBnIiwid2lkdGgiOiI8PTEwODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.45XsRzrecBLSw2jJRz9NONnO13x-ONNEC5w3KqJ3hYw" class="is-rounded">
-                                </figure>                            
+                            <a class="navbar-link">                                                           
                                 <span class="column">
-                                    <?= Yii::$app->user->identity->username ?>
+                                    <?
+                                        if (strlen(Yii::$app->user->identity->fname) == 0){
+                                            echo Yii::$app->user->identity->username;
+                                        }
+                                        else{
+                                            echo Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname;
+                                        }
+                                    ?>
                                 </span>
+                                <figure class="image is-32x32">
+                                    <?= Html::img(Yii::$app->user->identity->userpic, [
+                                        'class' => 'is-rounded',
+                                    ]) ?>
+                                </figure> 
                             </a>                           
                               
                             <div class="navbar-dropdown">
-                                <a href="/cabinet" class="navbar-item">1</a>
+                                <?= Html::a( Yii::t('app\admin', 'Account management'), '/cabinet', ['class' => 'navbar-item has-text-centered']) ?>
                                 <a class="navbar-item">
                                     <?= Html::beginForm(['/site/logout'], 'post') ?>
                                         <?= Html::submitButton(
-                                            'Logout',
-                                            [
-                                                'class' => 'button is-text',
-                                                'style' => 'width: 100%',
+                                            Yii::t('app\admin', 'Log out'), [
+                                                'class' => 'button is-fullwidth is-text',                                                
                                             ]
                                         ) ?>
                                     <?= Html::endForm() ?>
@@ -125,7 +133,7 @@ AppAsset::register($this);
         
         <?
             if ($alert){
-                echo Html::tag('div', $alert->content, ['class' => $alert->class.' has-text-centered']);
+                echo Html::tag('div', Yii::t('app\alert', $alert['content']), ['class' => $alert['class'].' has-text-centered']);
             }
         ?>
 

@@ -82,11 +82,3 @@ CREATE TABLE faq(
 	answer varchar(255) NOT NULL,
    PRIMARY KEY (id)
 );
-
-CREATE TABLE alert(
-	id int NOT NULL AUTO_INCREMENT,
-	code int NOT NULL,
-	content varchar(255) NOT NULL,
-	class varchar(255) NOT NULL,
-   PRIMARY KEY (id)
-);
