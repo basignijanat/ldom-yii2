@@ -49,8 +49,20 @@ AdminAsset::register($this);
                 <!-- /Logo -->
                 <ul class="nav navbar-top-links navbar-right">                    
                     <li>
-                        <a class="profile-pic" href="#">                             
-                            <img src="<?= Yii::$app->user->identity->userpic ?>" alt="user-img" width="36" class="img-circle">
+                        <a class="profile-pic" href="#">
+                            <? if (strlen(Yii::$app->user->identity->userpic)): ?>
+                                <?= Html::img(Yii::$app->user->identity->userpic, [
+                                    'alt' => 'user-img', 
+                                    'width' => '36',
+                                    'class' => 'img-circle'
+                                ]) ?>
+                            <? else: ?>
+                                <?= Html::img('web\upload\userpic\default.png', [
+                                    'alt' => 'user-img', 
+                                    'width' => '36',
+                                    'class' => 'img-circle'
+                                ]) ?>
+                            <? endif ?>
                             <b class="hidden-xs">
                                 <?
                                     if (strlen(Yii::$app->user->identity->fname) == 0){
@@ -79,9 +91,13 @@ AdminAsset::register($this);
                     <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
                 </div>
                 <ul class="nav" id="side-menu">
-                    <li style="padding: 70px 0 0;">
+                    <li>
+                        <a href="<?=Url::to(['/'])?>" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>На главную</a>
+                    </li>
+                    <li>
                         <a href="<?=Url::to(['/admin'])?>" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Админпанель</a>
                     </li>
+                    <hr>
                     <li>
                         <a href="<?=Url::to(['/admin/userlang'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'User Languages') ?></a>
                     </li>

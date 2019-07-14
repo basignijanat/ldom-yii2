@@ -94,24 +94,28 @@ AppAsset::register($this);
 
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link">                                                           
-                                <span class="column">
-                                    <?
-                                        if (strlen(Yii::$app->user->identity->fname) == 0){
-                                            echo Yii::$app->user->identity->username;
-                                        }
-                                        else{
-                                            echo Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname;
-                                        }
-                                    ?>
-                                </span>
                                 <figure class="image is-32x32">
-                                    <?= Html::img(Yii::$app->user->identity->userpic, [
-                                        'class' => 'is-rounded',
-                                    ]) ?>
+                                    <? if (strlen(Yii::$app->user->identity->userpic)): ?>
+                                        <?= Html::img(Yii::$app->user->identity->userpic, [
+                                            'class' => 'is-rounded',
+                                        ]) ?>
+                                    <? else: ?>
+                                        <?= Html::img('web\upload\userpic\default.png', [
+                                            'class' => 'is-rounded',
+                                        ]) ?>
+                                    <? endif ?>
                                 </figure> 
+                                <span class="column">
+                                    <? if (strlen(Yii::$app->user->identity->fname) == 0): ?>
+                                        <?= Yii::$app->user->identity->username ?>
+                                    <? else: ?>
+                                        <?= Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname ?>
+                                    <? endif ?>
+                                </span>                                
                             </a>                           
                               
                             <div class="navbar-dropdown">
+                                <?= Html::a( Yii::t('app\admin', 'Admin panel'), '/admin', ['class' => 'navbar-item has-text-centered']) ?>
                                 <?= Html::a( Yii::t('app\admin', 'Account management'), '/cabinet', ['class' => 'navbar-item has-text-centered']) ?>
                                 <a class="navbar-item">
                                     <?= Html::beginForm(['/site/logout'], 'post') ?>
