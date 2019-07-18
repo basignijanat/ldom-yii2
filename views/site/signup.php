@@ -27,33 +27,42 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="field control">                                    
                     <?= Html::activeInput('email', $model, 'username', [
                         'class' => 'input is-primary', 
-                        'placeholder' => 'Email',
+                        'placeholder' => Yii::t('app\admin', 'Email'),
                         'required' => true,
                     ]) ?>                                                        
                 </div>
                 <div class="field control">                
-                    <?= Html::activeInput('password', $model, 'password', [
+                    <?= Html::activeInput('password', $model, 'password_new', [
                         'class' => 'input is-primary', 
-                        'placeholder' => 'Password',
+                        'placeholder' => Yii::t('app\admin', 'Password'),
                         'required' => true,
                     ]) ?>
                 </div>
                 <div class="field control">                
                     <?= Html::activeInput('password', $model, 'password_repeat', [
                         'class' => 'input is-primary', 
-                        'placeholder' => 'Repeat Password',
+                        'placeholder' => Yii::t('app\admin', 'Repeat Password'),
                         'required' => true,
                     ]) ?>
                 </div>
                 <hr>
                 <div class="field control">                
-                    <?= Html::activeInput('text', $model, 'fname', ['class' => 'input is-primary', 'placeholder' => 'First name']) ?>                
+                    <?= Html::activeInput('text', $model, 'fname', [
+                        'class' => 'input is-primary', 
+                        'placeholder' => Yii::t('app\admin', 'First Name'),
+                    ]) ?>                
                 </div>
                 <div class="field control">                
-                    <?= Html::activeInput('text', $model, 'mname', ['class' => 'input is-primary', 'placeholder' => 'Middle name']) ?>                
+                    <?= Html::activeInput('text', $model, 'mname', [
+                        'class' => 'input is-primary', 
+                        'placeholder' => Yii::t('app\admin', 'Middle Name'),
+                    ]) ?>                
                 </div>
                 <div class="field control">                
-                    <?= Html::activeInput('text', $model, 'lname', ['class' => 'input is-primary', 'placeholder' => 'Last name']) ?>                
+                    <?= Html::activeInput('text', $model, 'lname', [
+                        'class' => 'input is-primary', 
+                        'placeholder' => Yii::t('app\admin', 'Last Name'),
+                    ]) ?>                
                 </div>
                 <hr>
                 <div class="field control file has-name is-info">                
@@ -63,16 +72,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             'accept' => 'image/jpeg,image/png'
                         ]) ?>                
                         <span class="file-cta">
-                            <span class="file-label">
-                                Choose a file
-                            </span>
+                            <?= Html::tag('span', Yii::t('app\admin', 'Choose a file'), [
+                                'class' => 'file-label'
+                            ]) ?>                                
                         </span>
                         <span class="file-name" id="userpic-file-name"></span>
                     </label>                    
                 </div>
 
                 <div class="field control">
-                    <?= Html::submitButton('Sign up', [
+                    <?= Html::submitButton(Yii::t('app\main', 'Sign Up'), [
                         'class' => 'button is-primary', 
                         'name' => 'signup',
                     ]) ?>

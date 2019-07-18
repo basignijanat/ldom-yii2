@@ -19,8 +19,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function __construct($id, $module, $config = [])
-	{		
+    public function __construct($id, $module, $config = []){		
         Userlang::SetLanguage();
         
         return parent::__construct($id, $module, $config = []);
@@ -87,12 +86,16 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()){
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post())){
+            if ($model->login()){
+                
+                return $this->goBack();
+            }
+            else{
+                $this->redirect('/site/login?alert=1.3');
+            }            
         }
-        elseif (Yii::$app->request->post('login')){
-            $this->redirect('/site/login?alert=3');
-        }
+        
 
         $model->password = '';
         return $this->render('login', [
@@ -115,7 +118,7 @@ class SiteController extends Controller
                 $model = new LoginForm();
 
                 $model->name = Yii::$app->request->post('User')['username'];
-                $model->password = Yii::$app->request->post('User')['password'];
+                $model->password = Yii::$app->request->post('User')['password_new'];
                 $model->rememberMe = true;
 
                 if ($model->login()){

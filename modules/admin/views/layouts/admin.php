@@ -11,7 +11,13 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AdminAsset;
 use yii\helpers\Url;
 
+use app\models\Userlang;
+use app\models\AlertData;
+
 AdminAsset::register($this);
+
+$languages = UserLang::GetMenuLanguages();
+$alert = AlertData::getAlert($_GET['alert']);
 
 ?>
 <?php $this->beginPage() ?>
@@ -38,7 +44,7 @@ AdminAsset::register($this);
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="dashboard.html">
+                    <a class="logo" href="/admin">
                         <!-- Logo icon image, you can use font-icon also --><b>
                         <!--This is dark logo icon--><img src="<?=Yii::$app->params['adminimage']?>/adminassets/plugins/images/admin-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="<?=Yii::$app->params['adminimage']?>/adminassets/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
                      </b>
@@ -46,10 +52,22 @@ AdminAsset::register($this);
                         <!--This is dark logo text--><img src="<?=Yii::$app->params['adminimage']?>/adminassets/plugins/images/admin-text.png" alt="home" class="dark-logo" /><!--This is light logo text--><img src="<?=Yii::$app->params['adminimage']?>/adminassets/plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
                      </span> </a>
                 </div>
-                <!-- /Logo -->
-                <ul class="nav navbar-top-links navbar-right">                    
+                <ul class="nav navbar-top-links navbar-left">
                     <li>
-                        <a class="profile-pic" href="#">
+                        <?= Html::a(Yii::t('app\admin', 'Home'), '/') ?>
+                    </li>                    
+                        <? foreach ($languages as $key => $value): ?>
+                            <li>                            
+                                <?= Html::a($value, '?lang='.$key, [
+                                    'class' => Yii::$app->language == $key ? 'language-selected' : '',
+                                ]) ?>
+                            </li>
+                        <? endforeach ?>                                           
+                </ul>                
+                <!-- /Logo -->
+                <ul class="nav navbar-top-links navbar-right">                                          
+                    <li>
+                        <a class="profile-pic" href="/cabinet">
                             <? if (strlen(Yii::$app->user->identity->userpic)): ?>
                                 <?= Html::img(Yii::$app->user->identity->userpic, [
                                     'alt' => 'user-img', 
@@ -57,7 +75,7 @@ AdminAsset::register($this);
                                     'class' => 'img-circle'
                                 ]) ?>
                             <? else: ?>
-                                <?= Html::img('web\upload\userpic\default.png', [
+                                <?= Html::img('\web\upload\userpic\default.png', [
                                     'alt' => 'user-img', 
                                     'width' => '36',
                                     'class' => 'img-circle'
@@ -74,7 +92,7 @@ AdminAsset::register($this);
                                 ?>
                             </b>
                         </a>
-                    </li>
+                    </li>                    
                 </ul>
             </div>
             <!-- /.navbar-header -->
@@ -93,16 +111,12 @@ AdminAsset::register($this);
                 <ul class="nav" id="side-menu">
                     <li>
                         <a href="<?=Url::to(['/'])?>" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>На главную</a>
+                    </li>                         
+                    <li>
+                        <a href="<?=Url::to(['/admin/ulang'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'User Languages') ?></a>
                     </li>
                     <li>
-                        <a href="<?=Url::to(['/admin'])?>" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Админпанель</a>
-                    </li>
-                    <hr>
-                    <li>
-                        <a href="<?=Url::to(['/admin/userlang'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'User Languages') ?></a>
-                    </li>
-                    <li>
-                        <a href="<?=Url::to(['/admin/language'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Languages')?> <span class="pull-right badge badge-info badge-pill ml-auto mr-3 font-medium px-2 py-1"><?=$order_count?></span></a>
+                        <a href="<?=Url::to(['/admin/language'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Languages') ?></a>
                     </li>
                     <li>
                         <a href="<?=Url::to(['/admin/eduform'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Teaching Methods') ?></a>
@@ -125,6 +139,9 @@ AdminAsset::register($this);
                     <li>
                         <a href="<?=Url::to(['/admin/faq'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'FAQ') ?></a>
                     </li>                    
+                    <li>
+                        <a href="<?=Url::to(['/admin/setting'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Settings') ?></a>
+                    </li>  
                 </ul>
                
             </div>
@@ -138,20 +155,22 @@ AdminAsset::register($this);
         <!-- ============================================================== -->
         <div id="page-wrapper">
             <div class="container-fluid">
-                <div class="row bg-title">
+                <!--div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Dashboard</h4> </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        
-                        
-                    </div>
-                    <!-- /.col-lg-12 -->
+                        <?= Html::tag('h4', Yii::t('app\admin', 'Dashboard'), ['class' => 'page-title']) ?>
+                    </div>                                        
                 </div>
                 <!-- /.row -->
                 <!-- ============================================================== -->
                 <!-- Different data widgets -->
                 <!-- ============================================================== -->
                 <!-- .row -->
+                <?
+                    if ($alert){
+                        echo Html::tag('div', Yii::t('app\alert', $alert['content']), ['class' => $alert['class'].' row bg-title']);
+                    }
+                ?>
+                
                 <?=$content?>
                                     </div>
                                 </div>

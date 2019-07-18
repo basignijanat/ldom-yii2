@@ -28,6 +28,7 @@ class AdminAsset extends AssetBundle
         'css/style.css',
         'css/animate.css',
         'css/colors/default.css',
+        'sass/custom.css',
     ];
     public $js = [
         /*'//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js',*/
@@ -43,8 +44,9 @@ class AdminAsset extends AssetBundle
         'plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js',
         'js/custom.min.js',
         'js/dashboard1.js',
-        'plugins/bower_components/toast-master/js/jquery.toast.js',
+        //'plugins/bower_components/toast-master/js/jquery.toast.js',
         'js/helperSelect.js',
+        'js/setting.js',
 
     ];
     public $depends = [

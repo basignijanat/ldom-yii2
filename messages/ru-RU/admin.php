@@ -15,6 +15,7 @@
 		'Update Price: {name}' => 'Обновить Цену: {name}',
 		
 		'Admin Panel' => 'Админпанель',
+		'Dashboard' => 'Админпанель',
 		
 		'Languages' => 'Языки',
 		'User Language' => 'Язык Пользователя',
@@ -23,6 +24,7 @@
 		'Prices' => 'Цены',
 		'Comments' => 'Отзывы',
 		'FAQ' => 'ЧаВо',
+		'Settings' => 'Настройки',
 		
 		'Users' => 'Пользователи',
 		'Is Administrator' => 'Администратор?',
@@ -47,20 +49,23 @@
 		'Experience' => 'Опыт работы',
 		'Education' => 'Образование',
 		'Password' => 'Пароль',
-		'New Password' => 'Новый Пароль',
+		'New Password' => 'Новый пароль',
+		'Repeat Password' => 'Повторить пароль',
 		'Image'	=> 'Фото',
 		'Download Image' => 'Загрузить Фото',
-		'Curriculums' => 'Образовательные Программы',
+		'Curriculums' => 'Образовательные программы',
 		'First Name' => 'Имя',
 		'Middle Name' => 'Отчество',
 		'Last Name' => 'Фамилия ',
 		
-		'All Teachers' => 'Все Учителя',
-		'Selected Teachers' => 'Выбранные Учителя',
-		'All Prices' => 'Все Цены',
-		'Selected Prices' => 'Выбранные Цены',
-		'All Curriculums' => 'Все Образовательные Программы',
-		'Selected Curriculums' => 'Выбранные Образовательные Программы',
+		'All Teachers' => 'Все учителя',
+		'Selected Teachers' => 'Выбранные учителя',
+		'All Prices' => 'Все цены',
+		'Selected Prices' => 'Выбранные цены',
+		'All Curriculums' => 'Все Образовательные программы',
+		'Selected Curriculums' => 'Выбранные Образовательные программы',
+
+		'Phone' => 'Телефон',
 		
 		'Save' => 'Сохранить',
 		'Update' => 'Обновить',
@@ -77,5 +82,6 @@
 		'Log in' => 'Войти',
 		'Log out' => 'Выйти',
 		'Sign up' => 'Регистрация',
+		'Choose a file' => 'Выберите файл',
 	);
 ?>

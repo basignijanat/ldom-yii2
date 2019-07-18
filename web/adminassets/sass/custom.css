@@ -1,0 +1,24 @@
+.setting-label {
+  width: 10%;
+  float: left;
+  margin-right: 5%;
+}
+
+.setting-form {
+  max-width: 50%;
+  float: left;
+  margin-right: 2.5%;
+}
+
+.language-selected {
+  text-decoration: underline;
+}
+
+.btn-multiselect {
+  width: 100%;
+}
+
+.label-multiselect {
+  padding: 5px;
+}
+/*# sourceMappingURL=custom.css.map */

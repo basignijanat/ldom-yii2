@@ -34,6 +34,7 @@ $config = [
 					'fileMap' => [
                         'app\admin' => 'admin.php',
                         'app\alert' => 'alert.php',
+                        'app\main' => 'main.php',
 
 						'app\error' => 'error.php',
 					],
@@ -72,7 +73,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-				
+                'admin/setting/<id:\d+>' => 'admin/setting/index',
             ],
         ],
 

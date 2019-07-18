@@ -25,28 +25,24 @@ use app\components\ListFormHelper;
 
     <?= $form->field($model, 'teacher_ids')->hiddenInput(['maxlength' => true])->label(false) ?>
 	
-	<?php 
-		echo ListFormHelper::showUpdateList($teachers, $selectedTeachers, 'eduform-teacher_ids', 'teacher_ids', [
-			'addButtonName' => Yii::t('app\admin', 'Add'),
-			'removeButtonName' => Yii::t('app\admin', 'Remove'),
-			'header-level' => 4,
-			'header-left' => Yii::t('app\admin', 'All Teachers'),
-			'header-right' => Yii::t('app\admin', 'Selected Teachers'),
-		]);
-	?>
+	<?= ListFormHelper::showUpdateList($teachers, $selectedTeachers, 'eduform-teacher_ids', 'teacher_ids', [
+		'addButtonName' => Yii::t('app\admin', 'Add'),
+		'removeButtonName' => Yii::t('app\admin', 'Remove'),
+		'header-level' => 4,
+		'header-left' => Yii::t('app\admin', 'All Teachers'),
+		'header-right' => Yii::t('app\admin', 'Selected Teachers'),
+	]) ?>
 	
     <?= $form->field($model, 'prices')->hiddenInput(['maxlength' => true])->label(false) ?>
 	
-	<?php 
-		echo ListFormHelper::showUpdateList($prices, $selectedPrices, 'eduform-prices', 'prices', [
-			'addButtonName' => Yii::t('app\admin', 'Add'),
-			'removeButtonName' => Yii::t('app\admin', 'Remove'),
-			'header-level' => 4,
-			'header-left' => Yii::t('app\admin', 'All Prices'),
-			'header-right' => Yii::t('app\admin', 'Selected Prices'),
-		]);
-	?>
-
+	<?= ListFormHelper::showUpdateList($prices, $selectedPrices, 'eduform-prices', 'prices', [
+		'addButtonName' => Yii::t('app\admin', 'Add'),
+		'removeButtonName' => Yii::t('app\admin', 'Remove'),
+		'header-level' => 4,
+		'header-left' => Yii::t('app\admin', 'All Prices'),
+		'header-right' => Yii::t('app\admin', 'Selected Prices'),
+	]) ?>
+	
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app\admin', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

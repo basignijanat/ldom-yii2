@@ -23,28 +23,26 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="field control">                                    
                     <?= Html::activeInput('email', $model, 'name', [
                         'class' => 'input is-primary', 
-                        'placeholder' => 'Email',
+                        'placeholder' => Yii::t('app\admin', 'Email'),
                         'required' => true,
                     ]) ?>                                                        
                 </div>
                 <div class="field control">                
                     <?= Html::activeInput('password', $model, 'password', [
                         'class' => 'input is-primary', 
-                        'placeholder' => 'Password',
+                        'placeholder' => Yii::t('app\admin', 'Password'),
                         'required' => true,
                     ]) ?>
                 </div>
                 <div class="field control">                
                     <?= Html::activeCheckbox($model, 'rememberMe', [
-                        'class' => 'checkbox', 
-                        'placeholder' => 'Password',
+                        'class' => 'checkbox',                         
                         'required' => false,
                     ]) ?>
-                </div>
-                
+                </div>                
 
                 <div class="field control">
-                    <?= Html::submitButton('Sign up', [
+                    <?= Html::submitButton(Yii::t('app\main', 'Log In'), [
                         'class' => 'button is-primary',
                         'name' => 'login',
                     ]) ?>

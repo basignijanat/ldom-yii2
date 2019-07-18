@@ -23,8 +23,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
 			[['isadmin'], 'integer'],			
-            [['authkey', 'accesstoken', 'userpic', 'password_new', 'password_repeat', 'fname', 'lname', 'mname'], 'string'],
-            [['password'], 'required'],
+            [['authkey', 'accesstoken', 'userpic', 'password', 'password_new', 'password_repeat', 'fname', 'lname', 'mname'], 'string'],
+//            [['password_new'], 'required'],
             [['username'], 'email'],
             [['username'], 'required'],            
 			[['image_file'], 'file', 'extensions' => 'png, jpg'],
@@ -139,24 +139,21 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function signup(){
         if (self::find()->where(['username' => $this->username])->one()){            
-            $this->signup_error = 1;
+            $this->signup_error = '1.1';
         }
-        elseif ($this->password != $this->password_repeat){
-            $this->signup_error = 2;
+        elseif ($this->password_new != $this->password_repeat){
+            $this->signup_error = '1.2';
         }
-        else{            
+        elseif (strlen($this->password_new)){            
 
-            return $this->save();            
+            return $this->save();
         }
 
         return false;
     }
 	
-	protected function savePassword($insert){		
-		if ($insert){
-			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
-		}
-		elseif (!$insert && strlen($this->password_new) > 0){			
+	protected function savePassword($insert){		        
+        if (strlen($this->password_new)){			
 			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password_new);
 		}
 	}

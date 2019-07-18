@@ -29,8 +29,8 @@ class AppAsset extends AssetBundle
 		'js/main.js',
     ];
     public $depends = [
-        /*'app\assets\FontAwesomeAsset',
+        //'app\assets\FontAwesomeAsset',
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',*/
+        //'yii\bootstrap\BootstrapAsset',
     ];
 }

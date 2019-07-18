@@ -31,7 +31,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <? 
-    $languages = UserLang::GetMenuLanguages() ;
+    $languages = UserLang::GetMenuLanguages();
     $alert = AlertData::getAlert($_GET['alert']);
 ?>
 
@@ -70,9 +70,9 @@ AppAsset::register($this);
                     <div class="navbar-dropdown">
                         <? foreach ($languages as $key => $value): ?>
                             <? if (Yii::$app->language != $key): ?>
-                                <a href="?lang=<?= $key ?>" class="navbar-item">                                
-                                    <?= $value ?>
-                                </a>
+                                <?= Html::a($value, '?lang='.$key, [
+                                    'class' => 'navbar-item',
+                                ]) ?>
                             <? endif ?>
                         <? endforeach ?>                                    
                     </div>
@@ -115,17 +115,14 @@ AppAsset::register($this);
                             </a>                           
                               
                             <div class="navbar-dropdown">
-                                <?= Html::a( Yii::t('app\admin', 'Admin panel'), '/admin', ['class' => 'navbar-item has-text-centered']) ?>
-                                <?= Html::a( Yii::t('app\admin', 'Account management'), '/cabinet', ['class' => 'navbar-item has-text-centered']) ?>
-                                <a class="navbar-item">
-                                    <?= Html::beginForm(['/site/logout'], 'post') ?>
-                                        <?= Html::submitButton(
-                                            Yii::t('app\admin', 'Log out'), [
-                                                'class' => 'button is-fullwidth is-text',                                                
-                                            ]
-                                        ) ?>
-                                    <?= Html::endForm() ?>
-                                </a>
+                                <? if (Yii::$app->user->identity->isadmin): ?>
+                                    <?= Html::a( Yii::t('app\admin', 'Admin Panel'), '/admin', ['class' => 'navbar-item']) ?>
+                                <? endif ?>
+                                <?= Html::a( Yii::t('app\main', 'Account Management'), '/cabinet', ['class' => 'navbar-item']) ?>
+                                <?= Html::a( Yii::t('app\admin', 'Log out'), '/site/logout', [
+                                    'class' => 'navbar-item',
+                                    'data-method' => 'post',
+                                ]) ?>                                                                
                             </div>                    
                     </div>
                 <? endif ?>

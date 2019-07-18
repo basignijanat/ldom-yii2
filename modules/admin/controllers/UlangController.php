@@ -13,7 +13,7 @@ use app\components\NoEmptyDb;
 /**
  * UserlangController implements the CRUD actions for Userlang model.
  */
-class UserlangController extends Controller
+class UlangController extends Controller
 {
     /**
      * {@inheritdoc}

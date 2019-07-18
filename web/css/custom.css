@@ -34,4 +34,9 @@
 .required {
   color: red;
 }
+
+.edit-user-property {
+  opacity: 0;
+  position: absolute;
+}
 /*# sourceMappingURL=custom.css.map */
