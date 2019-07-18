@@ -27,7 +27,7 @@ class CabinetController extends \yii\web\Controller
         ]);
     }
 
-    public function actionUserpic(){
+    public function actionEdit(){
         $user = User::findIdentity(Yii::$app->user->identity->id);        
         
         if ($user->load(Yii::$app->request->post()) && $user->username == Yii::$app->request->post('User')['username'] && $user->save()){            
