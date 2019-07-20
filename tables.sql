@@ -98,3 +98,8 @@ CREATE TABLE group_data(
 	teacher_ids varchar(255) NOT NULL,
    PRIMARY KEY (id)
 );
+
+/*"liveSassCompile.settings.includeItems": [
+        "ldom-yii2/web/css/custom.scss",
+        "ldom-yii2/web/adminassets/sass/custom.scss",
+    ]*/
