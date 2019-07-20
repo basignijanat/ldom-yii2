@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\components\ArrayForForm;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "language".
@@ -16,6 +17,8 @@ use app\components\ArrayForForm;
  */
 class Language extends \yii\db\ActiveRecord
 {
+    public $image_file;
+
     /**
      * {@inheritdoc}
      */
@@ -31,8 +34,10 @@ class Language extends \yii\db\ActiveRecord
     {
         return [
             [['meta_description', 'content'], 'string'],
-            [['meta_title', 'name'], 'string', 'max' => 255],
-			[['userlang_id'], 'integer'],
+            [['meta_title', 'name', 'image', 'url'], 'string', 'max' => 255],
+            [['userlang_id'], 'integer'],
+            [['url'], 'unique'],
+            [['image_file'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -47,10 +52,25 @@ class Language extends \yii\db\ActiveRecord
             'meta_description' => Yii::t('app\admin', 'Meta Description'),
             'name' => Yii::t('app\admin', 'Name'),
             'content' => Yii::t('app\admin', 'Content'),
-			'userlang_id' => Yii::t('app\admin', 'User Language'),
+            'userlang_id' => Yii::t('app\admin', 'User Language'),
+            'url' => Yii::t('app\admin', 'URL'),
+            'image' => Yii::t('app\admin', 'Image'),
+            'image_file' => Yii::t('app\admin', 'Download Image'),
         ];
     }
-	
+    
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert))
+		{			
+			$this->uploadImage();
+            
+            return true;
+        }
+        
+        return false;       
+    }
+
 	public static function getLanguages()
 	{
 		return ArrayForForm::getDropDownArray(Language::find()->all(), 'name', null);		
@@ -59,5 +79,13 @@ class Language extends \yii\db\ActiveRecord
 	public static function getLanguageById($id)
 	{
 		return Language::find()->where(['id' => $id])->one();		
-	}
+    }
+    
+    protected function uploadImage(){
+        if ($this->image_file = UploadedFile::getInstance($this, 'image_file')){
+			$fullFileName = 'upload/language/'.uniqid('language_').'.'.$this->image_file->extension;
+			$this->image_file->saveAs($fullFileName);
+			$this->image = '/web/'.$fullFileName;
+		}
+    }
 }

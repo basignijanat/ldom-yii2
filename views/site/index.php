@@ -1,27 +1,27 @@
 <?php
 
-/* @var $this yii\web\View */
+use yii\helpers\Html;
 
-$this->title = 'My Yii Application';
+$this->title = 'Languagedom';
 ?>
   <section class="section columns">
-    <div class="column is-3">             
-      <a class="course-link">
-        <figure class="image is-4by5">
-          <img src="http://previews.123rf.com/images/prawny/prawny0802/prawny080200039/2527779-british-pound-symbol-with-union-jack-flag-design-Stock-Photo-sterling.jpg">          
-        </figure>        
-        <div class="course-link-title">English</div>
-      </a>
-    </div>
-    <div class="column is-3">  
-      <a class="course-link">
-        <figure class="image is-4by5">
-          <img src="https://static4.depositphotos.com/1007499/304/i/950/depositphotos_3046471-stock-photo-deutsch-book.jpg">          
-        </figure>
-        <div class="course-link-title">German</div>
-      </a>
-    </div>
-    <div class="column is-3">
+    <? if ($languages): ?>
+      <? foreach ($languages as $language): ?>
+        <div class="column is-one-quarter">             
+          <?= Html::beginTag('a', [
+            'href' => '/language/'.$language->url,
+            'class' => 'course-link',
+          ]) ?>
+            <figure class="image is-4by5">
+              <?= Html::img($language->image) ?>              
+            </figure>        
+            <?= Html::tag('div', $language->name, ['class' => 'course-link-title']) ?>
+          <?= Html::endTag('a') ?>
+        </div>
+      <? endforeach ?>
+    <? endif?>
+    
+    <!--div class="column is-3">
       <a class="course-link">
         <figure class="image is-4by5">
           <img src="http://www.brainscape.com/blog/wp-content/uploads/2015/06/French.jpg">          
@@ -36,7 +36,7 @@ $this->title = 'My Yii Application';
         </figure>
         <div class="course-link-title">Italian</div>
       </a>
-    </div> 
+    </div--> 
   </section>
 
 </div>

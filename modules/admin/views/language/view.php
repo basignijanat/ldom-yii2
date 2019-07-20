@@ -34,8 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			['attribute' => 'userlang_id', 'value' => $languages[$model->userlang_id]],
             'meta_title',
             'meta_description:ntext',
+            'url',
             'name',
             'content:ntext',
+            'image:image',
         ],
     ]) ?>
 

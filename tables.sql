@@ -48,8 +48,10 @@ CREATE TABLE lang(
 	userlang_id int NOT NULL,
 	meta_title varchar(255) NOT NULL,
 	meta_description varchar(255) NOT NULL,
+	url varchar(255) NOT NULL,
 	name varchar(255) NOT NULL,
 	content varchar(255) NOT NULL,
+	image varchar(255) NULL,
    PRIMARY KEY (id)
 );
 
@@ -98,8 +100,3 @@ CREATE TABLE group_data(
 	teacher_ids varchar(255) NOT NULL,
    PRIMARY KEY (id)
 );
-
-/*"liveSassCompile.settings.includeItems": [
-        "ldom-yii2/web/css/custom.scss",
-        "ldom-yii2/web/adminassets/sass/custom.scss",
-    ]*/

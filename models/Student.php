@@ -45,7 +45,7 @@ class Student extends \yii\db\ActiveRecord
     
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert))
+        if (parent::beforeSave($insert) && $insert)
 		{            
 			$this->create_at = time();
             

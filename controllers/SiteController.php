@@ -14,6 +14,8 @@ use app\models\ContactForm;
 use app\models\Userlang;
 use app\models\User;
 
+use app\models\Language;
+
 class SiteController extends Controller
 {
     /**
@@ -71,7 +73,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index',[
+            'languages' => Language::find()->all(),
+        ]);
     }
 
     /**
@@ -129,20 +133,18 @@ class SiteController extends Controller
 
                 if ($model->login()){
 
-                    return $this->goBack();
+                    return $this->goBack($_SESSION['after_signup']);
                 }
                 
-                return $this->goBack();
+                return $this->goBack($_SESSION['after_signup']);
             }
             else{
                 $this->redirect('/site/signup?alert='.$model->signup_error);
             }
         }
-
-        //$model->password = '';
+        
         return $this->render('signup', [
-            'model' => $model,
-            'alert' => '123',
+            'model' => $model,            
         ]);
     }
 

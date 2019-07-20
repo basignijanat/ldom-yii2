@@ -82,6 +82,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'admin/setting/<id:\d+>' => 'admin/setting/index',
+                'language/<url:[0-9a-zA-Z\-]+>' => 'language/index',
             ],
         ],
 
