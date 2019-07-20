@@ -28,8 +28,7 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-			[['user_id'], 'integer'],
-            [['name', 'eduform_ids'], 'string', 'max' => 255],
+			[['user_id', 'create_at'], 'integer'],            
         ];
     }
 
@@ -40,14 +39,36 @@ class Student extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app\admin', 'ID'),
-			'user_id' => Yii::t('app\admin', 'User Email'),
-			'name' => Yii::t('app\admin', 'Name'),
-            'eduform_ids' => Yii::t('app\admin', 'Curriculums'),
+			'user_id' => Yii::t('app\admin', 'User'),			
         ];
     }
-	
-	public static function getStudents()
-	{
-		return ArrayForForm::getDropDownArray(Student::find()->all(), 'name');		
-	}
+    
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert))
+		{            
+			$this->create_at = time();
+            
+            return true;
+        }
+        
+        return false;       
+    }
+
+	public static function getStudents(){
+        
+        return ArrayForForm::getDropDownArrayCompound(new Student, new User, 'user_id', ['fname', 'mname', 'lname']);
+    }
+    
+    public static function getStudentsCountBetween($lower, $upper){
+        $students = self::find()->where(['>=', 'create_at', $lower])->andWhere(['<=', 'create_at', $upper])->all();
+        
+        if ($students){
+            return count($students);
+        }
+        else{
+            return 0;
+        }
+        
+    }
 }

@@ -13,7 +13,9 @@ use yii\helpers\Html;
 
     <div class="columns">            
         <div class="column is-one-quarter">
-            <?= Html::tag('h2', Yii::t('app\admin', $property['title']), ['class' => 'is-size-5']) ?>
+            <?= Html::tag('h2', Yii::t('app\admin', $property['title']), [
+                'class' => 'is-size-5',
+            ]) ?>
         </div>            
         <div class="column is-half" id="div-show-<?= $property['name'] ?>">
             <?= Html::tag('span', Html::encode($property['value']), [                        
@@ -23,8 +25,7 @@ use yii\helpers\Html;
         <div class="column" id="btn-edit-<?= $property['name'] ?>">
             <?= Html::button(Yii::t('app\main', 'Edit'), [
                 'class' => 'button is-info edit',
-                'data-user_property' => $property['name'],
-                'style' => 'width: 100%;',
+                'data-user_property' => $property['name'],                
             ]) ?>            
         </div>
         <div class="column is-half edit-user-property" id="div-edit-<?= $property['name'] ?>">                        
@@ -47,12 +48,10 @@ use yii\helpers\Html;
         <div class="column edit-user-property" id="cancel-edit-<?= $property['name'] ?>">
             <?= Html::button(Yii::t('app\main', 'Cancel'), [
                 'class' => 'button is-warning cancel',
-                'data-user_property' => $property['name'],
-                'style' => 'margin-bottom: 5px; width: 100%;',
+                'data-user_property' => $property['name'],                
             ]) ?>                        
             <?= Html::submitButton(Yii::t('app\main', 'Save'), [
-                'class' => 'button is-success',
-                'style' => 'width: 100%;',
+                'class' => 'button is-success',                
             ]) ?> 
         </div>                
     </div>

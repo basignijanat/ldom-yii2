@@ -6,6 +6,10 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Comment;
 
+use app\models\User;
+use app\models\Student;
+use app\models\Language;
+
 /**
  * CommentSearch represents the model behind the search form of `app\models\Comment`.
  */
@@ -17,8 +21,9 @@ class CommentSearch extends Comment
     public function rules()
     {
         return [
-            [['id', 'student_id', 'form_id'], 'integer'],
+            [['id'], 'integer'],
             [['content'], 'safe'],
+            [['student_id', 'language_id'], 'string'],
         ];
     }
 
@@ -59,11 +64,62 @@ class CommentSearch extends Comment
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'student_id' => $this->student_id,
-            'form_id' => $this->form_id,
+            //'student_id' => $this->student_id,
+            'language_id' => $this->language_id,
         ]);
 
         $query->andFilterWhere(['like', 'content', $this->content]);
+        
+        // custom complex search
+        // user search
+        if (strlen($this->student_id)){                                                        
+            $users = User::find()->select(['id', 'fname', 'mname', 'lname'])
+                ->where(['fname' => explode(' ', $this->student_id)])
+                ->orWhere(['mname' => explode(' ', $this->student_id)])
+                ->orWhere(['lname' => explode(' ', $this->student_id)])
+                ->orWhere(['like', 'fname', explode(' ', $this->student_id)])
+                ->orWhere(['like', 'mname', explode(' ', $this->student_id)])
+                ->orWhere(['like', 'lname', explode(' ', $this->student_id)])
+                ->all();
+                
+            if ($users){                
+                foreach ($users as $user){
+                    $query->orFilterWhere([
+                        'student_id' => Student::find()
+                            ->select(['id', 'user_id'])
+                            ->where(['user_id' => $user->id])
+                            ->one()['id'],
+                    ]);
+                }                                
+            }
+            else{
+                $query->andFilterWhere(['like', 'student_id', $this->student_id]);
+            }
+            
+        }
+        else{
+            $query->andFilterWhere(['like', 'student_id', $this->student_id]);
+        }
+
+        // language search
+        if (strlen($this->language_id)){                
+            $languages = Language::find()->select(['id', 'name'])->where(['like', 'name', $this->language_id])->all();
+            
+            if ($languages){                
+                foreach ($languages as $language){
+                    $query->orFilterWhere([
+                        'language_id' => $language->id,
+                    ]);
+                }                
+            }
+            else{
+                $query->andFilterWhere(['like', 'language_id', $this->language_id]);
+            }
+            
+        }
+        else{
+            $query->andFilterWhere(['like', 'language_id', $this->language_id]);
+        }
 
         return $dataProvider;
     }

@@ -18,7 +18,7 @@ class FaqSearch extends Faq
     {
         return [
             [['id'], 'integer'],
-            [['eduform_id', 'question', 'answer'], 'safe'],
+            [['language_id', 'question', 'answer'], 'safe'],
         ];
     }
 
@@ -61,7 +61,7 @@ class FaqSearch extends Faq
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'eduform_id', $this->eduform_id])
+        $query->andFilterWhere(['like', 'language_id', $this->language_id])
             ->andFilterWhere(['like', 'question', $this->question])
             ->andFilterWhere(['like', 'answer', $this->answer]);
 

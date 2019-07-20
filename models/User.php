@@ -48,11 +48,16 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         ];
     }
 	
-	public static function getUsers()
-	{
-		return ArrayForForm::getDropDownArray(User::find()->all(), 'username', Yii::t('app\admin', 'No User Selected'));				
+	public static function getUsers(){
+        
+        return ArrayForForm::getDropDownArray(User::find()->all(), 'username', Yii::t('app\admin', 'No User Selected'));				
 	}
-	
+    
+    public static function getUsersData(){
+        
+        return ArrayForForm::getDropDownArray(User::find()->all(), ['fname', 'mname', 'lname']);				
+    }
+    
 	public function beforeSave($insert)
     {
         if (parent::beforeSave($insert))
@@ -153,9 +158,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 	
 	protected function savePassword($insert){		        
-        if (strlen($this->password_new)){			
-			$this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password_new);
-		}
+        if (strlen($this->password_new) && $this->password_new == $this->password_repeat){			
+            
+            return $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password_new);
+        }
+        
+        return false;
 	}
 	
 	protected function uploadUserpic(){

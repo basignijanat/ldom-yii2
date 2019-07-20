@@ -29,7 +29,7 @@ class Faq extends \yii\db\ActiveRecord
     {
         return [
             [['answer'], 'string'],
-            [['eduform_id', 'question'], 'string', 'max' => 255],
+            [['language_id', 'question'], 'string', 'max' => 255],
         ];
     }
 
@@ -39,10 +39,10 @@ class Faq extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app\messages', 'ID'),
-            'eduform_id' => Yii::t('app\messages', 'Eduform ID'),
-            'question' => Yii::t('app\messages', 'Question'),
-            'answer' => Yii::t('app\messages', 'Answer'),
+            'id' => Yii::t('app\admin', 'ID'),
+            'language_id' => Yii::t('app\admin', 'Language'),
+            'question' => Yii::t('app\admin', 'Question'),
+            'answer' => Yii::t('app\admin', 'Answer'),
         ];
     }
 }

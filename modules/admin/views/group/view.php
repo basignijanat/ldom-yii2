@@ -4,15 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\User */
+/* @var $model app\models\Group */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Users'), 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Groups'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="white-box">
+<div class="group-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -26,20 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-	
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-			['attribute' => 'isadmin', 'value' => $model->isadmin == 0 ? Yii::t('app\admin', 'No') : Yii::t('app\admin', 'Yes')],            
-            'username:email',
-            'password',
-            'authkey',
-            'accesstoken',            
-            'fname',
-            'mname',
-            'lname',
-            'userpic:image',
+            'name',
+            ['attribute' => 'language_id', 'value' => $languages[$model->language_id]],
+            ['attribute' => 'teacher_ids', 'value' => implode(', ', $selectedTeachers)],
+            ['attribute' => 'student_ids', 'value' => implode(', ', $selectedStudents)],                        
         ],
     ]) ?>
 

@@ -17,8 +17,8 @@ class StudentSearch extends Student
     public function rules()
     {
         return [
-            [['id', 'user_id'], 'integer'],
-            [['name', 'eduform_ids'], 'safe'],
+            [['id'], 'integer'],            
+            [['user_id'], 'string'],
         ];
     }
 
@@ -58,13 +58,35 @@ class StudentSearch extends Student
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-			'name' => $this->name,
-        ]);
-
-        $query->andFilterWhere(['like', 'eduform_ids', $this->eduform_ids]);
-		$query->andFilterWhere(['like', 'user_id', $this->user_id]);
-
+            'id' => $this->id,			
+        ]);		
+        
+        //custom complex search
+        if (strlen($this->user_id)){                                                        
+            $users = User::find()->select(['id', 'fname', 'mname', 'lname'])
+                ->where(['fname' => explode(' ', $this->user_id)])
+                ->orWhere(['mname' => explode(' ', $this->user_id)])
+                ->orWhere(['lname' => explode(' ', $this->user_id)])
+                ->orWhere(['like', 'fname', explode(' ', $this->user_id)])
+                ->orWhere(['like', 'mname', explode(' ', $this->user_id)])
+                ->orWhere(['like', 'lname', explode(' ', $this->user_id)])
+                ->all();
+                
+            if ($users){                
+                foreach ($users as $user){
+                    $query->orFilterWhere([
+                        'user_id' => $user->id,
+                    ]);
+                }                                
+            }
+            else{
+                $query->andFilterWhere(['like', 'user_id', $this->user_id]);
+            }            
+        }
+        else{
+            $query->andFilterWhere(['like', 'user_id', $this->user_id]);
+        }
+        
         return $dataProvider;
     }
 }

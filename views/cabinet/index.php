@@ -41,8 +41,7 @@ use yii\helpers\Html;
     <div class="container">
         <?= Html::tag('h1', Yii::t('app\main', 'My Cabinet'), ['class' => 'title']) ?>        
                 
-        <div class="columns">
-            <div class="column is-two-thirds">
+        
                 <? foreach ($base_properties as $property): ?>
                     <?= $this->render('_property', [
                         'user' => $user,
@@ -95,8 +94,4 @@ use yii\helpers\Html;
                     </div>
                 </div>
             </div>
-            <div class="column">
-            </div>
-        </div>
-    </div>
 </div>

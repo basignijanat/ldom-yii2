@@ -111,10 +111,16 @@ class SiteController extends Controller
 
         $model = new User();       
 
-        if ($model->load(Yii::$app->request->post())){
-            $result = $model->signup();
-            
-            if ($result){
+        if ($model->load(Yii::$app->request->post())){            
+            if ($model->signup()){
+                /*Yii::$app->mailer->compose()
+                    ->setFrom('dmytrobilinsky1991@gmail.com')
+                    ->setTo('dmytrobilinsky1991@gmail.com')
+                    ->setSubject('Тема сообщения')
+                    ->setTextBody('Текст сообщения')
+                    ->setHtmlBody('<b>текст сообщения в формате HTML</b>')
+                    ->send();*/
+
                 $model = new LoginForm();
 
                 $model->name = Yii::$app->request->post('User')['username'];
@@ -180,13 +186,8 @@ class SiteController extends Controller
         return $this->render('about');
     }
 	
-	public function actionSetlang($lang, $url)
-	{
+	public function actionSetlang($lang, $url){
 		header('Location: http://ldom-yii2/admin/language/index');
-		header('Location: http://ldom-yii2'.$url);
-		//setcookie('userlang', $lang);			
-		/*return $this->render('setlang', [
-            'url' => $url,
-        ]);*/
+		header('Location: http://ldom-yii2'.$url);		
 	}
 }

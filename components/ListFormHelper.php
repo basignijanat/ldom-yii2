@@ -14,12 +14,15 @@ use yii\helpers\Html;
 			)){
 			$result = '';
 			
-			if (count($itemsAll) > 0){
+			if (is_array($itemsAll) && count($itemsAll) > 0){
 				foreach ($itemsAll as $itemOne){
 					if (in_array($itemOne, $itemsSelected)){
 						unset($itemsAll[array_search($itemOne, $itemsAll)]);					
 					}
 				}
+			}
+			else{
+				
 			}
 			
 			$result .= Html::beginTag('div', [

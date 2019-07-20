@@ -13,21 +13,7 @@ use app\components\ListFormHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-	<?= $form->field($model, 'user_id')->dropDownList($users) ?>
-	
-	<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-	
-	<?= $form->field($model, 'eduform_ids')->hiddenInput(['maxlength' => true])->label(false) ?>
-	
-    <?php 
-		echo ListFormHelper::showUpdateList($curriculums, $selectedCurriculums, 'student-eduform_ids', 'eduform_ids', [
-			'addButtonName' => Yii::t('app\admin', 'Add'),
-			'removeButtonName' => Yii::t('app\admin', 'Remove'),
-			'header-level' => 4,
-			'header-left' => Yii::t('app\admin', 'All Curriculums'),
-			'header-right' => Yii::t('app\admin', 'Selected Curriculums'),
-		]);
-	?>
+	<?= $form->field($model, 'user_id')->dropDownList($users) ?>	
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app\admin', 'Save'), ['class' => 'btn btn-success']) ?>

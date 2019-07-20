@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use app\models\Student;
+use app\models\User;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\StudentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -28,8 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',			
-			//['attribute' => 'user_id', 'label' => 'User ID'],
-			'name',
+			[
+                'label' => (new Student)->attributeLabels()['user_id'],
+                'attribute' => 'user_id',
+                'content' => function ($model, $key, $index, $column){
+                    
+                    return User::getUsersData()[$model->user_id];
+                },                
+            ],			
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

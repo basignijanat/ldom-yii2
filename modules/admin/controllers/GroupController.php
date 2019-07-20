@@ -3,18 +3,22 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Comment;
-use app\models\CommentSearch;
-use app\models\Student;
+use app\models\Group;
+use app\models\GroupSearch;
 use app\models\Language;
+use app\models\Teacher;
+use app\models\Student;
+
+use app\components\ArrayForForm;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CommentController implements the CRUD actions for Comment model.
+ * GroupController implements the CRUD actions for Group model.
  */
-class CommentController extends Controller
+class GroupController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,53 +36,53 @@ class CommentController extends Controller
     }
 
     /**
-     * Lists all Comment models.
+     * Lists all Group models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CommentSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new GroupSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);        
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider,            
+
         ]);
     }
 
     /**
-     * Displays a single Comment model.
+     * Displays a single Group model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        $essentialData = self::getEssentialData($this->findModel($id));		
+        $data = $this->essentialData($this->findModel($id));        
 		
-		return $this->render('view', $essentialData);
+		return $this->render('view', $data);
     }
 
     /**
-     * Creates a new Comment model.
+     * Creates a new Group model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Comment();
-		
-		$essentialData = self::getEssentialData($model);
+        $model = new Group();
+        $data = $this->essentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', $essentialData);
+        return $this->render('create', $data);
     }
 
     /**
-     * Updates an existing Comment model.
+     * Updates an existing Group model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -87,18 +91,17 @@ class CommentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-		
-		$essentialData = self::getEssentialData($model);
+        $data = $this->essentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', $essentialData);
+        return $this->render('update', $data);
     }
 
     /**
-     * Deletes an existing Comment model.
+     * Deletes an existing Group model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -112,27 +115,30 @@ class CommentController extends Controller
     }
 
     /**
-     * Finds the Comment model based on its primary key value.
+     * Finds the Group model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Comment the loaded model
+     * @return Group the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Comment::findOne($id)) !== null) {
+        if (($model = Group::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app\messages', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('app\admin', 'The requested page does not exist.'));
     }
-	
-	protected static function getEssentialData($model)
-	{
-		return array(
-			'model' => $model,
-			'students' => Student::getStudents(),
-			'languages' => Language::getLanguages(),			
-		);
-	}
+
+    protected function essentialData($model){
+        
+        return [
+            'model' => $model,
+            'languages' => Language::getLanguages(),
+            'teachers' => Teacher::getTeachers(),
+            'selectedTeachers' => ArrayForForm::excludeDropDownById(Teacher::getTeachers(), explode(' ', $model->teacher_ids)),
+            'students' => Student::getStudents(),
+			'selectedStudents' => ArrayForForm::excludeDropDownById(Student::getStudents(), explode(' ', $model->student_ids)),
+        ];
+    }
 }

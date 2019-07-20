@@ -55,7 +55,7 @@ class StudentController extends Controller
      */
     public function actionView($id)
     {
-        $essentialData = self::getEssentialData($this->findModel($id));		
+        $essentialData = self::getEssentialData($this->findModel($id));        
 		
 		return $this->render('view', $essentialData);
     }
@@ -132,9 +132,7 @@ class StudentController extends Controller
 	{
 		return array(
 			'model' => $model,
-			'users' => User::getUsers(),
-			'curriculums' => EduForm::getEduForms(),
-			'selectedCurriculums' => ArrayForForm::excludeDropDownById(EduForm::getEduForms(), explode(' ', $model->eduform_ids)),			
+			'users' => User::getUsersData(),			
 		);
 	}
 }

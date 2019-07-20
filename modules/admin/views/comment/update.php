@@ -5,13 +5,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comment */
 
-$this->title = Yii::t('app\messages', 'Update Comment: {name}', [
+$this->title = Yii::t('app\admin', 'Update Comment: {name}', [
     'name' => $model->id,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\messages', 'Comments'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Comments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app\messages', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('app\admin', 'Update');
 ?>
 <div class="white-box">
 
@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = Yii::t('app\messages', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
-		'students' => $students,
-		'curriculums' => $curriculums,	
+        'students' => $students,	
+        'languages' => $languages,		
     ]) ?>
 
 </div>

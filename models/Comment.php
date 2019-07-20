@@ -28,7 +28,7 @@ class Comment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['student_id', 'form_id'], 'integer'],
+            [['student_id', 'language_id'], 'integer'],
             [['content'], 'string', 'max' => 255],
         ];
     }
@@ -39,10 +39,10 @@ class Comment extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app\messages', 'ID'),
-            'student_id' => Yii::t('app\messages', 'Student ID'),
-            'form_id' => Yii::t('app\messages', 'Form ID'),
-            'content' => Yii::t('app\messages', 'Content'),
+            'id' => Yii::t('app\admin', 'ID'),
+            'student_id' => Yii::t('app\admin', 'User'),
+            'language_id' => Yii::t('app\admin', 'Language'),
+            'content' => Yii::t('app\admin', 'Content'),
         ];
     }
 }

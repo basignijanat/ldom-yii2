@@ -5,6 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Teacher;
+use app\models\User;
 
 /**
  * TeacherSearch represents the model behind the search form of `app\models\Teacher`.
@@ -17,8 +18,9 @@ class TeacherSearch extends Teacher
     public function rules()
     {
         return [
-            [['id', 'age', 'experience', 'user_id'], 'integer'],
-            [['education', 'eduprogram_ids'], 'safe'],
+            [['id', 'age', 'experience'], 'integer'],
+            [['education'], 'safe'],
+            [['user_id'], 'string'],
         ];
     }
 
@@ -63,9 +65,34 @@ class TeacherSearch extends Teacher
             'experience' => $this->experience,
         ]);
 
-        $query->andFilterWhere(['like', 'user_id', $this->user_id])
-            ->andFilterWhere(['like', 'education', $this->education])
-            ->andFilterWhere(['like', 'eduprogram_ids', $this->eduprogram_ids]);
+        $query->andFilterWhere(['like', 'education', $this->education])
+            /*->andFilterWhere(['like', 'eduprogram_ids', $this->eduprogram_ids])*/;
+        
+        //custom complex search
+        if (strlen($this->user_id)){                                                        
+            $users = User::find()->select(['id', 'fname', 'mname', 'lname'])
+                ->where(['fname' => explode(' ', $this->user_id)])
+                ->orWhere(['mname' => explode(' ', $this->user_id)])
+                ->orWhere(['lname' => explode(' ', $this->user_id)])
+                ->orWhere(['like', 'fname', explode(' ', $this->user_id)])
+                ->orWhere(['like', 'mname', explode(' ', $this->user_id)])
+                ->orWhere(['like', 'lname', explode(' ', $this->user_id)])
+                ->all();
+                
+            if ($users){                
+                foreach ($users as $user){
+                    $query->orFilterWhere([
+                        'user_id' => $user->id,
+                    ]);
+                }                                
+            }
+            else{
+                $query->andFilterWhere(['like', 'user_id', $this->user_id]);
+            }            
+        }
+        else{
+            $query->andFilterWhere(['like', 'user_id', $this->user_id]);
+        }
 
         return $dataProvider;
     }

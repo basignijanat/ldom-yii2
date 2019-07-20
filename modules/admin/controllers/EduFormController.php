@@ -22,12 +22,7 @@ class EduformController extends Controller
 {
     /**
      * {@inheritdoc}
-     */
-	public function __construct($id, $module, $config = [])
-	{
-		parent::__construct($id, $module, $config = []);
-		Userlang::SetLanguage();
-	}
+     */	
 
     public function behaviors()
     {

@@ -6,6 +6,7 @@ use Yii;
 use app\models\Language;
 use app\models\LanguageSearch;
 use app\models\Userlang;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -44,11 +45,11 @@ class LanguageController extends Controller
     public function actionIndex()
     {
         $searchModel = new LanguageSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);        
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider,            
         ]);
     }
 
@@ -60,12 +61,9 @@ class LanguageController extends Controller
      */
     public function actionView($id)
     {
-		$languages = Userlang::getLanguages();
+		$data = $this->essentialData($this->findModel($id));
 		
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-			'languages' => $languages,
-        ]);
+        return $this->render('view', $data);
     }
 
     /**
@@ -76,17 +74,13 @@ class LanguageController extends Controller
     public function actionCreate()
     {
         $model = new Language();
+        $data = $this->essentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        }
+        }		
 		
-		$languages = Userlang::getLanguages();
-		
-        return $this->render('create', [
-            'model' => $model,
-			'languages' => $languages,
-        ]);
+        return $this->render('create', $data);
     }
 
     /**
@@ -99,6 +93,7 @@ class LanguageController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $data = $this->essentialData($model);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -106,10 +101,7 @@ class LanguageController extends Controller
 
 		$languages = Userlang::getLanguages();
 		
-        return $this->render('update', [
-            'model' => $model,
-			'languages' => $languages,
-        ]);
+        return $this->render('update', $data);
     }
 
     /**
@@ -140,5 +132,13 @@ class LanguageController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app\admin', 'The requested page does not exist.'));
+    }
+
+    protected function essentialData($model){
+        
+        return [
+            'model' => $model,
+            'languages' => Userlang::getLanguages(),            
+        ];
     }
 }

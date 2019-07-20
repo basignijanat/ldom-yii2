@@ -55,12 +55,9 @@ class TeacherController extends Controller
      */
     public function actionView($id)
     {
-        $users = User::getUsers();
+        $data = $this->essentialData($this->findModel($id));        
 		
-		return $this->render('view', [
-            'model' => $this->findModel($id),
-			'users' => $users,
-        ]);
+		return $this->render('view', $data);
     }
 
     /**
@@ -70,18 +67,14 @@ class TeacherController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Teacher();		
+        $model = new Teacher();
+        $data = $this->essentialData($model);
 		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
-		}
+		}		
 		
-		$users = User::getUsers();
-		
-        return $this->render('create', [
-            'model' => $model,
-			'users' => $users,
-        ]);
+        return $this->render('create', $data);
     }
 
     /**
@@ -94,19 +87,13 @@ class TeacherController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-          
-		//$model->upload();
+        $data = $this->essentialData($model);        
 		
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        }
-			
-		$users = User::getUsers();		
+        }		
 		
-        return $this->render('update', [
-            'model' => $model,
-			'users' => $users,
-        ]);
+        return $this->render('update', $data);
     }
 
     /**
@@ -137,5 +124,13 @@ class TeacherController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app\messages', 'The requested page does not exist.'));
+    }
+
+    protected function essentialData($model){
+        
+        return [
+            'model' => $model,
+            'users' => User::getUsersData(),
+        ];
     }
 }

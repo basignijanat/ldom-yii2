@@ -3,23 +3,22 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use app\models\Group;
 use app\models\Language;
-use app\models\Userlang;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\LanguageSearch */
+/* @var $searchModel app\models\GroupSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app\admin', 'Languages');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app\admin', 'Administrator'), 'url' => ['/admin']];
+$this->title = Yii::t('app\admin', 'Groups');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="white-box">
+<div class="group-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app\admin', 'Create Language'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app\admin', 'Create Group'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,19 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',            
+            'id',
+            'name',            
             [
-                'label' => (new Language)->attributeLabels()['userlang_id'],
-                'attribute' => 'userlang_id',
+                'label' => (new Group)->attributeLabels()['language_id'],
+                'attribute' => 'language_id',
                 'content' => function ($model, $key, $index, $column){
                     
-                    return Userlang::getLanguages()[$model->userlang_id];
+                    return Language::getLanguages()[$model->language_id];
                 },
             ],
-            'meta_title',
-            'meta_description:ntext',
-            'name',
-            'content:ntext',
+            //'student_ids',
+            //'teacher_ids',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

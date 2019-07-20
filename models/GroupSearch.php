@@ -4,14 +4,15 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\models\Group;
 use app\models\Language;
-
-use app\models\Userlang;
+use app\models\Teacher;
+use app\models\Student;
 
 /**
- * LanguageSearch represents the model behind the search form of `app\models\Language`.
+ * GroupSearch represents the model behind the search form of `app\models\Group`.
  */
-class LanguageSearch extends Language
+class GroupSearch extends Group
 {
     /**
      * {@inheritdoc}
@@ -20,8 +21,8 @@ class LanguageSearch extends Language
     {
         return [
             [['id'], 'integer'],
-            [['meta_title', 'meta_description', 'name', 'content'], 'safe'],
-			[['userlang_id'], 'string'],
+            [['name'], 'safe'],
+            [['language_id', 'student_ids', 'teacher_ids'], 'string'],
         ];
     }
 
@@ -43,7 +44,7 @@ class LanguageSearch extends Language
      */
     public function search($params)
     {
-        $query = Language::find();
+        $query = Group::find();
 
         // add conditions that should always apply here
 
@@ -62,30 +63,32 @@ class LanguageSearch extends Language
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            /*'language_id' => $this->language_id,
+            'student_ids' => $this->student_ids,
+            'teacher_ids' => $this->teacher_ids,*/
         ]);
 
-        $query->andFilterWhere(['like', 'meta_title', $this->meta_title])
-            ->andFilterWhere(['like', 'meta_description', $this->meta_description])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         //custom complex search
-        if (strlen($this->userlang_id)){                        
-            $userlangs = Userlang::find()->select(['id', 'name'])->where(['like', 'name', $this->userlang_id])->all();
-
-            if ($userlangs){
-                foreach ($userlangs as $userlang){                                       
+        //language search
+        if (strlen($this->language_id)){                
+            $languages = Language::find()->select(['id', 'name'])->where(['like', 'name', $this->language_id])->all();
+            
+            if ($languages){                
+                foreach ($languages as $language){
                     $query->orFilterWhere([
-                        'userlang_id' => $userlang->id,
-                    ]);                    
-                }
+                        'language_id' => $language->id,
+                    ]);
+                }                
             }
             else{
-                $query->andFilterWhere(['like', 'userlang_id', $this->userlang_id]);
+                $query->andFilterWhere(['like', 'language_id', $this->language_id]);
             }
+            
         }
         else{
-            $query->andFilterWhere(['like', 'userlang_id', $this->userlang_id]);
+            $query->andFilterWhere(['like', 'language_id', $this->language_id]);
         }
 
         return $dataProvider;

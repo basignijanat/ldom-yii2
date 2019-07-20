@@ -119,7 +119,7 @@ $alert = AlertData::getAlert($_GET['alert']);
                         <a href="<?=Url::to(['/admin/language'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Languages') ?></a>
                     </li>
                     <li>
-                        <a href="<?=Url::to(['/admin/eduform'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Teaching Methods') ?></a>
+                        <a href="<?=Url::to(['/admin/group'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Groups') ?></a>
                     </li>                    
                     <li>
                         <a href="<?=Url::to(['/admin/user'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Users') ?></a>
@@ -154,7 +154,7 @@ $alert = AlertData::getAlert($_GET['alert']);
         <!-- Page Content -->
         <!-- ============================================================== -->
         <div id="page-wrapper">
-            <div class="container-fluid">
+            <div class="container-fluid white-box">
                 <!--div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <?= Html::tag('h4', Yii::t('app\admin', 'Dashboard'), ['class' => 'page-title']) ?>

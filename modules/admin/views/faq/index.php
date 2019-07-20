@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'eduform_id',
+            'language_id',
             'question',
             'answer:ntext',
 

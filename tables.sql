@@ -15,18 +15,16 @@ CREATE TABLE userdata(
 CREATE TABLE teacher(
 	id int NOT NULL AUTO_INCREMENT,
 	user_id int NOT NULL,	
-	age int NOT NULL,
-	experience int NOT NULL,
-	education varchar(255) NOT NULL,
-	eduprogram_ids varchar(255) NOT NULL,
+	age int default 0,
+	experience int default 0,
+	education varchar(255) default NULL,
    PRIMARY KEY (id)
 );
 
 CREATE TABLE student(
 	id int NOT NULL AUTO_INCREMENT,
-	user_id int NOT NULL,
-	name varchar(255) NOT NULL,
-	eduform_ids varchar(255) NOT NULL,	
+	user_id int NOT NULL,	
+	create_at int NOT NULL,	
    PRIMARY KEY (id)
 );
 
@@ -69,7 +67,7 @@ CREATE TABLE eduform(
 
 CREATE TABLE comment(
 	id int NOT NULL AUTO_INCREMENT,
-	form_id int NOT NULL,
+	language_id int NOT NULL,
 	student_id int NOT NULL,
 	content text NOT NULL,
    PRIMARY KEY (id)
@@ -77,7 +75,7 @@ CREATE TABLE comment(
 
 CREATE TABLE faq(
 	id int NOT NULL AUTO_INCREMENT,
-	eduform_id int NOT NULL,
+	language_id int NOT NULL,
 	question varchar(255) NOT NULL,	
 	answer varchar(255) NOT NULL,
    PRIMARY KEY (id)
@@ -89,6 +87,14 @@ CREATE TABLE setting(
 	value varchar(255) NOT NULL,
    PRIMARY KEY (id)
 );
-
 INSERT INTO `setting`(`id`, `name`, `value`) VALUES (1, 'email', '');
 INSERT INTO `setting`(`id`, `name`, `value`) VALUES (2, 'phone', '');
+
+CREATE TABLE group_data(
+	id int NOT NULL AUTO_INCREMENT,	
+	name varchar(255) NOT NULL,	
+	language_id int NOT NULL,
+	student_ids varchar(255) NOT NULL,
+	teacher_ids varchar(255) NOT NULL,
+   PRIMARY KEY (id)
+);

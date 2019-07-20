@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use app\components\ArrayForForm;
 
+use app\models\User;
+
 /**
  * This is the model class for table "teacher".
  *
@@ -53,7 +55,7 @@ class Teacher extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app\admin', 'ID'),
-			'user_id' => Yii::t('app\admin', 'User Email'),                        
+			'user_id' => Yii::t('app\admin', 'User'),                        
             'age' => Yii::t('app\admin', 'Age'),
             'experience' => Yii::t('app\admin', 'Experience'),
             'education' => Yii::t('app\admin', 'Education'),            
@@ -61,9 +63,9 @@ class Teacher extends \yii\db\ActiveRecord
         ];
     }
 	
-	public static function getTeachers()
-	{
-		return ArrayForForm::getDropDownArray(Teacher::find()->all(), 'name');				
+	public static function getTeachers(){
+
+        return ArrayForForm::getDropDownArrayCompound(new Teacher, new User, 'user_id', ['fname', 'mname', 'lname']);
 	}
 	
 }

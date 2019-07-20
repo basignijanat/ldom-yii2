@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use app\models\Teacher;
+use app\models\User;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\TeacherSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,15 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',            
-            'name',            
+            'id',
+            [                
+                'label' => (new Teacher)->attributeLabels()['user_id'],
+                'attribute' => 'user_id',
+                'content' => function ($model, $key, $index, $column){
+                    
+                    return User::getUsersData()[$model->user_id];
+                },
+            ],                     
             'age',
-            //'experience',
-            //'education',
-            //'email:email',
-            //'password',
-            //'image',
-            //'eduprogram_ids',
+            'experience',
+            'education',            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
