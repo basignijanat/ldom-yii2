@@ -45,6 +45,7 @@ class Teacher extends \yii\db\ActiveRecord
         return [
             [['age', 'experience', 'user_id'], 'integer'],
             [['education', 'eduprogram_ids'], 'string', 'max' => 255],		
+            [['user_id'], 'unique'],
         ];
     }
 
@@ -61,6 +62,20 @@ class Teacher extends \yii\db\ActiveRecord
             'education' => Yii::t('app\admin', 'Education'),            
             'eduprogram_ids' => Yii::t('app\admin', 'Curriculums'),
         ];
+    }
+
+    public function getFullName($patronymic = true){
+        $user = User::find()->where(['id' => $this->user_id])->one();
+        
+        return $user->lname.' '.$user->fname.' '.$user->mname;
+    }
+
+    public static function getTeacherByUserId($user_id){
+        
+        return self::find()
+            ->select(['id', 'user_id'])
+            ->where(['user_id' => $user_id])
+            ->one();
     }
 	
 	public static function getTeachers(){

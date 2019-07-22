@@ -83,19 +83,9 @@ $config = [
             'rules' => [
                 'admin/setting/<id:\d+>' => 'admin/setting/index',
                 'language/<url:[0-9a-zA-Z\-]+>' => 'language/index',
+                'schedule/<group_id:\d+>' => 'schedule/index',
             ],
         ],
-
-        /*'assetManager' => [
-            'bundles' => [
-                'yii\bootstrap\BootstrapPluginAsset' => [
-                    'js'=>[]
-                ],
-                'yii\bootstrap\BootstrapAsset' => [
-                    'css' => [],
-                ],
-            ],
-        ],*/
         
     ],
     'params' => $params,    

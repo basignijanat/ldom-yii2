@@ -10,12 +10,12 @@
         <?= Html::tag('span', $model->content) ?>
         
         <div class="section level level-item">
-            <?if (): ?>
+            <?if ($is_signed): ?>
+                
+            <? else: ?>
                 <?= Html::a(Yii::t('app\main', 'Sign Up For Free!'), null, [
                     'class' => 'button is-success is-large',
                 ]) ?>
-            <? else: ?>
-
             <? endif ?>
         </div>
     </div>

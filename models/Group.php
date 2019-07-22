@@ -48,4 +48,44 @@ class Group extends \yii\db\ActiveRecord
             'teacher_ids' => Yii::t('app\admin', 'Teachers'),
         ];
     }
+    
+    public static function getGroup($id){
+
+        return self::findOne(['id' => $id]);
+    }
+
+    public static function getGroups(){
+
+        return self::find()->all();
+    }
+    
+    public static function getGroupsByStudent($id){
+
+        return Group::find()
+            ->where(['like', 'student_ids', ' '.$id.' '])
+            ->orWhere(['like', 'student_ids', $id.' %', false])
+            ->orWhere(['like', 'student_ids', '% '.$id, false])
+            ->orWhere(['student_ids' => $id])
+            ->all();       
+    }
+
+    public static function getGroupsByTeacher($id){
+
+        return Group::find()
+            ->where(['like', 'teacher_ids', ' '.$id.' '])
+            ->orWhere(['like', 'teacher_ids', $id.' %', false])
+            ->orWhere(['like', 'teacher_ids', '% '.$id, false])
+            ->orWhere(['teacher_ids' => $id])
+            ->all();       
+    }
+
+    public function getTeachers(){
+
+        return Teacher::find()->where(['id' => explode(' ', $this->teacher_ids)])->all();
+    }
+
+    public function getStudents(){
+
+        return Student::find()->where(['id' => explode(' ', $this->student_ids)])->all();
+    }
 }

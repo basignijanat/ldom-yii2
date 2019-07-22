@@ -5,9 +5,17 @@ namespace app\controllers;
 use Yii;
 
 use app\models\Language;
+use app\models\Student;
+use app\models\Group;
 
 class LanguageController extends \yii\web\Controller
 {
+    public function __construct($id, $module, $config = []){		        
+        Userlang::SetLanguage();
+        
+        return parent::__construct($id, $module, $config = []);
+    }
+    
     public function actionIndex($url)
     {
         if (Yii::$app->user->isGuest){
@@ -15,11 +23,15 @@ class LanguageController extends \yii\web\Controller
 
             $this->redirect('/site/signup');
         }
-        else{
+        else{            
             
             return $this->render('index', [
                 'model' => $this->findModel($url),
-                'signed_students' => '',
+                'is_signed' => Group::getGroupsByStudent(
+                    Student::getStudentByUserId(
+                        Yii::$app->user->identity->id)['id'], 
+                        $this->findModel($url)['id']
+                ),
             ]);
         }
         

@@ -28,7 +28,8 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-			[['user_id', 'create_at'], 'integer'],            
+            [['user_id', 'create_at'], 'integer'],            
+            [['user_id'], 'unique'],
         ];
     }
 
@@ -55,9 +56,23 @@ class Student extends \yii\db\ActiveRecord
         return false;       
     }
 
+    public function getFullName($patronymic = true){
+        $user = User::find()->where(['id' => $this->user_id])->one();
+        
+        return $user->lname.' '.$user->fname.' '.$user->mname;
+    }
+
 	public static function getStudents(){
         
         return ArrayForForm::getDropDownArrayCompound(new Student, new User, 'user_id', ['fname', 'mname', 'lname']);
+    }
+
+    public static function getStudentByUserId($user_id){
+        
+        return self::find()
+            ->select(['id', 'user_id'])
+            ->where(['user_id' => $user_id])
+            ->one();
     }
     
     public static function getStudentsCountBetween($lower, $upper){

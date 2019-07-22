@@ -6,12 +6,11 @@ namespace app\components;
 	{
 		public static function getDropDownArray($elements, $names = ['name'], $defaultNul = null)
 		{			
+			$selectElements = [];
+			
 			if ($defaultNul){
 				$selectElements[0] = $defaultNul;
-			}
-			else{
-				$selectElements = [];
-			}
+			}			
 
 			foreach ($elements as $element){
 				if (is_array($names)){

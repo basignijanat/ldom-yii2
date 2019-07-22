@@ -100,3 +100,18 @@ CREATE TABLE group_data(
 	teacher_ids varchar(255) NOT NULL,
    PRIMARY KEY (id)
 );
+
+CREATE TABLE application_request(
+	id int NOT NULL AUTO_INCREMENT,	
+	language_id int NOT NULL,
+	student_id int NOT NULL,
+	status int NOT NULL,
+   PRIMARY KEY (id)
+);
+
+CREATE TABLE lesson(
+	id int NOT NULL AUTO_INCREMENT,	
+	group_id int NOT NULL,
+	time int NOT NULL,
+   PRIMARY KEY (id)
+);
