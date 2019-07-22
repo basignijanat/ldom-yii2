@@ -2,6 +2,12 @@
     return array(
         'Account Management' => 'Управление учетной записью',
         'My Cabinet' => 'Моя учетная запись',
+        'My Schedule' => 'Моё расписание',
+        'My Groups (' => 'Мои группы (',
+        'teacher' => 'учитель',
+        'student' => 'студент',
+        'Schedule for ' => 'Расписание для ',
+        'Leave Your Comment Here' => 'Оставьте ваш отзыв',
 
         'Remember Me' => 'Запомнить меня',
 
@@ -12,5 +18,13 @@
         'Sign Up' => 'Зарегистрироваться',
         'Log In' => 'Войти',
         'Sign Up For Free!' => 'Участвовать бесплатно!',
+
+        'Monday' => 'Понедельник',
+        'Tuesday' => 'Вторник',
+        'Wednesday' => 'Среда',
+        'Thursday' => 'Четверг',
+        'Friday' => 'Пятница',
+        'Saturday' => 'Суббота',
+        'Sunday' => 'Воскресенье',
     );
 ?>

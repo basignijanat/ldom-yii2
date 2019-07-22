@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Lesson */
@@ -13,7 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lesson-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Yii::t('app\admin', 'Lesson Id: ') ?>
+        <?= Html::encode($this->title) ?>
+    </h1>
 
     <p>
         <?= Html::a(Yii::t('app\admin', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -30,8 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'group_id',
-            'time:datetime',
+            [
+                'label' => $model->attributeLabels()['group_id'],
+                'value' => ArrayHelper::map($groups, 'id', 'name')[$model->group_id],
+            ],
+            [
+                'label' => $model->attributeLabels()['time'],
+                'value' => date('d-m-Y H:i', $model->time),
+            ],
         ],
     ]) ?>
 

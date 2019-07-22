@@ -7,16 +7,39 @@
             'class' => 'title',
         ]) ?>
 
-        <?= Html::tag('span', $model->content) ?>
+        <?= Html::tag('span', $model->content) ?>        
         
-        <div class="section level level-item">
-            <?if ($is_signed): ?>
-                
-            <? else: ?>
+        <? if (!$is_signed): ?>                
+            <div class="section level level-item">            
                 <?= Html::a(Yii::t('app\main', 'Sign Up For Free!'), null, [
                     'class' => 'button is-success is-large',
                 ]) ?>
-            <? endif ?>
-        </div>
+            </div>
+        <? else: ?>       
+            <div class="section">
+                <h2 class="is-size-5">
+                    <?= Yii::t('app\main', 'Leave Your Comment Here') ?>
+                </h2>
+                <div class="container">
+
+                </div>
+            </div>
+        <? endif ?>
+
+        <? if ($comments): ?>
+            <div class="section">
+                <h2 class="is-size-5">
+                    <?= Yii::t('app\admin', 'Comments') ?>
+                </h2>
+                <div class="container">
+                    <? foreach ($comments as $comment): ?>
+                        <div class="box">                            
+                            <?= $comment->content ?>
+                        </div>
+                    <? endforeach ?>
+                </div>
+            </div>
+        <? endif ?>
+
     </div>
 </section>

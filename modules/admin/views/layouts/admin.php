@@ -122,6 +122,9 @@ $alert = AlertData::getAlert($_GET['alert']);
                         <a href="<?=Url::to(['/admin/group'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Groups') ?></a>
                     </li>                    
                     <li>
+                        <a href="<?=Url::to(['/admin/lesson'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Lessons') ?></a>
+                    </li>                    
+                    <li>
                         <a href="<?=Url::to(['/admin/user'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Users') ?></a>
                     </li>
                     <li>
@@ -135,9 +138,6 @@ $alert = AlertData::getAlert($_GET['alert']);
                     </li>
                     <li>
                         <a href="<?=Url::to(['/admin/price'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Prices') ?></a>
-                    </li>
-                    <li>
-                        <a href="<?=Url::to(['/admin/faq'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'FAQ') ?></a>
                     </li>                    
                     <li>
                         <a href="<?=Url::to(['/admin/setting'])?>" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i><?= Yii::t('app\admin', 'Settings') ?></a>

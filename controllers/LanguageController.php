@@ -7,6 +7,8 @@ use Yii;
 use app\models\Language;
 use app\models\Student;
 use app\models\Group;
+use app\models\Comment;
+use app\models\Userlang;
 
 class LanguageController extends \yii\web\Controller
 {
@@ -16,22 +18,24 @@ class LanguageController extends \yii\web\Controller
         return parent::__construct($id, $module, $config = []);
     }
     
-    public function actionIndex($url)
+    public function actionIndex($url = null)
     {
         if (Yii::$app->user->isGuest){
             $_SESSION['after_signup'] = '/language/'.$url;
 
             $this->redirect('/site/signup');
         }
-        else{            
+        else{    
+            $model = $this->findModel($url);
             
             return $this->render('index', [
-                'model' => $this->findModel($url),
+                'model' => $model,
                 'is_signed' => Group::getGroupsByStudent(
                     Student::getStudentByUserId(
                         Yii::$app->user->identity->id)['id'], 
                         $this->findModel($url)['id']
                 ),
+                'comments' => Comment::getCommentsByLanguage($model->id),
             ]);
         }
         

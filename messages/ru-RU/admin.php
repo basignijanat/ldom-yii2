@@ -8,6 +8,7 @@
 		'Create Price' => 'Создать цену',
 		'Create Group' => 'Создать группу',
 		'Create User' => 'Создать пользователя',
+		'Create Lesson' => 'Создать занятие',
 		
 		'Update Language: {name}' => 'Обновить язык: {name}',
 		'Update User Language: {name}' => 'Обновить язык пользователя: {name}',
@@ -17,7 +18,10 @@
 		'Update Price: {name}' => 'Обновить цену: {name}',
 		'Update Group: {name}' => 'Обновить группу: {name}',
 		'Update User: {name}' => 'Обновить пользователя: {name}',
-		
+		'Update Lesson: {name}' => 'Обновить занятие: {name}',
+
+		'Lesson Id: ' => 'Id занятия: ',
+
 		'Admin Panel' => 'Админпанель',
 		'Dashboard' => 'Админпанель',
 		
@@ -31,6 +35,7 @@
 		'Settings' => 'Настройки',
 		'Groups' => 'Группы',
 		'Users' => 'Пользователи',
+		'Lessons' => 'Занятия',
 		
 		'Users' => 'Пользователи',
 		'Is Administrator' => 'Администратор?',
@@ -63,6 +68,9 @@
 		'First Name' => 'Имя',
 		'Middle Name' => 'Отчество',
 		'Last Name' => 'Фамилия ',
+		'Group' => 'Группа',
+		'Date' => 'Дата',
+		'Time' => 'Время',
 		
 		'All Teachers' => 'Все учителя',
 		'Selected Teachers' => 'Выбранные учителя',

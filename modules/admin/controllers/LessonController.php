@@ -41,7 +41,7 @@ class LessonController extends Controller
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider,            
         ]);
     }
 
@@ -55,7 +55,7 @@ class LessonController extends Controller
     {
         $data = $this->getEssentialData($this->findModel($id));
 
-        return $this->render('create', $data);
+        return $this->render('view', $data);
     }
 
     /**
@@ -91,7 +91,7 @@ class LessonController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', $data);
+        return $this->render('update', $data);
     }
 
     /**

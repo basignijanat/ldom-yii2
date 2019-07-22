@@ -29,7 +29,9 @@ use yii\widgets\ActiveForm;
 	<?= $form->field($model, 'image_file')->fileInput(['accept=' => 'image/jpeg,image/png,']) ?>
 	
 	<? if ($model->userpic): ?>
-		<?= Html::img($model->userpic, ['width' => '150px', 'alt' => 'Userpic']) ?>		
+		<div class="form-group">
+			<?= Html::img($model->userpic, ['width' => '150px', 'alt' => 'Userpic']) ?>		
+		</div>
 	<? endif ?>	
 
     <div class="form-group">

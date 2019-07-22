@@ -89,9 +89,11 @@ AppAsset::register($this);
                             </a>
                         </div>
                     </div>
-                <? else: ?>
+                <? else: ?>                    
+                    <a href="/schedule" class="navbar-item">                         
+                        <?= Yii::t('app\main', 'My Schedule') ?>
+                    </a>                    
                     <div class="navbar-item">                    
-
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link">                                                           
                                 <figure class="image is-32x32">

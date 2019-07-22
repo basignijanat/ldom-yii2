@@ -9,6 +9,7 @@ use app\models\Userlang;
 use app\models\Teacher;
 use app\models\Student;
 use app\models\Group;
+use app\models\Lesson;
 
 class ScheduleController extends \yii\web\Controller
 {
@@ -43,19 +44,16 @@ class ScheduleController extends \yii\web\Controller
         }
         
 
-        return $this->render('index', [
-            /*'all_groups' => [                
-                'teacher' => $teacher_groups,
-                'student' => $student_groups,
-            ],*/
+        return $this->render('index', [            
             'all_groups' => [                
                 'teacher' => $teacher_groups,
                 'student' => $student_groups,
             ],
             'current_group' => Group::getGroup($group_id),
-            /*'teacher' => $teacher,
-            'student' => $student,*/
+            'lessons' => Lesson::getLessonsByGroup($group_id),
             'group_id' => $group_id,
+            'teacher' => $teacher,
+            'student' => $student,
         ]);
     }
 

@@ -29,7 +29,7 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             [['student_id', 'language_id'], 'integer'],
-            [['content'], 'string', 'max' => 255],
+            [['content'], 'string'],
         ];
     }
 
@@ -44,5 +44,10 @@ class Comment extends \yii\db\ActiveRecord
             'language_id' => Yii::t('app\admin', 'Language'),
             'content' => Yii::t('app\admin', 'Content'),
         ];
+    }
+
+    public static function getCommentsByLanguage($language_id){
+
+        return self::find()->where(['language_id' => $language_id])->all();
     }
 }

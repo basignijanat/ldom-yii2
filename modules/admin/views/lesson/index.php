@@ -1,7 +1,11 @@
 <?php
 
+use app\models\Lesson;
+use app\models\Group;
+
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\LessonSearch */
@@ -26,9 +30,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'group_id',
-            'time:datetime',
+            'id',            
+            [
+                'label' => (new Lesson)->attributeLabels()['group_id'],
+                'attribute' => 'group_id',
+                'content' => function ($model, $key, $index, $column){
+                    
+                    return ArrayHelper::map(Group::getGroups(), 'id', 'name')[$model->group_id];
+                },
+            ],
+            [
+                'label' => (new Lesson)->attributeLabels()['time'], 
+                'attribute' => 'time',               
+                'content' => function ($model, $key, $index, $column){
+                    
+                    return date('d-m-Y H:i', $model->time);
+                },
+            ],            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

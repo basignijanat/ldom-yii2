@@ -5,6 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Lesson;
+use app\models\Group;
 
 /**
  * LessonSearch represents the model behind the search form of `app\models\Lesson`.
@@ -17,7 +18,8 @@ class LessonSearch extends Lesson
     public function rules()
     {
         return [
-            [['id', 'group_id', 'time'], 'integer'],
+            [['id'], 'integer'],
+            [['group_id', 'time'], 'string'],
         ];
     }
 
@@ -61,6 +63,35 @@ class LessonSearch extends Lesson
             'group_id' => $this->group_id,
             'time' => $this->time,
         ]);
+
+        //custom complex search
+        //custom group_id
+        if (strlen($this->group_id)){                        
+            $groups = Group::find()->select(['id', 'name'])->where(['like', 'name', $this->group_id])->all();
+
+            if ($groups){
+                foreach ($groups as $group){                                       
+                    $query->orFilterWhere([
+                        'group_id' => $group->id,
+                    ]);                    
+                }
+            }
+            else{
+                $query->andFilterWhere(['like', 'group_id', $this->group_id]);
+            }
+        }
+        else{
+            $query->andFilterWhere(['like', 'group_id', $this->group_id]);
+        }
+
+        //custom complex search
+        //custom time
+        if (strlen($this->time)){                                                    
+            $query->andFilterWhere(['like', 'time', strtotime($this->time)]);                              
+        }
+        else{
+            $query->andFilterWhere(['like', 'time', $this->time]);
+        }
 
         return $dataProvider;
     }
