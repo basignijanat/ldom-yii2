@@ -43,4 +43,9 @@ class Setting extends \yii\db\ActiveRecord
             'value' => Yii::t('app\admin', 'Value'),
         ];
     }
+
+    public static function getSettingValue($name){
+
+        return self::find()->where(['name' => $name])->one()['value'];
+    }
 }

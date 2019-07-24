@@ -91,6 +91,8 @@ CREATE TABLE setting(
 );
 INSERT INTO `setting`(`id`, `name`, `value`) VALUES (1, 'email', '');
 INSERT INTO `setting`(`id`, `name`, `value`) VALUES (2, 'phone', '');
+INSERT INTO `setting`(`id`, `name`, `value`) VALUES (3, 'logo_img', '/web/img/logo.png');
+INSERT INTO `setting`(`id`, `name`, `value`) VALUES (4, 'logo_txt', 'LanguageDom');
 
 CREATE TABLE group_data(
 	id int NOT NULL AUTO_INCREMENT,	

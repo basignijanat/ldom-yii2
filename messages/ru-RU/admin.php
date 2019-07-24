@@ -9,6 +9,7 @@
 		'Create Group' => 'Создать группу',
 		'Create User' => 'Создать пользователя',
 		'Create Lesson' => 'Создать занятие',
+		'Create Comment' => 'Создать отзыв',
 		
 		'Update Language: {name}' => 'Обновить язык: {name}',
 		'Update User Language: {name}' => 'Обновить язык пользователя: {name}',
@@ -19,6 +20,7 @@
 		'Update Group: {name}' => 'Обновить группу: {name}',
 		'Update User: {name}' => 'Обновить пользователя: {name}',
 		'Update Lesson: {name}' => 'Обновить занятие: {name}',
+		'Update Comment: {name}' => 'Обновить отзыв: {name}',
 
 		'Lesson Id: ' => 'Id занятия: ',
 
@@ -102,5 +104,10 @@
 		'Log out' => 'Выйти',
 		'Sign up' => 'Регистрация',
 		'Choose a file' => 'Выберите файл',
+
+		'email' => 'Email',
+		'phone' => 'Контактный телефон',
+		'logo_img' => 'Логотип (изображение)',
+		'logo_txt' => 'Логотип (текст)',
 	);
 ?>

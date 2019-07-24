@@ -6,6 +6,8 @@ use Yii;
 use app\components\ArrayForForm;
 use yii\web\UploadedFile;
 
+use app\models\Userlang;
+
 /**
  * This is the model class for table "language".
  *
@@ -79,6 +81,12 @@ class Language extends \yii\db\ActiveRecord
 	public static function getLanguageById($id)
 	{
 		return Language::find()->where(['id' => $id])->one();		
+    }
+
+    public static function getCurrentLanguages(){
+        $userlang = Userlang::find()->where(['val' => Yii::$app->language])->one();        
+
+		return Language::find()->where(['userlang_id' => $userlang->id])->all();		
     }
     
     protected function uploadImage(){

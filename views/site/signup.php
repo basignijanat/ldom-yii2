@@ -7,19 +7,19 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Sign up';
+$this->title = Yii::$app->name.': '.Yii::t('app\main', 'Sign Up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<section class="hero is-medium">  
-    <div class="hero-body">
+<section class="section">  
+    <div class="column is-offset-one-quarter is-half has-background-white-ter">
         <h1 class="title">
-            <?= Html::encode($this->title) ?>
+            <?= Yii::t('app\main', 'Sign Up') ?>
         </h1>
         <h2 class="subtitle">
-            Please fill out the following fields to sign up:
+            <?= Yii::t('app\main', 'Please fill out the following fields to sign up:') ?>
         </h2>
-        <div class="column is-half">            
+        <div class="column">            
             <?= Html::beginForm(null, 'post', [
                 'class' => 'field control',
                 'enctype' => 'multipart/form-data',

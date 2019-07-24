@@ -74,7 +74,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index',[
-            'languages' => Language::find()->all(),
+            'languages' => Language::getCurrentLanguages(),
         ]);
     }
 

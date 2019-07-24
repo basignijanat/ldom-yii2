@@ -1,7 +1,7 @@
 <?php
     use yii\helpers\Html;
-    
-    use froala\froalaeditor\FroalaEditorWidget;
+
+$this->title = Yii::$app->name.': '.Yii::t('app\main', $model->name);
 ?>
 <section class="section has-background-grey-lighter">
     <div class="container">
@@ -14,13 +14,13 @@
     </div>
 </section>
         <? if (!$user_groups): ?>                
-            <div class="section has-background-light level level-item">            
+            <div class="section has-background-white-bis level level-item">            
                 <?= Html::a(Yii::t('app\main', 'Sign Up For Free!'), null, [
                     'class' => 'button is-success is-large',
                 ]) ?>
             </div>
         <? else: ?>       
-            <div class="section has-background-light">                
+            <div class="section has-background-white-bis">                
                 <div class="container">                    
                     <?= Html::beginForm(null, 'post', [
                         'class' => 'field control',
@@ -51,7 +51,7 @@
         <? endif ?>
 
         <? if ($comments): ?>
-            <div class="section">                
+            <div class="section has-background-white-ter">                
                 <div class="container owl-carousel owl-theme">
                     <? foreach ($comments as $comment): ?>
                         <? $user = $comment->getStudent()->getUser() ?>

@@ -12,6 +12,7 @@ use app\assets\AppAsset;
 
 use app\models\Userlang;
 use app\models\AlertData;
+use app\models\Setting;
 
 AppAsset::register($this);
 ?>
@@ -33,14 +34,22 @@ AppAsset::register($this);
 <? 
     $languages = UserLang::GetMenuLanguages();
     $alert = AlertData::getAlert($_GET['alert']);
+    
+    $logo_img = Setting::getSettingValue('logo_img');
+    $logo_txt = Setting::getSettingValue('logo_txt');
+    $phone = Setting::getSettingValue('phone');
+    $email = Setting::getSettingValue('email');
 ?>
 
 <div class="wrap">
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="<?= Yii::$app->homeUrl ?>">
-                <!--img src="http://readysteadylife.eu/wp-content/uploads/2015/06/iconmonstr-language-9-icon-256.png" width="256"-->
-                <?= Yii::$app->name ?>
+                <? if (strlen($logo_img)): ?>
+                    <?= Html::img($logo_img) ?>
+                <? else: ?>
+                    <?= $logo_txt ?>
+                <? endif ?>
             </a>
 
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -55,10 +64,19 @@ AppAsset::register($this);
                 <a href="/site/index" class="navbar-item">
                     <?= Yii::t('app\admin', 'Home') ?>
                 </a>
-
-                <a href="/site/contact" class="navbar-item">
-                    <?= Yii::t('app\admin', 'Contact') ?>
-                </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a href="/site/contact" class="navbar-link">
+                        <?= Yii::t('app\admin', 'Contact') ?>
+                    </a>
+                    <div class="navbar-dropdown">
+                        <?= Html::a(Yii::t('app\admin', $phone), 'tel:'.$phone, [
+                            'class' => 'navbar-item',
+                        ]) ?>                
+                        <?= Html::a(Yii::t('app\admin', $email), 'mailto:'.$email, [
+                            'class' => 'navbar-item',
+                        ]) ?>  
+                    </div>
+                </div>              
             </div>
 
             <div class="navbar-end">            
@@ -144,7 +162,7 @@ AppAsset::register($this);
   </div>
 </div>
 
-<footer class="footer has-background-grey-light">
+<footer class="footer has-background-grey has-text-white-ter">
   <div class="content has-text-centered">
     <p>
       <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed

@@ -8,11 +8,14 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = 'Contact';
+$this->title = Yii::$app->name.': '.Yii::t('app\main', 'Contact');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
+<section class="section">
+<div class="container column is-half is-offset-one-quarter has-background-white-ter">
+    <h1 class="title">
+        <?= Yii::t('app\admin', 'Contact') ?>
+    </h1>
 
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
@@ -33,36 +36,61 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php else: ?>
 
-        <p>
-            If you have business inquiries or other questions, please fill out the following form to contact us.
-            Thank you.
+        <p class="subtitle">
+        <?= Yii::t('app\main', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.') ?>
         </p>
 
         <div class="row">
             <div class="col-lg-5">
 
-                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
-
-                    <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
-
-                    <?= $form->field($model, 'email') ?>
-
-                    <?= $form->field($model, 'subject') ?>
-
-                    <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-
-                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+            <?= Html::beginForm(null, 'post', [
+                'class' => 'field control',
+                'enctype' => 'multipart/form-data',
+            ]) ?>
+                <div class="field control">
+                    <?= Html::activeInput('text', $model, 'name', [
+                        'class' => 'input is-primary', 
+                        'placeholder' => Yii::t('app\admin', 'Name'),
+                        'required' => true,
+                    ]) ?>                                                        
+                </div>
+                <div class="field control">
+                    <?= Html::activeInput('email', $model, 'email', [
+                        'class' => 'input is-primary', 
+                        'placeholder' => Yii::t('app\admin', 'Email'),
+                        'required' => true,
+                    ]) ?>                                                        
+                </div>
+                <div class="field control">
+                    <?= Html::activeInput('text', $model, 'subject', [
+                        'class' => 'input is-primary', 
+                        'placeholder' => Yii::t('app\main', 'Subject'),
+                        'required' => true,
+                    ]) ?>                                                        
+                </div>
+                <div class="field control">
+                    <?= Html::activeTextarea($model, 'body', [
+                        'class' => 'textarea is-primary', 
+                        'placeholder' => Yii::t('app\main', 'Body'),
+                        'required' => true,
+                        'rows' => 6
+                    ]) ?>                                                        
+                </div>
+                <div class="field control">
+                    <?= Html::submitButton(Yii::t('app\main', 'Submit'), [
+                        'class' => 'button is-primary', 
+                        'name' => 'contact-button',
                     ]) ?>
+                </div>                    
 
-                    <div class="form-group">
-                        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-                    </div>
-
-                <?php ActiveForm::end(); ?>
+                    <!--?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                    ]) ?-->                    
+                <?= Html::endForm() ?>
 
             </div>
         </div>
 
     <?php endif; ?>
 </div>
+</section>

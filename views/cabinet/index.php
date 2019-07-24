@@ -37,7 +37,7 @@ use yii\helpers\Html;
     ];
 ?>
 
-<div class="section">
+<div class="section has-background-white-ter">
     <div class="container">
         <?= Html::tag('h1', Yii::t('app\main', 'My Cabinet'), ['class' => 'title']) ?>        
                 
