@@ -102,7 +102,7 @@ AppAsset::register($this);
                                             'class' => 'is-rounded',
                                         ]) ?>
                                     <? else: ?>
-                                        <?= Html::img('web\upload\userpic\default.png', [
+                                        <?= Html::img('/web/upload/userpic/default.png', [
                                             'class' => 'is-rounded',
                                         ]) ?>
                                     <? endif ?>

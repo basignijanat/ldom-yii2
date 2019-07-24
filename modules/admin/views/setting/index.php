@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,7 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <? foreach ($settings as $model): ?>
 
         <div class="form-group">
-            <?= Html::beginForm('/admin/setting/'.$model->id) ?>               
+        <? Pjax::begin() ?>
+            <?= Html::beginForm('/admin/setting/update/'.$model->id, 'post', [                        
+                        'data-pjax' => '1',
+                    ]) ?>               
                 
                 <?= Html::activeHiddenInput($model, 'name', [
                     'id' => 'setting-name-raw-'.$model->id,
@@ -43,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::submitButton(Yii::t('app\admin', 'Save'), ['class' => 'btn btn-success']) ?>                
 
             <?= Html::endForm() ?>
+        <? Pjax::end() ?>
         </div>
 
     <? endforeach ?>

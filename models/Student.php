@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use app\components\ArrayForForm;
 
+use app\models\User;
+
 /**
  * This is the model class for table "student".
  *
@@ -59,7 +61,7 @@ class Student extends \yii\db\ActiveRecord
     public function getFullName($patronymic = true){
         $user = User::find()->where(['id' => $this->user_id])->one();
         
-        return $user->lname.' '.$user->fname.' '.$user->mname;
+        return $user->getFullName($patronymic);
     }
 
 	public static function getStudents(){
@@ -74,9 +76,28 @@ class Student extends \yii\db\ActiveRecord
             ->where(['user_id' => $user_id])
             ->one();
     }
+
+    public function getUser(){
+        
+        return User::find()            
+            ->where(['id' => $this->user_id])
+            ->one();
+    }
     
     public static function getStudentsCountBetween($lower, $upper){
         $students = self::find()->where(['>=', 'create_at', $lower])->andWhere(['<=', 'create_at', $upper])->all();
+        
+        if ($students){
+            return count($students);
+        }
+        else{
+            return 0;
+        }
+        
+    }
+
+    public static function getTotalStudentsCount(){
+        $students = self::find()->all();
         
         if ($students){
             return count($students);

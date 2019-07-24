@@ -173,4 +173,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 			$this->userpic = '/web/'.$fullFileName;
 		}
     }
+
+    public function getFullName($patronymic = true){        
+        
+        return $patronymic 
+            ? $this->lname.' '.$this->fname.' '.$this->mname 
+            : $this->fname.' '.$this->mname.' '.$this->lname;
+    }
 }

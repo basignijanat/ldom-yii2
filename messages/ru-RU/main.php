@@ -7,7 +7,7 @@
         'teacher' => 'учитель',
         'student' => 'студент',
         'Schedule for ' => 'Расписание для ',
-        'Leave Your Comment Here' => 'Оставьте ваш отзыв',
+        'Leave Your Comment Here' => 'Оставьте Ваш отзыв',
 
         'Remember Me' => 'Запомнить меня',
 
@@ -17,7 +17,8 @@
         'Load Image' => 'Загрузить изображение',
         'Sign Up' => 'Зарегистрироваться',
         'Log In' => 'Войти',
-        'Sign Up For Free!' => 'Участвовать бесплатно!',
+        'Submit' => 'Отправить',
+        'Sign Up For Free!' => 'Участвовать бесплатно!',        
 
         'Monday' => 'Понедельник',
         'Tuesday' => 'Вторник',

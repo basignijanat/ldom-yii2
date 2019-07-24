@@ -48,4 +48,16 @@
 .one-quarter-input {
   width: 25%;
 }
+
+.carousel-box {
+  margin: 5px;
+  height: 100%;
+}
+
+.comment-header {
+  margin-bottom: 5%;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: lightgray;
+}
 /*# sourceMappingURL=custom.css.map */

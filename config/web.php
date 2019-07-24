@@ -81,7 +81,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'admin/setting/<id:\d+>' => 'admin/setting/index',
+                'admin/setting/update/<id:\d+>' => 'admin/setting/update',
                 'language/<url:[0-9a-zA-Z\-]+>' => 'language/index',
                 'schedule/<group_id:\d+>' => 'schedule/index',
             ],

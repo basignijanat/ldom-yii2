@@ -71,6 +71,9 @@
 		'Group' => 'Группа',
 		'Date' => 'Дата',
 		'Time' => 'Время',
+		'Day of The Week' => 'День недели',
+		'Student Count' => 'Количество студентов',
+		'Total Students:' => 'Всего студентов:',
 		
 		'All Teachers' => 'Все учителя',
 		'Selected Teachers' => 'Выбранные учителя',

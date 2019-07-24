@@ -69,6 +69,17 @@ class Group extends \yii\db\ActiveRecord
             ->all();       
     }
 
+    public static function getGroupsByStudentLanguage($id, $language_id){
+
+        return Group::find()
+            ->where(['like', 'student_ids', ' '.$id.' '])
+            ->orWhere(['like', 'student_ids', $id.' %', false])
+            ->orWhere(['like', 'student_ids', '% '.$id, false])
+            ->orWhere(['student_ids' => $id])
+            ->andWhere(['language_id' => $language_id])
+            ->all();       
+    }
+
     public static function getGroupsByTeacher($id){
 
         return Group::find()

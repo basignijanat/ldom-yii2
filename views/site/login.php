@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::encode($this->title) ?>
         </h1>
         <h2 class="subtitle">
-            Please fill out the following fields to log in:
+            <?= Yii::t('app\main', 'Please fill out the following fields to log in:') ?>
         </h2>
         <div class="column is-half">            
             <?= Html::beginForm(null, 'post', ['class' => 'field control']) ?>
