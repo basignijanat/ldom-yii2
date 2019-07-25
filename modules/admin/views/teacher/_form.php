@@ -18,9 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'experience')->textInput() ?>
 
-    <?= $form->field($model, 'education')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'eduprogram_ids')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'education')->textInput(['maxlength' => true]) ?>    
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app\admin', 'Save'), ['class' => 'btn btn-success']) ?>

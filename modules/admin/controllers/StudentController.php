@@ -89,9 +89,10 @@ class StudentController extends Controller
     {
         $model = $this->findModel($id);
 		
-		$essentialData = self::getEssentialData($model);
+        $essentialData = self::getEssentialData($model);        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

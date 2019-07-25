@@ -34,8 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			['attribute' => 'user_id', 'value' => $users[$model->user_id]],                      
             'age',
             'experience',
-            'education',            
-            'eduprogram_ids',
+            'education',                        
         ],
     ]) ?>
 

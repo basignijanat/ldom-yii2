@@ -25,6 +25,7 @@
 		'Lesson Id: ' => 'Id занятия: ',
 
 		'Admin Panel' => 'Админпанель',
+		'Administrator' => 'Админпанель',
 		'Dashboard' => 'Админпанель',
 		
 		'Languages' => 'Языки',
@@ -59,7 +60,7 @@
 		'Teachers' => 'Учителя',
 		'Students' => 'Студенты',
 		'Age' => 'Возраст',
-		'Experience' => 'Опыт работы',
+		'Experience' => 'Опыт преподавания (лет)',
 		'Education' => 'Образование',
 		'Password' => 'Пароль',
 		'New Password' => 'Новый пароль',

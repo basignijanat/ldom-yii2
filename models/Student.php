@@ -30,7 +30,7 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'create_at'], 'integer'],            
+            [['user_id', 'age', 'create_at'], 'integer'],            
             [['user_id'], 'unique'],
         ];
     }
@@ -42,15 +42,18 @@ class Student extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app\admin', 'ID'),
-			'user_id' => Yii::t('app\admin', 'User'),			
+            'user_id' => Yii::t('app\admin', 'User'),			
+            'age' => Yii::t('app\admin', 'Age'),
         ];
     }
     
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert) && $insert)
-		{            
-			$this->create_at = time();
+        if (parent::beforeSave($insert))
+		{
+            if ($insert){
+                $this->create_at = time();
+            }            			
             
             return true;
         }

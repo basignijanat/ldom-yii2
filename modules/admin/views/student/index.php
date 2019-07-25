@@ -38,7 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     
                     return User::getUsersData()[$model->user_id];
                 },                
-            ],			
+            ],	
+            'age',		
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

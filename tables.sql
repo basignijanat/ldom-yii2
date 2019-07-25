@@ -15,8 +15,8 @@ CREATE TABLE userdata(
 CREATE TABLE teacher(
 	id int NOT NULL AUTO_INCREMENT,
 	user_id int NOT NULL,	
-	age int default 0,
-	experience int default 0,
+	age int not null,
+	experience int not null,
 	education varchar(255) default NULL,
    PRIMARY KEY (id)
 );
@@ -24,6 +24,7 @@ CREATE TABLE teacher(
 CREATE TABLE student(
 	id int NOT NULL AUTO_INCREMENT,
 	user_id int NOT NULL,	
+	age int not null,
 	create_at int NOT NULL,	
    PRIMARY KEY (id)
 );

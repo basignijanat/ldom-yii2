@@ -19,7 +19,7 @@ AppAsset::register($this);
 <?php $this->beginPage() ?>
 
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language ?>" class="has-navbar-fixed-top">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,9 +40,7 @@ AppAsset::register($this);
     $phone = Setting::getSettingValue('phone');
     $email = Setting::getSettingValue('email');
 ?>
-
-<div class="wrap">
-    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="<?= Yii::$app->homeUrl ?>">
                 <? if (strlen($logo_img)): ?>
@@ -53,15 +51,15 @@ AppAsset::register($this);
             </a>
 
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
+                <span aria-hidden="true"><?= Yii::t('app\admin', 'Home') ?></span>
+                <span aria-hidden="true"><?= Yii::t('app\admin', 'Contact') ?></span>
                 <span aria-hidden="true"></span>
             </a>
         </div>
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a href="/site/index" class="navbar-item">
+                <a href="/" class="navbar-item">
                     <?= Yii::t('app\admin', 'Home') ?>
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
@@ -76,7 +74,23 @@ AppAsset::register($this);
                             'class' => 'navbar-item',
                         ]) ?>  
                     </div>
-                </div>              
+                </div>
+                <?= Html::beginForm('/site/search', 'post', [
+                        'class' => 'field control',
+                        'data-pjax' => '1',
+                    ]) ?>                        
+                    <a class="navbar-item">                                                             
+                                <?= Html::input('text', 'search_data', null, [
+                                    'class' => 'input is-info is-rounded is-medium',                        
+                                    'placeholder' => Yii::t('app\main', 'What language would you like to learn?'),
+                                    'required' => true,  
+                                    'style' => 'margin: 10px; width: 350px;',
+                                ]) ?>
+                                <?= Html::submitButton(Yii::t('app\main', 'Search'), [
+                                    'class' => 'button is-info is-medium',                                
+                                ]) ?>                                             
+                    </a>                       
+                <?= Html::endForm() ?>             
             </div>
 
             <div class="navbar-end">            
@@ -85,7 +99,7 @@ AppAsset::register($this);
                         <?= $languages[Yii::$app->language] ?>
                     </a>
 
-                    <div class="navbar-dropdown">
+                    <div class="navbar-dropdown is-right">
                         <? foreach ($languages as $key => $value): ?>
                             <? if (Yii::$app->language != $key): ?>
                                 <?= Html::a($value, '?lang='.$key, [
@@ -134,7 +148,7 @@ AppAsset::register($this);
                                 </span>                                
                             </a>                           
                               
-                            <div class="navbar-dropdown">
+                            <div class="navbar-dropdown is-right">
                                 <? if (Yii::$app->user->identity->isadmin): ?>
                                     <?= Html::a( Yii::t('app\admin', 'Admin Panel'), '/admin', ['class' => 'navbar-item']) ?>
                                 <? endif ?>
@@ -143,35 +157,36 @@ AppAsset::register($this);
                                     'class' => 'navbar-item',
                                     'data-method' => 'post',
                                 ]) ?>                                                                
-                            </div>                    
+                            </div>
+                        </div>                    
                     </div>
                 <? endif ?>
             </div>
         </div>
-    </nav>
-
+    </nav>    
   <main class="main">        
-        
-        <?
-            if ($alert){
-                echo Html::tag('div', Yii::t('app\alert', $alert['content']), ['class' => $alert['class'].' has-text-centered']);
-            }
-        ?>
+    <? if ($alert): ?>
+        <?= Html::beginTag('div', ['class' => $alert['class'].' has-text-centered']) ?>
+            <?= Yii::t('app\alert', $alert['content']) ?>
+        <?= Html::endTag('div') ?>    
+    <? endif ?>
+    
+    <?= $content ?>
+  </main>
 
-        <?= $content ?>
-  </div>
-</div>
 
 <footer class="footer has-background-grey has-text-white-ter">
-  <div class="content has-text-centered">
-    <p>
+  <div class="content has-text-centered columns">
+    <p class="column is-half">
       <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
       <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
       is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
     </p>
-    <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+    <div class="column is-half">
+        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-    <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right"><?= Yii::powered() ?></p>
+    </div>
   </div>
 </footer>
 

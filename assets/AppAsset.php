@@ -29,6 +29,7 @@ class AppAsset extends AssetBundle
     public $js = [
         '//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js',        
         'owlcarousel/owl.carousel.min.js',
+        'https://cloud.tinymce.com/stable/tinymce.min.js',
 		'js/main.js',
     ];
     public $depends = [

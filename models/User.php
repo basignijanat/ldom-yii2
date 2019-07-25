@@ -24,10 +24,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
 			[['isadmin'], 'integer'],			
             [['authkey', 'accesstoken', 'userpic', 'password', 'password_new', 'password_repeat', 'fname', 'lname', 'mname'], 'string'],
-//            [['password_new'], 'required'],
             [['username'], 'email'],
             [['username'], 'required'],            
-			[['image_file'], 'file', 'extensions' => 'png, jpg'],
+			[['image_file'], 'file', 'extensions' => 'png, jpg, jpeg, gif'],
         ];
     }
 	
@@ -179,5 +178,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $patronymic 
             ? $this->lname.' '.$this->fname.' '.$this->mname 
             : $this->fname.' '.$this->mname.' '.$this->lname;
+    }
+
+    public function getShortName($patronymic = true){        
+        
+        return $patronymic 
+            ? $this->lname.' '.$this->fname 
+            : $this->fname.' '.$this->lname;
     }
 }

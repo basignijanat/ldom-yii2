@@ -27,6 +27,10 @@ class AlertData{
             'content' => 'Changes have been successfully applied!',
             'class' => 'alert alert-success',
         ],        
+        '3.1' => [
+            'content' => 'You have successfully applied for a course. We will call you back later!',
+            'class' => 'alert alert-success',
+        ], 
     ];
 
     public static function getAlert($code){

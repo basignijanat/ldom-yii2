@@ -44,7 +44,7 @@ class AdminAsset extends AssetBundle
         'plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js',
         'js/custom.min.js',
         'js/dashboard1.js',
-        //'plugins/bower_components/toast-master/js/jquery.toast.js',
+        //'plugins/bower_components/toast-master/js/jquery.toast.js',        
         'js/helperSelect.js',
         'js/setting.js',
 

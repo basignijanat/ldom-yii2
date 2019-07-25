@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'lname')->textInput(['maxlength' => true]) ?>
 	
-	<?= $form->field($model, 'image_file')->fileInput(['accept=' => 'image/jpeg,image/png,']) ?>
+	<?= $form->field($model, 'image_file')->fileInput(['accept=' => 'image/gif,image/jpeg,image/png,']) ?>
 	
 	<? if ($model->userpic): ?>
 		<div class="form-group">

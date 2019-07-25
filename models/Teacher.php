@@ -44,7 +44,7 @@ class Teacher extends \yii\db\ActiveRecord
     {
         return [
             [['age', 'experience', 'user_id'], 'integer'],
-            [['education', 'eduprogram_ids'], 'string', 'max' => 255],		
+            [['education'], 'string', 'max' => 255],		
             [['user_id'], 'unique'],
         ];
     }
@@ -59,8 +59,7 @@ class Teacher extends \yii\db\ActiveRecord
 			'user_id' => Yii::t('app\admin', 'User'),                        
             'age' => Yii::t('app\admin', 'Age'),
             'experience' => Yii::t('app\admin', 'Experience'),
-            'education' => Yii::t('app\admin', 'Education'),            
-            'eduprogram_ids' => Yii::t('app\admin', 'Curriculums'),
+            'education' => Yii::t('app\admin', 'Education'),                        
         ];
     }
 
@@ -82,5 +81,11 @@ class Teacher extends \yii\db\ActiveRecord
 
         return ArrayForForm::getDropDownArrayCompound(new Teacher, new User, 'user_id', ['fname', 'mname', 'lname']);
 	}
-	
+    
+    public function getUser(){
+        
+        return User::find()            
+            ->where(['id' => $this->user_id])
+            ->one();
+    }
 }

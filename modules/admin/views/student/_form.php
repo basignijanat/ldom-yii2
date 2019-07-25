@@ -15,6 +15,8 @@ use app\components\ListFormHelper;
 
 	<?= $form->field($model, 'user_id')->dropDownList($users) ?>	
 
+    <?= $form->field($model, 'age')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app\admin', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

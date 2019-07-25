@@ -20,4 +20,10 @@ $(document).ready(function(){
         $('#div-edit-' + user_property).addClass('edit-user-property');        
         $('#cancel-edit-' + user_property).addClass('edit-user-property');        
     });
+
+    $('.button-show-more').on('click', function(){
+        show_more = $(this).data('show_more');        
+        $('#btn-show-' + show_more).addClass('is-hidden');        
+        $('.' + show_more).removeClass('is-hidden');                
+    });
 });

@@ -15,6 +15,7 @@ use app\models\Userlang;
 use app\models\User;
 
 use app\models\Language;
+use app\models\Teacher;
 
 class SiteController extends Controller
 {
@@ -75,6 +76,21 @@ class SiteController extends Controller
     {
         return $this->render('index',[
             'languages' => Language::getCurrentLanguages(),
+            'teachers' => teacher::find()->all(),
+        ]);
+    }
+
+    public function actionSearch()
+    {
+        $languages = Language::getCurrentLanguages();
+
+        if (Yii::$app->request->post('search_data')){
+            $languages = Language::find()->where(['like', 'name', Yii::$app->request->post('search_data')])->all();
+        }
+
+        return $this->render('search',[
+            'languages' => $languages,
+            'teachers' => teacher::find()->all(),
         ]);
     }
 
@@ -188,8 +204,17 @@ class SiteController extends Controller
         return $this->render('about');
     }
 	
-	public function actionSetlang($lang, $url){
-		header('Location: http://ldom-yii2/admin/language/index');
-		header('Location: http://ldom-yii2'.$url);		
+	public function actionApply($language_id){
+        Yii::$app->mailer->compose()
+            ->setFrom('info@languagedom.com')
+            ->setTo('info@languagedom.com')
+            ->setSubject(Yii::t('app\main', 'New Student'))
+            ->setTextBody(
+                Yii::t('app\admin', 'User').': '.User::findIdentity(Yii::$app->user->identity->id)->getFullName().' '.
+                Yii::t('app\admin', 'Language').': '.Language::getLanguageById($language_id)['name']
+            )
+            ->send();
+
+		return $this->render('apply');
 	}
 }

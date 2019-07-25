@@ -56,15 +56,15 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => false,
-            'transport' => [
+            'useFileTransport' => true,
+            /*'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
-                'username' => 'dmytrobilinsky1991@gmail.com',
-                'password' => 'sunglasses9',
+                'username' => '',
+                'password' => '',
                 'port' => '465', // Port 25 is a very common port too
                 'encryption' => 'ssl', // It is often used, check your provider or mail server specs
-            ],
+            ],*/
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -84,6 +84,7 @@ $config = [
                 'admin/setting/update/<id:\d+>' => 'admin/setting/update',
                 'language/<url:[0-9a-zA-Z\-]+>' => 'language/index',
                 'schedule/<group_id:\d+>' => 'schedule/index',
+                'site/apply/<language_id:\d+>' => 'site/apply',
             ],
         ],
         

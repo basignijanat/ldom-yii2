@@ -17,7 +17,7 @@ class StudentSearch extends Student
     public function rules()
     {
         return [
-            [['id'], 'integer'],            
+            [['id', 'age'], 'integer'],            
             [['user_id'], 'string'],
         ];
     }
@@ -59,6 +59,7 @@ class StudentSearch extends Student
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,			
+            'age' => $this->age,	
         ]);		
         
         //custom complex search

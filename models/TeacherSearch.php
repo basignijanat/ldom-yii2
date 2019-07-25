@@ -65,8 +65,7 @@ class TeacherSearch extends Teacher
             'experience' => $this->experience,
         ]);
 
-        $query->andFilterWhere(['like', 'education', $this->education])
-            /*->andFilterWhere(['like', 'eduprogram_ids', $this->eduprogram_ids])*/;
+        $query->andFilterWhere(['like', 'education', $this->education]);
         
         //custom complex search
         if (strlen($this->user_id)){                                                        

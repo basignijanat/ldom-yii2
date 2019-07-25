@@ -171,6 +171,10 @@ $alert = AlertData::getAlert($_GET['alert']);
                     }
                 ?>
                 
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                
                 <?=$content?>
                                     </div>
                                 </div>

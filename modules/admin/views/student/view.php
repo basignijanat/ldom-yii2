@@ -31,8 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-			['attribute' => 'user_id', 'value' => $users[$model->user_id]],			
-        ],
+            ['attribute' => 'user_id', 'value' => $users[$model->user_id]],			
+            'age',
+        ],        
     ]) ?>
 
 </div>
