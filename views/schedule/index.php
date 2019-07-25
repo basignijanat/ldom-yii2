@@ -12,14 +12,12 @@ $this->title = Yii::$app->name.': '.Yii::t('app\main', 'My Schedule');
         </h2>    
         <div class="container">        
             <div class="columns">        
-                <? foreach($all_groups as $key => $groups): ?>
-                    <div class="column">
-                        <?= $this->render('_groups', [
-                            'groups' => $groups,
-                            'role' => $key,
-                            'group_id' => $group_id,
-                        ]) ?>
-                    </div>
+                <? foreach($all_groups as $key => $groups): ?>                    
+                    <?= $this->render('_groups', [
+                        'groups' => $groups,
+                        'role' => $key,
+                        'group_id' => $group_id,
+                    ]) ?>                    
                 <? endforeach ?>  
             </div>        
         </div>

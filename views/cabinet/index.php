@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 
+$this->title = Yii::$app->name.': '.Yii::t('app\main', 'My Cabinet');
 ?>
 
 <?
