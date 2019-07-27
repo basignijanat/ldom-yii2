@@ -39,6 +39,7 @@ AppAsset::register($this);
     $logo_txt = Setting::getSettingValue('logo_txt');
     $phone = Setting::getSettingValue('phone');
     $email = Setting::getSettingValue('email');
+    $default_user_img = Setting::getSettingValue('default_user_img');
 ?>
     <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
@@ -124,21 +125,19 @@ AppAsset::register($this);
                 <? else: ?>                    
                     <a href="/schedule" class="navbar-item">                         
                         <?= Yii::t('app\main', 'My Schedule') ?>
-                    </a>                    
+                    </a>                                  
                     <div class="navbar-item">                    
-                        <div class="navbar-item has-dropdown is-hoverable">
+                        <div class="navbar-item has-dropdown is-hoverable">                        
                             <a class="navbar-link">                                                           
-                                <figure class="image is-32x32">
-                                    <? if (strlen(Yii::$app->user->identity->userpic)): ?>
+                            <? if (strlen(Yii::$app->user->identity->userpic)): ?>
                                         <?= Html::img(Yii::$app->user->identity->userpic, [
-                                            'class' => 'is-rounded',
+                                            'style' => 'border-radius: 100%',                                            
                                         ]) ?>
                                     <? else: ?>
-                                        <?= Html::img('/web/upload/userpic/default.png', [
-                                            'class' => 'is-rounded',
+                                        <?= Html::img($default_user_img, [
+                                            'style' => 'border-radius: 100%',
                                         ]) ?>
                                     <? endif ?>
-                                </figure> 
                                 <span class="column">
                                     <? if (strlen(Yii::$app->user->identity->fname) == 0): ?>
                                         <?= Yii::$app->user->identity->username ?>

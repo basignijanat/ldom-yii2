@@ -10,6 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AdminAsset;
 use yii\helpers\Url;
+use app\models\Setting;
 
 use app\models\Userlang;
 use app\models\AlertData;
@@ -18,6 +19,7 @@ AdminAsset::register($this);
 
 $languages = UserLang::GetMenuLanguages();
 $alert = AlertData::getAlert($_GET['alert']);
+$default_user_img = Setting::getSettingValue('default_user_img');
 
 ?>
 <?php $this->beginPage() ?>
@@ -75,7 +77,7 @@ $alert = AlertData::getAlert($_GET['alert']);
                                     'class' => 'img-circle'
                                 ]) ?>
                             <? else: ?>
-                                <?= Html::img('\web\upload\userpic\default.png', [
+                                <?= Html::img($default_user_img, [
                                     'alt' => 'user-img', 
                                     'width' => '36',
                                     'class' => 'img-circle'

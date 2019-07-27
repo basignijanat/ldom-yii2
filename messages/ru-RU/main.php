@@ -25,7 +25,7 @@
         'Submit' => 'Отправить',
         'Sign Up For Free!' => 'Участвовать бесплатно!', 
         'Search' => 'Поиск',
-        'What language would you like to learn?' => 'Какой язык вы хотите выучить?',
+        'What language would you like to learn?' => 'Какой язык Вы хотите выучить?',
         'Show More Languages!' => 'Показать больше языков!',
         'Back to Home' => 'На главную',
 
