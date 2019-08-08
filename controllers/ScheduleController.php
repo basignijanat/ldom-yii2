@@ -15,7 +15,7 @@ class ScheduleController extends \yii\web\Controller
 {
     public function __construct($id, $module, $config = []){		
         if (Yii::$app->user->isGuest){
-            Yii::$app->response->redirect(Url::to(['/']))->send();
+            $this->redirect('/');
         }
 
         Userlang::SetLanguage();
