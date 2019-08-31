@@ -41,54 +41,105 @@ AppAsset::register($this);
     $email = Setting::getSettingValue('email');
     $default_user_img = Setting::getSettingValue('default_user_img');
 
-    if (strlen($logo_img)){
-        $nav_logo = Html::img($logo_img, [
-            'style' => 'background-color: black; width: 100px; height: 35px; float: left;',
-        ]);
+    $menu_languages = [];
+    foreach ($languages as $url => $label){
+        if (Yii::$app->language != $url){
+            $menu_languages[] = [
+                'label' => $label,
+                'url' => '?lang='.$url,
+            ];
+        }
     }
-    else{
-        $nav_logo = $logo_txt;
-    }    
-
     
 ?>
 
-<? 
-    NavBar::begin(['brandLabel' => false,
+<? NavBar::begin([        
+        //'brandImage' => $logo_img,
+        'brandLabel' => $logo_txt,        
         'options' => [
-            'class' => 'navbar-dark bg-primary',
+            'class' => 'navbar navbar-default navbar-fixed-top',
         ],
-    ]);
+]) ?>
 
-    //echo $nav_logo;
-
-    echo Nav::widget([
-        'items' => [             
-            [
-                'label' => 'Home',
-                'url' => ['site/index'],
-                'linkOptions' => ['class' => 'btn btn-light'],
-            ],
-            [
-                'label' => 'Dropdown',
-                'items' => [
-                    ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
-                    '<li class="divider"></li>',
-                    '<li class="dropdown-header">Dropdown Header</li>',
-                    ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
-                ],
-            ],
-            [
-                'label' => 'Login',
-                'url' => ['site/login'],
-                'visible' => Yii::$app->user->isGuest
-            ],
+<?= Nav::widget([
+    'items' => [             
+        [
+            'label' => Yii::t('app\admin', 'Home'),
+            'url' => ['/'],                
         ],
-        'options' => ['class' =>'nav-pills'], // set this to nav-tab to get tab-styled navigation
-    ]);
+        [
+            'label' => Yii::t('app\admin', 'Contact'),
+            'items' => [
+                ['label' => Yii::t('app\admin', $phone), 'url' => 'tel:'.$phone],                    
+                ['label' => Yii::t('app\admin', $email), 'url' => 'mailto:'.$email],
+            ],
+        ],        
+    ],
+    'options' => ['class' => 'navbar-nav navbar-left'], // set this to nav-tab to get tab-styled navigation
+]) ?>
 
-    NavBar::end();
-?>
+<?= Nav::widget([
+    'items' => [        
+        Html::beginForm('/search', 'post', [
+            'class' => 'navbar-form',
+            'data-pjax' => '1',
+        ]),                                    
+        Html::input('text', 'search_data', null, [
+            'class' => 'form-control',                        
+            'placeholder' => Yii::t('app\main', 'What language would you like to learn?'),
+            'required' => true,  
+        ]),
+        Html::submitButton(Yii::t('app\main', 'Search'), [
+            'class' => 'btn btn-default',                                
+        ]),            
+        Html::endForm(),                
+    ],
+    'options' => ['class' => 'navbar-nav'],
+]) ?>
+
+<? if (Yii::$app->user->isGuest): ?>
+    <?= Nav::widget([
+        'items' => [        
+            [
+                'label' => Yii::t('app\main', 'Sign Up'),
+                'url' => '/signup',
+            ],
+            [
+                'label' => Yii::t('app\admin', 'Log in'),
+                'url' => '/login',
+            ],
+        ],        
+        'options' => ['class' => 'navbar-nav navbar-right'],
+    ]) ?>
+<? else: ?>
+    <?= Nav::widget([
+        'items' => [        
+            [
+                'label' => Yii::t('app\main', 'Sign up'),
+                'url' => '/signup',
+            ],
+            [
+                'label' => Yii::t('app\admin', 'Log in'),
+                'url' => '/login',
+            ],
+        ],        
+        'options' => ['class' => 'navbar-nav navbar-right'],
+    ]) ?>
+<? endif ?>
+
+<?= Nav::widget([
+    'items' => [        
+        [
+            'label' => $languages[Yii::$app->language],
+            'items' => $menu_languages,
+        ],
+    ],
+    'options' => ['class' => 'navbar-nav navbar-right'],
+]) ?>
+
+
+
+<? NavBar::end() ?>
 
     <!--nav class="navbar is-primary" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">

@@ -113,3 +113,25 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.navbar{
+    background-color: rgb(205, 253, 207);
+    border-width: 0px;
+    border-bottom-width: 2px;
+    border-bottom-style: outset;
+    border-color: rgb(188, 253, 190);
+}
+
+.navbar-default .navbar-nav > .active > a{
+    background-color: rgb(165, 223, 167);
+}
+
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > li > a:hover{
+    background-color: rgb(108, 182, 108);
+    color: white;
+}
+
+.navbar-brand > img{
+    width: 100px;
+}
