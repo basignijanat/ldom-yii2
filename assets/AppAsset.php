@@ -20,14 +20,14 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        //'css/site.css',
+        'css/site.css',
         'css/bulma.css',
         'css/custom.css',
         'owlcarousel/assets/owl.carousel.min.css',
         'owlcarousel/assets/owl.theme.default.min.css',
     ];
     public $js = [
-        '//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js',        
+        //'//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js',        
         'owlcarousel/owl.carousel.min.js',
         'https://cloud.tinymce.com/stable/tinymce.min.js',
 		'js/main.js',
@@ -35,6 +35,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         //'app\assets\FontAwesomeAsset',
         'yii\web\YiiAsset',
-        //'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

@@ -40,8 +40,57 @@ AppAsset::register($this);
     $phone = Setting::getSettingValue('phone');
     $email = Setting::getSettingValue('email');
     $default_user_img = Setting::getSettingValue('default_user_img');
+
+    if (strlen($logo_img)){
+        $nav_logo = Html::img($logo_img, [
+            'style' => 'background-color: black; width: 100px; height: 35px; float: left;',
+        ]);
+    }
+    else{
+        $nav_logo = $logo_txt;
+    }    
+
+    
 ?>
-    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+
+<? 
+    NavBar::begin(['brandLabel' => false,
+        'options' => [
+            'class' => 'navbar-dark bg-primary',
+        ],
+    ]);
+
+    //echo $nav_logo;
+
+    echo Nav::widget([
+        'items' => [             
+            [
+                'label' => 'Home',
+                'url' => ['site/index'],
+                'linkOptions' => ['class' => 'btn btn-light'],
+            ],
+            [
+                'label' => 'Dropdown',
+                'items' => [
+                    ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
+                    '<li class="divider"></li>',
+                    '<li class="dropdown-header">Dropdown Header</li>',
+                    ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+                ],
+            ],
+            [
+                'label' => 'Login',
+                'url' => ['site/login'],
+                'visible' => Yii::$app->user->isGuest
+            ],
+        ],
+        'options' => ['class' =>'nav-pills'], // set this to nav-tab to get tab-styled navigation
+    ]);
+
+    NavBar::end();
+?>
+
+    <!--nav class="navbar is-primary" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="<?= Yii::$app->homeUrl ?>">
                 <? if (strlen($logo_img)): ?>
@@ -81,15 +130,15 @@ AppAsset::register($this);
                         'data-pjax' => '1',
                     ]) ?>                        
                     <a class="navbar-item">                                                             
-                                <?= Html::input('text', 'search_data', null, [
-                                    'class' => 'input is-info is-rounded is-medium',                        
-                                    'placeholder' => Yii::t('app\main', 'What language would you like to learn?'),
-                                    'required' => true,  
-                                    'style' => 'margin: 10px; width: 350px;',
-                                ]) ?>
-                                <?= Html::submitButton(Yii::t('app\main', 'Search'), [
-                                    'class' => 'button is-info is-medium',                                
-                                ]) ?>                                             
+                        <?= Html::input('text', 'search_data', null, [
+                            'class' => 'input is-info is-rounded is-medium',                        
+                            'placeholder' => Yii::t('app\main', 'What language would you like to learn?'),
+                            'required' => true,  
+                            'style' => 'margin: 10px; width: 350px;',
+                        ]) ?>
+                        <?= Html::submitButton(Yii::t('app\main', 'Search'), [
+                            'class' => 'button is-info is-medium',                                
+                        ]) ?>                                             
                     </a>                       
                 <?= Html::endForm() ?>             
             </div>
@@ -162,7 +211,7 @@ AppAsset::register($this);
                 <? endif ?>
             </div>
         </div>
-    </nav>    
+    </nav-->    
   <main class="main">        
     <? if ($alert): ?>
         <?= Html::beginTag('div', ['class' => $alert['class'].' has-text-centered']) ?>
@@ -174,55 +223,10 @@ AppAsset::register($this);
   </main>
 
 
-<footer class="footer has-background-grey has-text-white-ter">
-    <div class="columns">
-        <div class="column is-one-quarter">
-            <a href="/" class="has-text-white is-size-3" style="display: block">
-                <?= Yii::t('app\admin', 'Home') ?>
-            </a>
-            <a href="/site/signup" class="has-text-white" style="display: block">
-                <?= Yii::t('app\admin', 'Sign up') ?>
-            </a>
-            <a href="/site/login" class="has-text-white" style="display: block">
-                <?= Yii::t('app\admin', 'Log in') ?>
-            </a>
-        </div>
-        <div class="column is-one-quarter">
-            <a href="/site/contact" class="has-text-white is-size-3" style="display: block">
-                <?= Yii::t('app\admin', 'Contact') ?>
-            </a>
-            <?= Html::a(Yii::t('app\admin', $phone), 'tel:'.$phone, [
-                'class' => 'has-text-white',
-                'style' => 'display: block',
-            ]) ?>
-            <?= Html::a(Yii::t('app\admin', $email), 'mailto:'.$email, [
-                'class' => 'has-text-white',
-                'style' => 'display: block',
-            ]) ?>
-        </div>
-        <div class="column is-half">
-            <?= Html::a( Yii::t('app\main', 'Account Management'), '/cabinet', [
-                'class' => 'has-text-white is-size-3',
-                'style' => 'display: block',
-            ]) ?>
-            <a href="/schedule" class="has-text-white" style="display: block" >
-                <?= Yii::t('app\main', 'My Schedule') ?>
-            </a>
-        </div>
-    </div>
-  <div class="columns">
-    <p class="column">
-      <strong>Bulma</strong> by <a href="https://jgthms.com" class="has-text-white">Jeremy Thomas</a>. The source code is licensed
-      <a href="http://opensource.org/licenses/mit-license.php" class="has-text-white">MIT</a>. The website content
-      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="has-text-white">CC BY NC SA 4.0</a>.
-    </p>
-    <div class="column is-one-quarter">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right" class="has-text-white"><?= Yii::powered() ?></p>
-    </div>
-  </div>
-</footer>
+    <?= $this->render('_footer', [
+        'phone' => $phone,
+        'email' => $email,
+    ]) ?>
 
 <?php $this->endBody() ?>
 </body>
