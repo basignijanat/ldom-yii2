@@ -54,10 +54,10 @@ AppAsset::register($this);
 ?>
 
 <? 
-    NavBar::begin(['brandLabel' => false,
-        'options' => [
+    NavBar::begin(['brandLabel' => 'false',
+        /*'options' => [
             'class' => 'navbar-dark bg-primary',
-        ],
+        ],*/
     ]);
 
     //echo $nav_logo;
@@ -67,7 +67,7 @@ AppAsset::register($this);
             [
                 'label' => 'Home',
                 'url' => ['site/index'],
-                'linkOptions' => ['class' => 'btn btn-light'],
+                //'linkOptions' => ['class' => 'btn btn-light'],
             ],
             [
                 'label' => 'Dropdown',
