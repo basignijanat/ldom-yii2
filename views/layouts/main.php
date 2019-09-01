@@ -10,11 +10,14 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
-use app\models\Userlang;
 use app\models\AlertData;
 use app\models\Setting;
 
 AppAsset::register($this);
+
+$settings = Setting::getSettingValues(['logo_img', 'logo_txt', 'phone', 'email', 'default_user_img']);
+$alert = AlertData::getAlert($_GET['alert']);    
+
 ?>
 <?php $this->beginPage() ?>
 
@@ -31,31 +34,9 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<? 
-    $languages = UserLang::GetMenuLanguages();
-    $alert = AlertData::getAlert($_GET['alert']);
-    
-    $logo_img = Setting::getSettingValue('logo_img');
-    $logo_txt = Setting::getSettingValue('logo_txt');
-    $phone = Setting::getSettingValue('phone');
-    $email = Setting::getSettingValue('email');
-    $default_user_img = Setting::getSettingValue('default_user_img');
-
-    $menu_languages = [];
-    foreach ($languages as $url => $label){
-        if (Yii::$app->language != $url){
-            $menu_languages[] = [
-                'label' => $label,
-                'url' => '?lang='.$url,
-            ];
-        }
-    }
-    
-?>
-
 <? NavBar::begin([        
-        //'brandImage' => $logo_img,
-        'brandLabel' => $logo_txt,        
+        //'brandImage' => $settings['logo_img'],
+        'brandLabel' => $settings['logo_txt'],        
         'options' => [
             'class' => 'navbar navbar-default navbar-fixed-top',
         ],
@@ -65,13 +46,13 @@ AppAsset::register($this);
     'items' => [             
         [
             'label' => Yii::t('app\admin', 'Home'),
-            'url' => ['/'],                
+            'url' => '/',                
         ],
         [
             'label' => Yii::t('app\admin', 'Contact'),
             'items' => [
-                ['label' => Yii::t('app\admin', $phone), 'url' => 'tel:'.$phone],                    
-                ['label' => Yii::t('app\admin', $email), 'url' => 'mailto:'.$email],
+                ['label' => Yii::t('app\admin', $settings['phone']), 'url' => 'tel:'.$settings['phone']],                    
+                ['label' => Yii::t('app\admin', $settings['email']), 'url' => 'mailto:'.$settings['email']],
             ],
         ],        
     ],
@@ -102,11 +83,11 @@ AppAsset::register($this);
         'items' => [        
             [
                 'label' => Yii::t('app\main', 'Sign Up'),
-                'url' => '/signup',
+                'url' => 'site/signup',
             ],
             [
                 'label' => Yii::t('app\admin', 'Log in'),
-                'url' => '/login',
+                'url' => 'site/login',
             ],
         ],        
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -115,23 +96,40 @@ AppAsset::register($this);
     <?= Nav::widget([
         'items' => [        
             [
-                'label' => Yii::t('app\main', 'Sign up'),
-                'url' => '/signup',
+                'label' => Yii::t('app\main', 'My Schedule'),
+                'url' => '/schedule',
             ],
             [
-                'label' => Yii::t('app\admin', 'Log in'),
-                'url' => '/login',
-            ],
+                'image' => strlen(Yii::$app->user->identity->userpic) ? Html::img(Yii::$app->user->identity->userpic) : Html::img($settings['default_user_img']),
+                'label' => Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname,                
+                'url' => '/schedule',
+            ],            
         ],        
         'options' => ['class' => 'navbar-nav navbar-right'],
     ]) ?>
 <? endif ?>
 
+                                <!--? if (strlen(Yii::$app->user->identity->userpic)): ?>
+                                        <!-?= Html::img(Yii::$app->user->identity->userpic, [
+                                            'style' => 'border-radius: 100%',                                            
+                                        ]) ?>
+                                    <!-? else: ?>
+                                        <!?= Html::img($default_user_img, [
+                                            'style' => 'border-radius: 100%',
+                                        ]) ?>
+                                    <!-? endif ?>
+                                <span class="column">
+                                    <!-? if (strlen(Yii::$app->user->identity->fname) == 0): ?>
+                                        <!?= Yii::$app->user->identity->username ?>
+                                    <!? else: ?>
+                                        <!?= Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname ?>
+                                    <!? endif ?-->
+
 <?= Nav::widget([
     'items' => [        
         [
-            'label' => $languages[Yii::$app->language],
-            'items' => $menu_languages,
+            'label' => Yii::$app->params['languages'][Yii::$app->language]['label'],
+            'items' => Yii::$app->params['languages'],
         ],
     ],
     'options' => ['class' => 'navbar-nav navbar-right'],
@@ -141,125 +139,44 @@ AppAsset::register($this);
 
 <? NavBar::end() ?>
 
-    <!--nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="<?= Yii::$app->homeUrl ?>">
-                <? if (strlen($logo_img)): ?>
-                    <?= Html::img($logo_img) ?>
-                <? else: ?>
-                    <?= $logo_txt ?>
-                <? endif ?>
-            </a>
-
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"><?= Yii::t('app\admin', 'Home') ?></span>
-                <span aria-hidden="true"><?= Yii::t('app\admin', 'Contact') ?></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a href="/" class="navbar-item">
-                    <?= Yii::t('app\admin', 'Home') ?>
-                </a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a href="/site/contact" class="navbar-link">
-                        <?= Yii::t('app\admin', 'Contact') ?>
-                    </a>
-                    <div class="navbar-dropdown">
-                        <?= Html::a(Yii::t('app\admin', $phone), 'tel:'.$phone, [
-                            'class' => 'navbar-item',
-                        ]) ?>                
-                        <?= Html::a(Yii::t('app\admin', $email), 'mailto:'.$email, [
-                            'class' => 'navbar-item',
-                        ]) ?>  
-                    </div>
-                </div>
-                <?= Html::beginForm('/site/search', 'post', [
-                        'class' => 'field control',
-                        'data-pjax' => '1',
-                    ]) ?>                        
-                    <a class="navbar-item">                                                             
-                        <?= Html::input('text', 'search_data', null, [
-                            'class' => 'input is-info is-rounded is-medium',                        
-                            'placeholder' => Yii::t('app\main', 'What language would you like to learn?'),
-                            'required' => true,  
-                            'style' => 'margin: 10px; width: 350px;',
-                        ]) ?>
-                        <?= Html::submitButton(Yii::t('app\main', 'Search'), [
-                            'class' => 'button is-info is-medium',                                
-                        ]) ?>                                             
-                    </a>                       
-                <?= Html::endForm() ?>             
-            </div>
-
-            <div class="navbar-end">            
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">                    
-                        <?= $languages[Yii::$app->language] ?>
-                    </a>
-
-                    <div class="navbar-dropdown is-right">
-                        <? foreach ($languages as $key => $value): ?>
-                            <? if (Yii::$app->language != $key): ?>
-                                <?= Html::a($value, '?lang='.$key, [
-                                    'class' => 'navbar-item',
-                                ]) ?>
-                            <? endif ?>
-                        <? endforeach ?>                                    
-                    </div>
-                </div>
-
-                <? if (Yii::$app->user->isGuest): ?>
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a href="/site/signup" class="button is-primary">
-                                <strong><?= Yii::t('app\admin', 'Sign up') ?></strong>
-                            </a>
-                            <a href="/site/login" class="button is-light">
-                                <?= Yii::t('app\admin', 'Log in') ?>
-                            </a>
-                        </div>
-                    </div>
-                <? else: ?>                    
-                    <a href="/schedule" class="navbar-item">                         
-                        <?= Yii::t('app\main', 'My Schedule') ?>
+                
+                    <!--a href="/schedule" class="navbar-item">                         
+                        <!?= Yii::t('app\main', 'My Schedule') ?>
                     </a>                                  
                     <div class="navbar-item">                    
                         <div class="navbar-item has-dropdown is-hoverable">                        
                             <a class="navbar-link">                                                           
-                            <? if (strlen(Yii::$app->user->identity->userpic)): ?>
-                                        <?= Html::img(Yii::$app->user->identity->userpic, [
+                                    <!? if (strlen(Yii::$app->user->identity->userpic)): ?>
+                                        <!?= Html::img(Yii::$app->user->identity->userpic, [
                                             'style' => 'border-radius: 100%',                                            
                                         ]) ?>
-                                    <? else: ?>
-                                        <?= Html::img($default_user_img, [
+                                    <!? else: ?>
+                                        <!?= Html::img($default_user_img, [
                                             'style' => 'border-radius: 100%',
                                         ]) ?>
-                                    <? endif ?>
+                                    <!? endif ?>
                                 <span class="column">
-                                    <? if (strlen(Yii::$app->user->identity->fname) == 0): ?>
-                                        <?= Yii::$app->user->identity->username ?>
-                                    <? else: ?>
-                                        <?= Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname ?>
-                                    <? endif ?>
+                                    <!? if (strlen(Yii::$app->user->identity->fname) == 0): ?>
+                                        <!?= Yii::$app->user->identity->username ?>
+                                    <!? else: ?>
+                                        <!?= Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname ?>
+                                    <!? endif ?>
                                 </span>                                
                             </a>                           
                               
                             <div class="navbar-dropdown is-right">
-                                <? if (Yii::$app->user->identity->isadmin): ?>
-                                    <?= Html::a( Yii::t('app\admin', 'Admin Panel'), '/admin', ['class' => 'navbar-item']) ?>
-                                <? endif ?>
-                                <?= Html::a( Yii::t('app\main', 'Account Management'), '/cabinet', ['class' => 'navbar-item']) ?>
-                                <?= Html::a( Yii::t('app\admin', 'Log out'), '/site/logout', [
+                                <!? if (Yii::$app->user->identity->isadmin): ?>
+                                    <!?= Html::a( Yii::t('app\admin', 'Admin Panel'), '/admin', ['class' => 'navbar-item']) ?>
+                                <!? endif ?>
+                                <!?= Html::a( Yii::t('app\main', 'Account Management'), '/cabinet', ['class' => 'navbar-item']) ?>
+                                <!?= Html::a( Yii::t('app\admin', 'Log out'), '/site/logout', [
                                     'class' => 'navbar-item',
                                     'data-method' => 'post',
                                 ]) ?>                                                                
                             </div>
                         </div>                    
                     </div>
-                <? endif ?>
+                <!? endif ?>
             </div>
         </div>
     </nav-->    

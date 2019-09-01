@@ -58,9 +58,9 @@ $default_user_img = Setting::getSettingValue('default_user_img');
                     <li>
                         <?= Html::a(Yii::t('app\admin', 'Home'), '/') ?>
                     </li>                    
-                        <? foreach ($languages as $key => $value): ?>
+                        <? foreach (Yii::$app->params['languages'] as $key => $value): ?>
                             <li>                            
-                                <?= Html::a($value, '?lang='.$key, [
+                                <?= Html::a($value['label'], $value['url'], [
                                     'class' => Yii::$app->language == $key ? 'language-selected' : '',
                                 ]) ?>
                             </li>

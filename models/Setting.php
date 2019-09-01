@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "setting".
@@ -47,5 +48,16 @@ class Setting extends \yii\db\ActiveRecord
     public static function getSettingValue($name){
 
         return self::find()->where(['name' => $name])->one()['value'];
+    }
+
+    public static function getSettingValues($names = false){
+        if ($names){
+
+            return ArrayHelper::map(self::find()->where(['name' => $names])->all(), 'name', 'value');
+        }
+        else{
+            
+            return ArrayHelper::map(self::find()->all(), 'name', 'value');
+        }
     }
 }
