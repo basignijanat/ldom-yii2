@@ -120,6 +120,8 @@ a.desc:after {
     border-bottom-width: 2px;
     border-bottom-style: outset;
     border-color: rgb(188, 253, 190);
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
 
 .navbar-default .navbar-nav > .active > a{
@@ -132,6 +134,24 @@ a.desc:after {
     color: white;
 }
 
+.navbar-nav > li > a,
+.navbar-brand{    
+    padding: 20px 10px;                
+}
+
 .navbar-brand > img{
     width: 100px;
+}
+
+#search .form-control{
+    width: 20em;
+}
+
+.userpic{    
+    overflow: hidden;
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    border-color: #ddd;    
+    margin-right: 5px;
 }

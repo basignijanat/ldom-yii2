@@ -10,13 +10,12 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
-use app\models\AlertData;
 use app\models\Setting;
 
 AppAsset::register($this);
 
 $settings = Setting::getSettingValues(['logo_img', 'logo_txt', 'phone', 'email', 'default_user_img']);
-$alert = AlertData::getAlert($_GET['alert']);    
+$alert = $_GET['alert'];    
 
 ?>
 <?php $this->beginPage() ?>
@@ -38,7 +37,7 @@ $alert = AlertData::getAlert($_GET['alert']);
         //'brandImage' => $settings['logo_img'],
         'brandLabel' => $settings['logo_txt'],        
         'options' => [
-            'class' => 'navbar navbar-default navbar-fixed-top',
+            'class' => 'navbar navbar-default navbar-static-top',
         ],
 ]) ?>
 
@@ -56,12 +55,13 @@ $alert = AlertData::getAlert($_GET['alert']);
             ],
         ],        
     ],
-    'options' => ['class' => 'navbar-nav navbar-left'], // set this to nav-tab to get tab-styled navigation
+    'options' => ['class' => 'navbar-nav navbar-left'],
 ]) ?>
 
 <?= Nav::widget([
     'items' => [        
-        Html::beginForm('/search', 'post', [
+        Html::beginForm('/site/search', 'post', [
+            'id' => 'search',
             'class' => 'navbar-form',
             'data-pjax' => '1',
         ]),                                    
@@ -83,47 +83,50 @@ $alert = AlertData::getAlert($_GET['alert']);
         'items' => [        
             [
                 'label' => Yii::t('app\main', 'Sign Up'),
-                'url' => 'site/signup',
+                'url' => '/site/signup',
             ],
             [
                 'label' => Yii::t('app\admin', 'Log in'),
-                'url' => 'site/login',
+                'url' => '/site/login',
             ],
         ],        
         'options' => ['class' => 'navbar-nav navbar-right'],
     ]) ?>
 <? else: ?>
     <?= Nav::widget([
-        'items' => [        
+        'items' => [                    
             [
                 'label' => Yii::t('app\main', 'My Schedule'),
                 'url' => '/schedule',
-            ],
-            [
-                'image' => strlen(Yii::$app->user->identity->userpic) ? Html::img(Yii::$app->user->identity->userpic) : Html::img($settings['default_user_img']),
-                'label' => Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname,                
+            ],            
+            [                                
+                'label' => strlen(Yii::$app->user->identity->userpic) ?
+                    Html::img(Yii::$app->user->identity->userpic, ['class' => 'userpic']).Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname :
+                    Html::img($settings['default_user_img'], ['class' => 'userpic']).Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname,                
                 'url' => '/schedule',
+                'encode' => false,
+                'items' => [
+                    [
+                        'label' => Yii::t('app\admin', 'Admin Panel'), 
+                        'url' => '/admin',                    
+                    ],
+                    [
+                        'label' => Yii::t('app\main', 'Account Management'), 
+                        'url' => '/cabinet'
+                    ],
+                    [
+                        'label' => Yii::t('app\admin', 'Log out'), 
+                        'url' => '/site/logout', 
+                        'linkOptions' => [                            
+                            'data-method' => 'post',
+                        ],
+                    ],
+                ],
             ],            
         ],        
         'options' => ['class' => 'navbar-nav navbar-right'],
     ]) ?>
-<? endif ?>
-
-                                <!--? if (strlen(Yii::$app->user->identity->userpic)): ?>
-                                        <!-?= Html::img(Yii::$app->user->identity->userpic, [
-                                            'style' => 'border-radius: 100%',                                            
-                                        ]) ?>
-                                    <!-? else: ?>
-                                        <!?= Html::img($default_user_img, [
-                                            'style' => 'border-radius: 100%',
-                                        ]) ?>
-                                    <!-? endif ?>
-                                <span class="column">
-                                    <!-? if (strlen(Yii::$app->user->identity->fname) == 0): ?>
-                                        <!?= Yii::$app->user->identity->username ?>
-                                    <!? else: ?>
-                                        <!?= Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname ?>
-                                    <!? endif ?-->
+<? endif ?>                                
 
 <?= Nav::widget([
     'items' => [        
@@ -135,65 +138,18 @@ $alert = AlertData::getAlert($_GET['alert']);
     'options' => ['class' => 'navbar-nav navbar-right'],
 ]) ?>
 
-
-
 <? NavBar::end() ?>
-
-                
-                    <!--a href="/schedule" class="navbar-item">                         
-                        <!?= Yii::t('app\main', 'My Schedule') ?>
-                    </a>                                  
-                    <div class="navbar-item">                    
-                        <div class="navbar-item has-dropdown is-hoverable">                        
-                            <a class="navbar-link">                                                           
-                                    <!? if (strlen(Yii::$app->user->identity->userpic)): ?>
-                                        <!?= Html::img(Yii::$app->user->identity->userpic, [
-                                            'style' => 'border-radius: 100%',                                            
-                                        ]) ?>
-                                    <!? else: ?>
-                                        <!?= Html::img($default_user_img, [
-                                            'style' => 'border-radius: 100%',
-                                        ]) ?>
-                                    <!? endif ?>
-                                <span class="column">
-                                    <!? if (strlen(Yii::$app->user->identity->fname) == 0): ?>
-                                        <!?= Yii::$app->user->identity->username ?>
-                                    <!? else: ?>
-                                        <!?= Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname ?>
-                                    <!? endif ?>
-                                </span>                                
-                            </a>                           
-                              
-                            <div class="navbar-dropdown is-right">
-                                <!? if (Yii::$app->user->identity->isadmin): ?>
-                                    <!?= Html::a( Yii::t('app\admin', 'Admin Panel'), '/admin', ['class' => 'navbar-item']) ?>
-                                <!? endif ?>
-                                <!?= Html::a( Yii::t('app\main', 'Account Management'), '/cabinet', ['class' => 'navbar-item']) ?>
-                                <!?= Html::a( Yii::t('app\admin', 'Log out'), '/site/logout', [
-                                    'class' => 'navbar-item',
-                                    'data-method' => 'post',
-                                ]) ?>                                                                
-                            </div>
-                        </div>                    
-                    </div>
-                <!? endif ?>
-            </div>
-        </div>
-    </nav-->    
-  <main class="main">        
-    <? if ($alert): ?>
-        <?= Html::beginTag('div', ['class' => $alert['class'].' has-text-centered']) ?>
-            <?= Yii::t('app\alert', $alert['content']) ?>
-        <?= Html::endTag('div') ?>    
-    <? endif ?>
+  
+<main class="main">        
+    <?= Alert::widget() ?>
     
     <?= $content ?>
-  </main>
+</main>
 
 
     <?= $this->render('_footer', [
-        'phone' => $phone,
-        'email' => $email,
+        'phone' => $settings['phone'],
+        'email' => $settings['email'],
     ]) ?>
 
 <?php $this->endBody() ?>

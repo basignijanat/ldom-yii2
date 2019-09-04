@@ -3,6 +3,7 @@
 
 return [
     'adminEmail' => 'admin@example.com',
+
     'languages' => [
         'ru-RU' => [
             'label' => 'RU',
@@ -16,5 +17,5 @@ return [
             'label' => 'UA',
             'url' => '?lang=ua-UA',
         ],
-    ],
+    ],    
 ];

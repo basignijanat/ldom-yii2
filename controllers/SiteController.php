@@ -112,7 +112,8 @@ class SiteController extends Controller
                 return $this->goBack();
             }
             else{
-                $this->redirect('/site/login?alert=1.3');
+                Yii::$app->session->setFlash('error', 'The username or password is incorrect!');
+                //$this->redirect('/site/login?alert=1.3');
             }            
         }
         

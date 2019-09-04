@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         //'css/bulma.css',
-        'css/custom.css',
+        //'css/custom.css',
         'owlcarousel/assets/owl.carousel.min.css',
         'owlcarousel/assets/owl.theme.default.min.css',
     ];
