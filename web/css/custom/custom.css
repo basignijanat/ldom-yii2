@@ -1,0 +1,133 @@
+.navbar {
+  background-color: #4fc87a;
+  border-width: 0px;
+  border-bottom-width: 2px;
+  border-bottom-style: outset;
+  border-color: #bcfdbe;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  background-color: #a5dfa7;
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #fff;
+  background-color: #4fc87a;
+}
+
+.navbar-nav > li > a {
+  height: 5em;
+  padding-top: 2em;
+}
+
+.navbar-nav > li > .usermenu {
+  padding-top: 1.25em;
+}
+
+.navbar-brand {
+  padding-top: 1em;
+}
+
+.navbar-brand a {
+  padding-top: 0.5em;
+}
+
+.navbar-brand > img {
+  width: 100px;
+}
+
+#search .form-control,
+#search .btn {
+  height: 3em;
+}
+
+#search .form-control {
+  width: 20em;
+}
+
+.navbar-form {
+  padding-top: 0.5em;
+}
+
+.userpic {
+  height: 3em;
+  margin-right: 0.5em;
+  border-radius: 25%;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #e2e2e2;
+}
+
+.navbar-default .navbar-nav > .dropdown.open > a {
+  background-color: #44ad69;
+  color: #fff;
+}
+
+.course-link {
+  display: block;
+  text-decoration: none;
+}
+
+/*.course-link-big
+    background-color: #fff
+    border-radius: 6px
+    box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1)
+    color: #4a4a4a */
+.course-link-title {
+  background-color: lightblue;
+  color: black;
+  font-size: large;
+  opacity: 0.9;
+}
+
+.course-image {
+  height: 25em;
+  width: 100%;
+}
+
+.footer {
+  background-color: #495978;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.footer > .container > .row > .col-md-4 > .h3 {
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+}
+
+.footer-link {
+  color: #fff;
+  display: block;
+}
+
+/*.required
+    color: red */
+/*.edit-user-property
+    opacity: 0
+    position: absolute */
+/*.hidden
+    opacity: 0
+    position: absolute */
+.one-quarter-input {
+  width: 25%;
+}
+
+.carousel-box {
+  margin: 5px;
+  height: 100%;
+}
+
+/*.comment-header
+    margin-bottom: 5%
+    border-bottom-style: solid
+    border-bottom-width: 1px
+    border-bottom-color: lightgray */
+.div-show-more {
+  margin: 20px;
+}
+/*# sourceMappingURL=custom.css.map */

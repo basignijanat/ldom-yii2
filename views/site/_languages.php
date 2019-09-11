@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 ?>
 
-<section class="container">
+<section class="container-fluid">
   <? if ($languages): ?>
     <? $is_first = true ?>
     <? $elem_count = 0 ?>
@@ -15,7 +15,7 @@ use yii\helpers\Html;
     <div class="container">
       <div class="row">
         <? foreach ($languages as $language): ?>
-          <div class="col-md-3 col-sm-3">             
+          <div class="col-sm-6 col-md-3 text-center">             
             <?= Html::beginTag('a', [
               'href' => '/language/'.$language->url,
               'class' => 'course-link',
@@ -30,10 +30,12 @@ use yii\helpers\Html;
           <? if ($elem_count >= 4): ?>
               </div>
               <? if ($is_first): ?>
-                  <div class="level level-item" id="btn-show-languages">
-                      <a class="btn btn-success button-show-more" data-show_more="languages">
-                          <?= Yii::t('app\main', 'Show More Languages!') ?>
-                      </a>
+                  <div class="container text-center div-show-more" id="btn-show-languages">                      
+                    <a class="btn btn-success button-show-more" data-show_more="languages">
+                      <h4>
+                        <?= Yii::t('app\main', 'Show More Languages!') ?>
+                      </h4>
+                    </a>                      
                   </div>
               <? endif ?>
               <div class="row hidden languages">                
