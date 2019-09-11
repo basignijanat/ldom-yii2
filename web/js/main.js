@@ -23,7 +23,7 @@ $(document).ready(function(){
 
     $('.button-show-more').on('click', function(){
         show_more = $(this).data('show_more');        
-        $('#btn-show-' + show_more).addClass('is-hidden');        
-        $('.' + show_more).removeClass('is-hidden');                
+        $('#btn-show-' + show_more).addClass('hidden');        
+        $('.' + show_more).removeClass('hidden');                
     });
 });

@@ -11,16 +11,16 @@ $this->title = Yii::$app->name;
 ])?>
 
 <? if ($teachers): ?>  
-  <div class="section has-background-white-ter">                
-    <h3 class="title">
+  <div class="container">                
+    <h3 class="page-header">
       <?= Yii::t('app\main', 'Our Teachers') ?>
     </h3>
       <div class="container owl-carousel owl-theme">
           <? foreach ($teachers as $teacher): ?>
               <? $user = $teacher->getUser() ?>
               <div class="box carousel-box">
-                  <div class="column is-half is-offset-one-quarter">
-                      <div class="image is-5by3 is-128x128">
+                  <div class="col-md-12">
+                      <div class="">
                           <? if (strlen($user->userpic)): ?>                                        
                               <?= Html::img($user->userpic, [
                                   'class' => 'is-rounded',

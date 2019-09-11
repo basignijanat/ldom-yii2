@@ -4,25 +4,25 @@ use yii\helpers\Html;
 
 ?>
 
-<section class="section has-background-white-bis">
+<section class="container">
   <? if ($languages): ?>
     <? $is_first = true ?>
     <? $elem_count = 0 ?>
 
-    <h3 class="title">
+    <h3 class="page-header">
       <?= $title ?>
     </h3>
     <div class="container">
-      <div class="columns">
+      <div class="row">
         <? foreach ($languages as $language): ?>
-          <div class="column is-one-quarter">             
+          <div class="col-md-3 col-sm-3">             
             <?= Html::beginTag('a', [
               'href' => '/language/'.$language->url,
               'class' => 'course-link',
             ]) ?>
-              <figure class="image is-4by5">
-                <?= Html::img($language->image) ?>              
-              </figure>        
+              <?= Html::img($language->image, [
+                'class' => 'course-image',
+              ]) ?>        
               <?= Html::tag('div', $language->name, ['class' => 'course-link-title']) ?>
             <?= Html::endTag('a') ?>
           </div>            
@@ -31,12 +31,12 @@ use yii\helpers\Html;
               </div>
               <? if ($is_first): ?>
                   <div class="level level-item" id="btn-show-languages">
-                      <a class="button is-success is-large button-show-more" data-show_more="languages">
+                      <a class="btn btn-success button-show-more" data-show_more="languages">
                           <?= Yii::t('app\main', 'Show More Languages!') ?>
                       </a>
                   </div>
               <? endif ?>
-              <div class="columns is-hidden languages">                
+              <div class="row hidden languages">                
 
               <? $elem_count = 0 ?>
               <? $is_first = false ?>
