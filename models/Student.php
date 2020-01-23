@@ -88,26 +88,16 @@ class Student extends \yii\db\ActiveRecord
     }
     
     public static function getStudentsCountBetween($lower, $upper){
-        $students = self::find()->where(['>=', 'create_at', $lower])->andWhere(['<=', 'create_at', $upper])->all();
         
-        if ($students){
-            return count($students);
-        }
-        else{
-            return 0;
-        }
-        
+        return self::find()
+            ->where(['>=', 'create_at', $lower])
+            ->andWhere(['<=', 'create_at', $upper])
+            ->count();        
     }
 
-    public static function getTotalStudentsCount(){
-        $students = self::find()->all();
-        
-        if ($students){
-            return count($students);
-        }
-        else{
-            return 0;
-        }
-        
+    public static function getTotalStudentsCount()
+    {
+
+        return self::find()->count();         
     }
 }
