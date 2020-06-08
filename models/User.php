@@ -56,6 +56,26 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         
         return ArrayForForm::getDropDownArray(User::find()->all(), ['fname', 'mname', 'lname']);				
     }
+
+    public static function getUploadDir()
+    {
+        return 'uploads/userpic/';
+    }
+
+    public static function getDefaultImage()
+    {        
+        return '/web/uploads/userpic/default.png';
+    }    
+
+    public function getUserpic()
+    {
+        if (isset($this->userpic))
+        {
+            return '/web/uploads/userpic/'.$this->userpic;
+        }
+        
+        return false;
+    }    
     
 	public function beforeSave($insert)
     {
@@ -166,11 +186,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 	}
 	
 	protected function uploadUserpic(){
-        if ($this->image_file = UploadedFile::getInstance($this, 'image_file')){
-			$fullFileName = 'upload/userpic/'.uniqid('user_').'.'.$this->image_file->extension;
+        if ($this->image_file = UploadedFile::getInstance($this, 'image_file'))
+        {
+            $fileName = uniqid('user_');
+			$fullFileName = self::getUploadDir().$fileName.'.'.$this->image_file->extension;
 			$this->image_file->saveAs($fullFileName);
-			$this->userpic = '/web/'.$fullFileName;
-		}
+            $this->userpic = $fileName.'.'.$this->image_file->extension;
+            
+            return true;
+        }
+        
+        return false;
     }
 
     public function getFullName($patronymic = true){        

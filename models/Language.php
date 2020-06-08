@@ -19,7 +19,7 @@ use app\models\Userlang;
  */
 class Language extends \yii\db\ActiveRecord
 {
-    public $image_file;
+    //public $image_file;
 
     /**
      * {@inheritdoc}
@@ -39,7 +39,8 @@ class Language extends \yii\db\ActiveRecord
             [['meta_title', 'name', 'image', 'url'], 'string', 'max' => 255],
             [['userlang_id'], 'integer'],
             [['url'], 'unique'],
-            [['image_file'], 'file', 'extensions' => 'png, jpg'],
+            //[['image_file'], 'file', 'extensions' => 'png, jpg'],
+            //[['image_file'], 'string'],
         ];
     }
 
@@ -60,8 +61,28 @@ class Language extends \yii\db\ActiveRecord
             'image_file' => Yii::t('app\admin', 'Download Image'),
         ];
     }
+
+    public static function getUploadDir(){
+        
+        return 'uploads/language/';
+    }
+
+    public static function getImageExt(){
+        
+        return '.png';
+    }
+
+    public static function getImagePrefix(){
+        
+        return 'language';
+    }
+
+    public function getImage(){
+        
+        return '/web/uploads/language/'.$this->image;
+    }
     
-    public function beforeSave($insert)
+    /*public function beforeSave($insert)
     {
         if (parent::beforeSave($insert))
 		{			
@@ -71,7 +92,7 @@ class Language extends \yii\db\ActiveRecord
         }
         
         return false;       
-    }
+    }*/
 
 	public static function getLanguages()
 	{
@@ -90,10 +111,16 @@ class Language extends \yii\db\ActiveRecord
     }
     
     protected function uploadImage(){
-        if ($this->image_file = UploadedFile::getInstance($this, 'image_file')){
-			$fullFileName = 'upload/language/'.uniqid('language_').'.'.$this->image_file->extension;
-			$this->image_file->saveAs($fullFileName);
-			$this->image = '/web/'.$fullFileName;
-		}
+        if ($this->image_file = UploadedFile::getInstance($this, 'image_file'))
+        {
+            $fileName = uniqid('language_');
+			$fullFileName = self::getUploadDir().$fileName.'.'.$this->image_file->extension;
+            $this->image_file->saveAs($fullFileName);
+            $this->image = $fileName.'.'.$this->image_file->extension;
+            
+            return true;
+        }
+        
+        return false;
     }
 }

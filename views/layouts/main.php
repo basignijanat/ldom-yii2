@@ -100,8 +100,8 @@ $alert = $_GET['alert'];
                     'url' => '/schedule',
                 ],            
                 [                                
-                    'label' => strlen(Yii::$app->user->identity->userpic) ?
-                        Html::img(Yii::$app->user->identity->userpic, ['class' => 'userpic']).Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname :
+                    'label' => Yii::$app->user->identity->getUserpic() ?
+                        Html::img(Yii::$app->user->identity->getUserpic(), ['class' => 'userpic']).Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname :
                         Html::img($settings['default_user_img'], ['class' => 'userpic']).Yii::$app->user->identity->fname.' '.Yii::$app->user->identity->lname,                
                     'url' => '/schedule',
                     'encode' => false,

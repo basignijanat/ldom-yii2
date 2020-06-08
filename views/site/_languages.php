@@ -20,7 +20,7 @@ use yii\helpers\Html;
               'href' => '/language/'.$language->url,
               'class' => 'course-link',
             ]) ?>
-              <?= Html::img($language->image, [
+              <?= Html::img($language->getImage(), [
                 'class' => 'course-image',
               ]) ?>        
               <?= Html::tag('div', $language->name, ['class' => 'course-link-title']) ?>

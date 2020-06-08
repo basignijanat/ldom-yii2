@@ -21,12 +21,12 @@ $this->title = Yii::$app->name;
               <div class="box carousel-box">
                   <div class="col-md-12">
                       <div class="">
-                          <? if (strlen($user->userpic)): ?>                                        
-                              <?= Html::img($user->userpic, [
+                          <? if (Yii::$app->user->identity->getUserpic()): ?>                                        
+                              <?= Html::img($user->getUserpic(), [
                                   'class' => 'is-rounded',
                               ]) ?>                                
                           <? else: ?>
-                              <?= Html::img('/web/upload/userpic/default.png', [
+                              <?= Html::img($user::getDefaultImage(), [
                                   'class' => 'is-rounded',
                               ]) ?>
                           <? endif ?>

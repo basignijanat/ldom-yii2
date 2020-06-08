@@ -8,17 +8,18 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AdminAsset;
 use yii\helpers\Url;
-use app\models\Setting;
 
+use app\assets\AdminAsset;
+
+use app\models\Setting;
 use app\models\Userlang;
-use app\models\AlertData;
+//use app\models\AlertData;
 
 AdminAsset::register($this);
 
 $languages = UserLang::GetMenuLanguages();
-$alert = AlertData::getAlert($_GET['alert']);
+//$alert = AlertData::getAlert($_GET['alert']);
 $default_user_img = Setting::getSettingValue('default_user_img');
 
 ?>
@@ -70,8 +71,8 @@ $default_user_img = Setting::getSettingValue('default_user_img');
                 <ul class="nav navbar-top-links navbar-right">                                          
                     <li>
                         <a class="profile-pic" href="/cabinet">
-                            <? if (strlen(Yii::$app->user->identity->userpic)): ?>
-                                <?= Html::img(Yii::$app->user->identity->userpic, [
+                            <? if (Yii::$app->user->identity->getUserpic()): ?>
+                                <?= Html::img(Yii::$app->user->identity->getUserpic(), [
                                     'alt' => 'user-img', 
                                     'width' => '36',
                                     'class' => 'img-circle'
@@ -167,16 +168,14 @@ $default_user_img = Setting::getSettingValue('default_user_img');
                 <!-- Different data widgets -->
                 <!-- ============================================================== -->
                 <!-- .row -->
-                <?
-                    if ($alert){
-                        echo Html::tag('div', Yii::t('app\alert', $alert['content']), ['class' => $alert['class'].' row bg-title']);
-                    }
-                ?>
+                <!--??-->
                 
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
                 
+                <?= Alert::widget() ?>
+
                 <?=$content?>
                                     </div>
                                 </div>

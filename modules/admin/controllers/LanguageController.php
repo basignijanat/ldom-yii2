@@ -6,6 +6,7 @@ use Yii;
 use app\models\Language;
 use app\models\LanguageSearch;
 use app\models\Userlang;
+use app\models\Image;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,7 +62,7 @@ class LanguageController extends Controller
      */
     public function actionView($id)
     {
-		$data = $this->essentialData($this->findModel($id));
+		$data = $this->essentialData(['model' => $this->findModel($id)]);
 		
         return $this->render('view', $data);
     }
@@ -74,7 +75,7 @@ class LanguageController extends Controller
     public function actionCreate()
     {
         $model = new Language();
-        $data = $this->essentialData($model);
+        $data = $this->essentialData(['model' => $model]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -93,13 +94,27 @@ class LanguageController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $data = $this->essentialData($model);
+        $image = new Image();
+
+        $data = $this->essentialData(['model' => $model, 'image' => $image]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
-		$languages = Userlang::getLanguages();
+        elseif ($image->load(Yii::$app->request->post())){
+            $image->uploadTemp();
+        }
+        elseif (Yii::$app->request->post('cropped_image')){
+            
+            return json_encode([
+                'uploaded_file' => $image->uploadCropped(
+                    Yii::$app->request->post('cropped_image'), 
+                    Language::getUploadDir(), 
+                    Language::getImagePrefix(), 
+                    Language::getImageExt()
+                ),
+            ]);
+        }
 		
         return $this->render('update', $data);
     }
@@ -134,11 +149,12 @@ class LanguageController extends Controller
         throw new NotFoundHttpException(Yii::t('app\admin', 'The requested page does not exist.'));
     }
 
-    protected function essentialData($model){
+    protected function essentialData($base){
         
-        return [
-            'model' => $model,
-            'languages' => Userlang::getLanguages(),            
-        ];
+        return array_merge(
+            $base, [
+                'languages' => Userlang::getLanguages(),            
+            ]
+        );
     }
 }

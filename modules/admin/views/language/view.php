@@ -37,7 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'url',
             'name',
             'content:ntext',
-            'image:image',
+            [
+                'attribute' => 'image', 
+                'value' => $model->getImage(), 
+                'format' => 
+                [
+                    'image',
+                    [
+                        'width'=>'100',
+                        'height'=>'100'
+                    ]
+                ],
+            ],
         ],
     ]) ?>
 

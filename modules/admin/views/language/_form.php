@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
+
+use developit\jcrop\Jcrop;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Language */
@@ -24,11 +27,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'image_file')->fileInput(['accept=' => ',image/jpeg,image/png,image/gif,']) ?>
-	
-	<? if ($model->image): ?>
-		<?= Html::img($model->image, ['width' => '150px', 'alt' => 'Image']) ?>		
-	<? endif ?>	
+    <?= $form->field($model, 'image')->hiddenInput()->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app\admin', 'Save'), ['class' => 'btn btn-success']) ?>
@@ -36,4 +35,11 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
+    <? 
+        Pjax::begin();        
+        echo $image->viewForm();
+        Pjax::end();
+
+        echo $image->viewImg($model->getImage());
+    ?>
 </div>
